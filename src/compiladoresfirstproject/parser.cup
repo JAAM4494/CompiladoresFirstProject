@@ -1,4 +1,4 @@
-package compiladoresfirstproject;
+package test1;
 
 import java.io.*;
 import java.lang.*;
@@ -7,97 +7,175 @@ import java_cup.runtime.Symbol;
 import java.util.ArrayList;
 import java.util.*;
 
+
+
 action code{:
 
-void print(String msj)
-   {System.out.println(msj);}
+
 :}
 
 parser code {:
 
 public void syntax_error(Symbol cur_token){
 System.out.println("va a ingresar el error sintactico "+ cur_token.value);
+interfaz.rotular  ("va a ingresar el error sintactico "+ cur_token.value);
 }
 
 public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+interfaz.rotular("error YA no se recupera");
 
 System.out.println("error YA no se recupera");
- }
 
-public void semantic(Symbol cur_token,String n)
-{
-System.out.println("error semantico ");
-  }
 
-public void semantic(String msg, Object obj) {
+:}
 
-}
-:};
+
+
+
+
+
+
+
+
+
+
+
+
 /////////////////////////////////////////////////
-//////simbolos terminales generales//////////////
+////// SIMBOLOS TERMINALES /////////////
 /////////////////////////////////////////////////
 
-terminal COMA,PUNTOCOMA,DIAGONAL,DOSPUNTOS,OPEN,CLOSE,EQUALS;
-terminal DIFERENTE,MAYORIGUAL,MENORIGUAL,MENOSNUM,MENOSUNO;
-terminal MASNUM,MASUNO,MAYOR,MENOR,LLAVEIZQ,LLAVEDER,FOR;
-terminal INT,VOID,NUMERAL,PUNTO,PORCIENTO,CONIO,COMILLAS;
-terminal AMPERSAND,GETCH,SCANF,PRINTF,ELSE,IF,H,STDIO;
+terminal izquierda, arriba, derecha,  abajo;
+terminal mover, decir, ID, NEWLINE;
+terminal MENOR,  MAYOR,  MENOR_IGUAL, MAYOR_IGUAL, IGUAL_IGUAL, DIFERENTE;
+terminal SUMA, RESTA, MULTI, DIV;
+terminal True, False, si, entonces, mientras, haga, sino;
+terminal hola, adios, lindos, boca, ojos;
+terminal UNO, DOS, TRES, CUATRO, CINCO, SEIS, SIETE, OCHO,  NUEVE, CERO;
 
-terminal  FRASE;
 
 /////////////////////////////////////////////////////////////
-///////////////////SIMBOLOS NO TERMINALES ///////////////////
+/////////////////// SIMBOLOS NO TERMINALES ///////////////////
 /////////////////////////////////////////////////////////////
 
-non terminal START, INICIO;
-non terminal String SIMBOLO;
 
-start with START;
+non terminal Programa, PALABRA;
+non terminal ListaVariables, DeclaracionVariable;
+non terminal ListaDeclaraciones, Declaración, declarar;
+non terminal Mover, Voz, DeclaracionSeleccion;
+non terminal DeclaracionIteracion, TIPO;
+non terminal Expresion, ExpresionSuma, Termino;
+non terminal OperadorSuma, ExpresionMult;
+non terminal OperadorMult, ExpresiónCondición;
+non terminal ListaDeclaracionesCondicionadas; 
+non terminal OperadorRelacional, NUM;
 
-/***********inicio de la gramatica *******************
+
+
+start with Programa;
+
+
+/***********inicio de la gramática *******************
 ******************************************************/
 
-START  ::=   START INICIO 
-           | INICIO;
-INICIO ::=  FRASE:d        
-           | SIMBOLO:d    
-           ;
-SIMBOLO::=   COMA:d         {: RESULT =d.toString();:}
-           | PUNTOCOMA:d    {: RESULT =d.toString();:}
-           | DIAGONAL:d     {: RESULT =d.toString();:}
-           | DOSPUNTOS:d    {: RESULT =d.toString();:}        
-           | EQUALS:d       {: RESULT =d.toString();:}
-           | OPEN:d         {: RESULT =d.toString();:}
-           | CLOSE:d        {: RESULT =d.toString();:}
+Programa ::= ListaVariables ListaDeclaraciones;
 
-           | DIFERENTE:d    {: RESULT =d.toString();:}
-           | MAYORIGUAL:d   {: RESULT =d.toString();:}
-           | MENORIGUAL:d   {: RESULT =d.toString();:}
-           | MENOSNUM:d     {: RESULT =d.toString();:}
-           | MENOSUNO:d     {: RESULT =d.toString();:}
-           | MASNUM:d       {: RESULT =d.toString();:}
-           | MAYOR:d        {: RESULT =d.toString();:}
-           | MENOR:d        {: RESULT =d.toString();:}
-           
-           | LLAVEIZQ:d     {: RESULT =d.toString();:}
-           | LLAVEDER:d     {: RESULT =d.toString();:}
-           | MASUNO:d       {: RESULT =d.toString();:}
-           | FOR:d          {: RESULT =d.toString();:}
-           | INT:d          {: RESULT =d.toString();:}
-           | VOID:d         {: RESULT =d.toString();:}
+ListaVariables ::= ListaVariables DeclaracionVariable 
+     | DeclaracionVariable 
+ 		    ;
 
-           | NUMERAL:d      {: RESULT =d.toString();:}
-           | PUNTO:d        {: RESULT =d.toString();:}
-           | PORCIENTO:d    {: RESULT =d.toString();:}
-           | COMILLAS:d     {: RESULT =d.toString();:}
-           | AMPERSAND:d    {: RESULT =d.toString();:}
-           | GETCH:d        {: RESULT =d.toString();:}
-           | SCANF:d        {: RESULT =d.toString();:}
-           | PRINTF:d       {: RESULT =d.toString();:}
-           | ELSE:d         {: RESULT =d.toString();:}
-           | IF:d           {: RESULT =d.toString();:}
-           | H:d            {: RESULT =d.toString();:}
-           | STDIO:d        {: RESULT =d.toString();:}
-           | CONIO:d        {: RESULT =d.toString();:}
-           ;
-/*********************Fin de la gramatica ********************/
+ 
+
+
+DeclaracionVariable ::= declarar ID NEWLINE
+			;
+
+ListaDeclaraciones ::=  ListaDeclaraciones Declaración 
+| Declaración 
+;
+
+Declaracion ::=  Mover 
+| Voz
+| DeclaracionSeleccion
+| DeclaracionIteracion
+;
+
+Mover ::=  mover TIPO NEWLINE;
+
+Voz ::= decir PALABRA;
+
+PALABRA ::= hola
+		| adios
+		| lindos
+		| ojos	
+		| boca
+		;
+
+TIPO ::= izquierda 
+| arriba 
+| derecha
+| abajo
+;
+
+Expresion ::= ID = ExpresionSuma 
+          | ExpresionSuma
+          ;
+
+Expresion ::= ExpresionSuma OperadorRelacional ExpresionSuma 
+          | ExpresionSuma
+          ;
+
+OperadorRelacional ::= MENOR  
+|  MAYOR 
+|  MENOR_IGUAL
+| MAYOR_IGUAL
+|  IGUAL_IGUAL
+|  DIFERENTE
+;
+
+
+
+ExpresionSuma ::= ExpresionSuma OperadorSuma Termino 
+ 		       | ExpresionMult
+		       ;
+
+ExpresionMult ::= ExpresionMult OperadorMult ExpresionSuma 
+| Termino
+;
+
+OperadorSuma ::=  SUMA
+       | RESTA
+       ;
+
+OperadorMult ::=  MULTI
+    | DIV
+    ;
+
+Termino ::= ( Expresion )
+        | ID 
+        | NUM
+        ;
+ NUM ::= UNO  | DOS  | TRES  | CUATRO  | CINCO 
+                | SEIS | SIETE  | OCHO  | NUEVE | CERO 
+                ;  
+         
+
+ExpresiónCondición ::= Expresion 
+| True
+| False
+;
+
+ListaDeclaracionesCondicionadas ::= Declaración 
+| { ListaDeclaraciones }
+;
+
+
+DeclaracionSeleccion ::= si (ExpresiónCondición) entonces ListaDeclaracionesCondicionadas
+                                       | si (ExpresiónCondición) entonces ListaDeclaracionesCondicionadas                         sino  ListaDeclaracionesCondicionadas
+                                     ;
+
+
+DeclaracionIteracion ::=  mientras ( ExpresiónCondición ) haga ListaDeclaracionesCondicionadas 
+ 			| haga ListaDeclaracionesCondicionadas mientras Expresion
+			;
+
