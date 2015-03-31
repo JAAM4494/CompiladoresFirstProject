@@ -20,7 +20,7 @@ public class Main {
     public static void main(String[] args) {
         // Metodos para generar los .java de los analizadores
         // los comentan despues de generarlos (las 2 lineas de abajo)
-        generarScanner();
+        //generarScanner();
         generarParser();
         //---------------------------------------------------
 

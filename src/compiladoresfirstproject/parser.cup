@@ -1,4 +1,4 @@
-package proyecto1;
+package compiladoresfirstproject;
 
 import java.io.*;
 import java.lang.*;
@@ -18,11 +18,9 @@ parser code {:
 
 public void syntax_error(Symbol cur_token){
 System.out.println("va a ingresar el error sintactico "+ cur_token.value);
-interfaz.rotular  ("va a ingresar el error sintactico "+ cur_token.value);
 }
 
 public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
-interfaz.rotular("error YA no se recupera");
 
 System.out.println("error YA no se recupera");
  }
@@ -62,8 +60,8 @@ start with START;
 
 START  ::=   START INICIO 
            | INICIO;
-INICIO ::=  FRASE:d         {:interfaz.rotular("Se reconocio una frase alfanumerica : "+ d.toString());:}
-           | SIMBOLO:d      {:interfaz.rotular("Se reconocio el token "+d.toString());:}
+INICIO ::=  FRASE:d        
+           | SIMBOLO:d    
            ;
 SIMBOLO::=   COMA:d         {: RESULT =d.toString();:}
            | PUNTOCOMA:d    {: RESULT =d.toString();:}
