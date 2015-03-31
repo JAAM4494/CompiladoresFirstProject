@@ -8,48 +8,37 @@ package compiladoresfirstproject;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int True = 20;
-  public static final int boca = 30;
-  public static final int SIETE = 38;
-  public static final int lindos = 29;
-  public static final int decir = 7;
-  public static final int DIFERENTE = 15;
-  public static final int RESTA = 17;
-  public static final int derecha = 4;
-  public static final int entonces = 23;
-  public static final int OCHO = 39;
-  public static final int si = 22;
-  public static final int mientras = 24;
-  public static final int SEIS = 37;
-  public static final int DIV = 19;
-  public static final int SUMA = 16;
-  public static final int IGUAL_IGUAL = 14;
-  public static final int ID = 8;
-  public static final int DOS = 33;
-  public static final int EOF = 0;
-  public static final int arriba = 3;
-  public static final int error = 1;
-  public static final int NEWLINE = 9;
-  public static final int False = 21;
-  public static final int hola = 27;
-  public static final int MENOR = 10;
-  public static final int TRES = 34;
-  public static final int CUATRO = 35;
-  public static final int MAYOR = 11;
-  public static final int abajo = 5;
-  public static final int NUEVE = 40;
-  public static final int MAYOR_IGUAL = 13;
-  public static final int izquierda = 2;
-  public static final int haga = 25;
-  public static final int MULTI = 18;
-  public static final int ojos = 31;
-  public static final int UNO = 32;
-  public static final int CINCO = 36;
-  public static final int MENOR_IGUAL = 12;
-  public static final int adios = 28;
   public static final int mover = 6;
-  public static final int CERO = 41;
-  public static final int sino = 26;
+  public static final int lindos = 28;
+  public static final int MENOR = 9;
+  public static final int haga = 24;
+  public static final int adios = 27;
+  public static final int SUMA = 15;
+  public static final int MENOR_IGUAL = 11;
+  public static final int True = 19;
+  public static final int MULTI = 17;
+  public static final int mientras = 23;
+  public static final int sino = 25;
+  public static final int MAYOR_IGUAL = 12;
+  public static final int False = 20;
+  public static final int izquierda = 2;
+  public static final int ojos = 30;
+  public static final int arriba = 3;
+  public static final int IGUAL_IGUAL = 13;
+  public static final int MAYOR = 10;
+  public static final int EOF = 0;
+  public static final int hola = 26;
+  public static final int DIFERENTE = 14;
+  public static final int boca = 29;
+  public static final int entonces = 22;
+  public static final int DIV = 18;
+  public static final int NEWLINE = 8;
+  public static final int error = 1;
+  public static final int decir = 7;
+  public static final int abajo = 5;
+  public static final int derecha = 4;
+  public static final int si = 21;
+  public static final int RESTA = 16;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -59,7 +48,6 @@ public class sym {
   "abajo",
   "mover",
   "decir",
-  "ID",
   "NEWLINE",
   "MENOR",
   "MAYOR",
@@ -82,17 +70,7 @@ public class sym {
   "adios",
   "lindos",
   "boca",
-  "ojos",
-  "UNO",
-  "DOS",
-  "TRES",
-  "CUATRO",
-  "CINCO",
-  "SEIS",
-  "SIETE",
-  "OCHO",
-  "NUEVE",
-  "CERO"
+  "ojos"
   };
 }
 

@@ -46,12 +46,12 @@ System.out.println("error YA no se recupera");
 /////////////////////////////////////////////////
 
 terminal izquierda, arriba, derecha,  abajo;
-terminal mover, decir, ID, NEWLINE;
+terminal mover, decir, NEWLINE;
 terminal MENOR,  MAYOR,  MENOR_IGUAL, MAYOR_IGUAL, IGUAL_IGUAL, DIFERENTE;
 terminal SUMA, RESTA, MULTI, DIV;
 terminal True, False, si, entonces, mientras, haga, sino;
 terminal hola, adios, lindos, boca, ojos;
-terminal UNO, DOS, TRES, CUATRO, CINCO, SEIS, SIETE, OCHO,  NUEVE, CERO;
+
 
 
 /////////////////////////////////////////////////////////////
@@ -65,7 +65,7 @@ non terminal ListaDeclaraciones, Declaración, declarar;
 non terminal Mover, Voz, DeclaracionSeleccion;
 non terminal DeclaracionIteracion, TIPO;
 non terminal Expresion, ExpresionSuma, Termino;
-non terminal OperadorSuma, ExpresionMult;
+non terminal OperadorSuma, ExpresionMult, ID;
 non terminal OperadorMult, ExpresiónCondición;
 non terminal ListaDeclaracionesCondicionadas; 
 non terminal OperadorRelacional, NUM;
@@ -155,9 +155,7 @@ Termino ::= ( Expresion )
         | ID 
         | NUM
         ;
- NUM ::= UNO  | DOS  | TRES  | CUATRO  | CINCO 
-                | SEIS | SIETE  | OCHO  | NUEVE | CERO 
-                ;  
+
          
 
 ExpresiónCondición ::= Expresion 
