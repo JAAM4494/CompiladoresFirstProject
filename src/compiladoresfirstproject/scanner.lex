@@ -1,19 +1,20 @@
-package proyecto1;
+package compiladoresfirstproject;
 
 import java_cup.runtime.*;
 import javax.swing.*;
 import java.util.*;
-import proyecto1.*;
-%%
 
-%class Yylex
+%%
+%class Scanner
+
 %{String literal;
   String temp_include;
-
 %}
+
 %{
 int columna=1;
 %}
+
 %public
 %cup
 %line
@@ -33,12 +34,12 @@ int columna=1;
 {return new Symbol(sym.EOF, null); }
 %eofval}
 
-ALPHA=[A-Za-z]
+LETRA=[a-zA-Z]
 DIGITO=[0-9]
-ALPHA_NUMERIC={ALPHA}|{DIGITO}
+ALPHA_NUMERIC={LETRA}|{DIGITO}
 
 NEW_LINE=(\n|\r)
-WHITE_SPACE=([\ |\t|\f])
+ESPACIO_EN_BLANCO=([\ |\t|\f])
 LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
 
@@ -52,38 +53,23 @@ FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
 [ \t\r\n\f] { /* ignore white space. */ }
 
 \' { /* ignore apostrofos. */ }
-<YYINITIAL> {WHITE_SPACE}  {/*no hace nada, aumenta una columna*/yychar++; }
+<YYINITIAL> {ESPACIO_EN_BLANCO}  {/*no hace nada, aumenta una columna,continua lectura*/yychar++; }
 <YYINITIAL> {NEW_LINE}     {yychar=0; yyline=0}
 
-<YYINITIAL>"<>"     {return new Symbol(sym.DIFERENTE, yyline, yychar, yytext());}
+<YYINITIAL>"=="     {return new Symbol(sym.IGUALIGUAL, yyline, yychar, yytext());}
+<YYINITIAL>"!="     {return new Symbol(sym.DIFERENTE, yyline, yychar, yytext());}
 <YYINITIAL>">="     {return new Symbol(sym.MAYORIGUAL,yyline, yychar, yytext());}
 <YYINITIAL>"<="     {return new Symbol(sym.MENORIGUAL,yyline, yychar, yytext());}
-<YYINITIAL>"-="     {return new Symbol(sym.MENOSNUM,  yyline, yychar, yytext());}
-<YYINITIAL>"--"     {return new Symbol(sym.MENOSUNO,  yyline, yychar, yytext());}
-<YYINITIAL>"+="     {return new Symbol(sym.MASNUM,    yyline, yychar, yytext());}
-<YYINITIAL>"++"     {return new Symbol(sym.MASUNO,    yyline, yychar, yytext());}
 <YYINITIAL>">"      {return new Symbol(sym.MAYOR,     yyline, yychar, yytext());}
 <YYINITIAL>"<"      {return new Symbol(sym.MENOR,     yyline, yychar, yytext());}
 
 <YYINITIAL>"{"      {return new Symbol(sym.LLAVEIZQ,  yyline, yychar, yytext());}
 <YYINITIAL>"}"      {return new Symbol(sym.LLAVEDER,  yyline, yychar, yytext());}
-<YYINITIAL>"for"    {return new Symbol(sym.FOR,       yyline, yychar, yytext());}
 <YYINITIAL>"int"    {return new Symbol(sym.INT,       yyline, yychar, yytext());}
-<YYINITIAL>"void"   {return new Symbol(sym.VOID,      yyline, yychar, yytext());}
 
-<YYINITIAL>"#"      {return new Symbol(sym.NUMERAL,   yyline, yychar, yytext());}
 <YYINITIAL>"."      {return new Symbol(sym.PUNTO,     yyline, yychar, yytext());}
-<YYINITIAL>"%"      {return new Symbol(sym.PORCIENTO, yyline, yychar, yytext());}
-<YYINITIAL>"\""     {return new Symbol(sym.COMILLAS,  yyline, yychar, yytext());}
-<YYINITIAL>"&"      {return new Symbol(sym.AMPERSAND, yyline, yychar, yytext());}
-<YYINITIAL>"getch"  {return new Symbol(sym.GETCH,     yyline, yychar, yytext());}
-<YYINITIAL>"scanf"  {return new Symbol(sym.SCANF,     yyline, yychar, yytext());}
-<YYINITIAL>"printf" {return new Symbol(sym.PRINTF,    yyline, yychar, yytext());}
 <YYINITIAL>"else"   {return new Symbol(sym.ELSE,      yyline, yychar, yytext());}
 <YYINITIAL>"if"     {return new Symbol(sym.IF,        yyline, yychar, yytext());}
-<YYINITIAL>"h"      {return new Symbol(sym.H,         yyline, yychar, yytext());}
-<YYINITIAL>"stdio"  {return new Symbol(sym.STDIO,     yyline, yychar, yytext());}
-<YYINITIAL>"conio"  {return new Symbol(sym.CONIO,     yyline, yychar, yytext());}
 
 <YYINITIAL>"("      {return new Symbol(sym.OPEN,      yyline, yychar, yytext());}
 <YYINITIAL>")"      {return new Symbol(sym.CLOSE,     yyline, yychar, yytext());}		
@@ -95,8 +81,4 @@ FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
 
 <YYINITIAL>{FRASE}  {return new Symbol(sym.FRASE,     yyline, yychar, yytext());}
 
-.		        {
-              System.out.println("error lexico en la fila "+yyline +" y en la columna " + yychar);
-interfaz.rotular("error lexico :"+  yytext()+" en la fila "+yyline +" y en la columna " + yychar);
-
-	          	}
+. {System.out.println("Caracter desconocido en la fila " + yyline + ", columna " + yychar);}

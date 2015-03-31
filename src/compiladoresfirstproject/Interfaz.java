@@ -5,6 +5,8 @@
  */
 package compiladoresfirstproject;
 
+import java.io.*;
+import javax.swing.*;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,7 +19,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author JAAM
  */
-public class Interfaz extends javax.swing.JPanel {
+public class Interfaz extends javax.swing.JFrame {
 
     /**
      * Creates new form Interfaz
@@ -76,8 +78,8 @@ public class Interfaz extends javax.swing.JPanel {
 
         jLabel2.setText("Salida");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()

@@ -21,9 +21,10 @@ public class Main {
         // Metodos para generar los .java de los analizadores
         // los comentan despues de generarlos (las 2 lineas de abajo)
         //generarScanner();
-        generarParser();
+        //generarParser();
         //---------------------------------------------------
-
+        
+       // new Interfaz().setVisible(true);
     }
 
     // Metodo que genera el analizador lexico, usando jFlex
