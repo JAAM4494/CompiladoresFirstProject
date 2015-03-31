@@ -1,4 +1,4 @@
-package test1;
+package compiladoresfirstproject;
 
 import java.io.*;
 import java.lang.*;
