@@ -23,7 +23,7 @@ public class Main {
         //generarParser();
         //---------------------------------------------------
 
-        new VentanaPrincipal().run();
+       // new VentanaPrincipal().run();
     }
 
     // Metodo que genera el analizador lexico, usando jFlex

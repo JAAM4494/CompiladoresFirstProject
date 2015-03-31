@@ -56,29 +56,35 @@ FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
 <YYINITIAL> {ESPACIO_EN_BLANCO}  {/*no hace nada, aumenta una columna,continua lectura*/yychar++; }
 <YYINITIAL> {NEW_LINE}     {yychar=0; yyline=0}
 
-<YYINITIAL>"=="     {return new Symbol(sym.IGUALIGUAL, yyline, yychar, yytext());}
-<YYINITIAL>"!="     {return new Symbol(sym.DIFERENTE, yyline, yychar, yytext());}
-<YYINITIAL>">="     {return new Symbol(sym.MAYORIGUAL,yyline, yychar, yytext());}
-<YYINITIAL>"<="     {return new Symbol(sym.MENORIGUAL,yyline, yychar, yytext());}
-<YYINITIAL>">"      {return new Symbol(sym.MAYOR,     yyline, yychar, yytext());}
-<YYINITIAL>"<"      {return new Symbol(sym.MENOR,     yyline, yychar, yytext());}
+<YYINITIAL>"mover"     {return new Symbol(sym.mover, yyline, yychar, yytext());}
+<YYINITIAL>"lindos"     {return new Symbol(sym.lindos, yyline, yychar, yytext());}
+<YYINITIAL>"<"     {return new Symbol(sym.MENOR,yyline, yychar, yytext());}
+<YYINITIAL>"haga"     {return new Symbol(sym.haga,yyline, yychar, yytext());}
+<YYINITIAL>"adios"      {return new Symbol(sym.adios,     yyline, yychar, yytext());}
+<YYINITIAL>"+"      {return new Symbol(sym.SUMA,     yyline, yychar, yytext());}
+<YYINITIAL>"<="      {return new Symbol(sym.MENOR_IGUAL,  yyline, yychar, yytext());}
+<YYINITIAL>"true"      {return new Symbol(sym.True,  yyline, yychar, yytext());}
+<YYINITIAL>"*"    {return new Symbol(sym.MULTI,       yyline, yychar, yytext());}
+<YYINITIAL>"mientras"      {return new Symbol(sym.mientras,     yyline, yychar, yytext());}
+<YYINITIAL>"sino"   {return new Symbol(sym.sino,      yyline, yychar, yytext());}
+<YYINITIAL>">="     {return new Symbol(sym.MAYOR_IGUAL,        yyline, yychar, yytext());}
+<YYINITIAL>"false"      {return new Symbol(sym.False,      yyline, yychar, yytext());}
+<YYINITIAL>"izquierda"      {return new Symbol(sym.izquierda,     yyline, yychar, yytext());}		
+<YYINITIAL>"ojos"      {return new Symbol(sym.ojos, yyline, yychar, yytext());}
+<YYINITIAL>"arriba"      {return new Symbol(sym.arriba, yyline, yychar, yytext());}
+<YYINITIAL>"=="      {return new Symbol(sym.IGUAL_IGUAL,      yyline, yychar, yytext());}
+<YYINITIAL>">"      {return new Symbol(sym.MAYOR,  yyline, yychar, yytext());}
+<YYINITIAL>"hola"      {return new Symbol(sym.hola,    yyline, yychar, yytext());}
+<YYINITIAL>"!="      {return new Symbol(sym.DIFERENTE,    yyline, yychar, yytext());}
+<YYINITIAL>"boca"      {return new Symbol(sym.boca,    yyline, yychar, yytext());}
+<YYINITIAL>"entonces"      {return new Symbol(sym.entonces,    yyline, yychar, yytext());}
+<YYINITIAL>"/"      {return new Symbol(sym.DIV,    yyline, yychar, yytext());}
+<YYINITIAL>"decir"      {return new Symbol(sym.decir,    yyline, yychar, yytext());}
+<YYINITIAL>"abajo"      {return new Symbol(sym.abajo,    yyline, yychar, yytext());}
+<YYINITIAL>"derecha"      {return new Symbol(sym.derecha,    yyline, yychar, yytext());}
+<YYINITIAL>"si"      {return new Symbol(sym.si,    yyline, yychar, yytext());}
+<YYINITIAL>"-"      {return new Symbol(sym.RESTA,    yyline, yychar, yytext());}
 
-<YYINITIAL>"{"      {return new Symbol(sym.LLAVEIZQ,  yyline, yychar, yytext());}
-<YYINITIAL>"}"      {return new Symbol(sym.LLAVEDER,  yyline, yychar, yytext());}
-<YYINITIAL>"int"    {return new Symbol(sym.INT,       yyline, yychar, yytext());}
-
-<YYINITIAL>"."      {return new Symbol(sym.PUNTO,     yyline, yychar, yytext());}
-<YYINITIAL>"else"   {return new Symbol(sym.ELSE,      yyline, yychar, yytext());}
-<YYINITIAL>"if"     {return new Symbol(sym.IF,        yyline, yychar, yytext());}
-
-<YYINITIAL>"("      {return new Symbol(sym.OPEN,      yyline, yychar, yytext());}
-<YYINITIAL>")"      {return new Symbol(sym.CLOSE,     yyline, yychar, yytext());}		
-<YYINITIAL>";"      {return new Symbol(sym.PUNTOCOMA, yyline, yychar, yytext());}
-<YYINITIAL>":"      {return new Symbol(sym.DOSPUNTOS, yyline, yychar, yytext());}
-<YYINITIAL>","      {return new Symbol(sym.COMA,      yyline, yychar, yytext());}
-<YYINITIAL>"/"      {return new Symbol(sym.DIAGONAL,  yyline, yychar, yytext());}
-<YYINITIAL>"="      {return new Symbol(sym.EQUALS,    yyline, yychar, yytext());}
-
-<YYINITIAL>{FRASE}  {return new Symbol(sym.FRASE,     yyline, yychar, yytext());}
+/*<YYINITIAL>{FRASE}  {return new Symbol(sym.FRASE,     yyline, yychar, yytext());}*/
 
 . {System.out.println("Caracter desconocido en la fila " + yyline + ", columna " + yychar);}
