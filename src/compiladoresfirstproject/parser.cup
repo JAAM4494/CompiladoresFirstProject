@@ -1,0 +1,106 @@
+package proyecto1;
+
+import java.io.*;
+import java.lang.*;
+import java_cup.runtime.*;
+import java_cup.runtime.Symbol;
+import java.util.ArrayList;
+import java.util.*;
+import proyecto1.*;
+
+action code{:
+
+void print(String msj)
+   {System.out.println(msj);}
+:}
+
+parser code {:
+
+public void syntax_error(Symbol cur_token){
+System.out.println("va a ingresar el error sintactico "+ cur_token.value);
+interfaz.rotular  ("va a ingresar el error sintactico "+ cur_token.value);
+}
+
+public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+interfaz.rotular("error YA no se recupera");
+
+System.out.println("error YA no se recupera");
+ }
+
+public void semantic(Symbol cur_token,String n)
+{
+System.out.println("error semantico ");
+  }
+
+public void semantic(String msg, Object obj) {
+
+}
+:};
+/////////////////////////////////////////////////
+//////simbolos terminales generales//////////////
+/////////////////////////////////////////////////
+
+terminal COMA,PUNTOCOMA,DIAGONAL,DOSPUNTOS,OPEN,CLOSE,EQUALS;
+terminal DIFERENTE,MAYORIGUAL,MENORIGUAL,MENOSNUM,MENOSUNO;
+terminal MASNUM,MASUNO,MAYOR,MENOR,LLAVEIZQ,LLAVEDER,FOR;
+terminal INT,VOID,NUMERAL,PUNTO,PORCIENTO,CONIO,COMILLAS;
+terminal AMPERSAND,GETCH,SCANF,PRINTF,ELSE,IF,H,STDIO;
+
+terminal  FRASE;
+
+/////////////////////////////////////////////////////////////
+///////////////////SIMBOLOS NO TERMINALES ///////////////////
+/////////////////////////////////////////////////////////////
+
+non terminal START, INICIO;
+non terminal String SIMBOLO;
+
+start with START;
+
+/***********inicio de la gramatica *******************
+******************************************************/
+
+START  ::=   START INICIO 
+           | INICIO;
+INICIO ::=  FRASE:d         {:interfaz.rotular("Se reconocio una frase alfanumerica : "+ d.toString());:}
+           | SIMBOLO:d      {:interfaz.rotular("Se reconocio el token "+d.toString());:}
+           ;
+SIMBOLO::=   COMA:d         {: RESULT =d.toString();:}
+           | PUNTOCOMA:d    {: RESULT =d.toString();:}
+           | DIAGONAL:d     {: RESULT =d.toString();:}
+           | DOSPUNTOS:d    {: RESULT =d.toString();:}        
+           | EQUALS:d       {: RESULT =d.toString();:}
+           | OPEN:d         {: RESULT =d.toString();:}
+           | CLOSE:d        {: RESULT =d.toString();:}
+
+           | DIFERENTE:d    {: RESULT =d.toString();:}
+           | MAYORIGUAL:d   {: RESULT =d.toString();:}
+           | MENORIGUAL:d   {: RESULT =d.toString();:}
+           | MENOSNUM:d     {: RESULT =d.toString();:}
+           | MENOSUNO:d     {: RESULT =d.toString();:}
+           | MASNUM:d       {: RESULT =d.toString();:}
+           | MAYOR:d        {: RESULT =d.toString();:}
+           | MENOR:d        {: RESULT =d.toString();:}
+           
+           | LLAVEIZQ:d     {: RESULT =d.toString();:}
+           | LLAVEDER:d     {: RESULT =d.toString();:}
+           | MASUNO:d       {: RESULT =d.toString();:}
+           | FOR:d          {: RESULT =d.toString();:}
+           | INT:d          {: RESULT =d.toString();:}
+           | VOID:d         {: RESULT =d.toString();:}
+
+           | NUMERAL:d      {: RESULT =d.toString();:}
+           | PUNTO:d        {: RESULT =d.toString();:}
+           | PORCIENTO:d    {: RESULT =d.toString();:}
+           | COMILLAS:d     {: RESULT =d.toString();:}
+           | AMPERSAND:d    {: RESULT =d.toString();:}
+           | GETCH:d        {: RESULT =d.toString();:}
+           | SCANF:d        {: RESULT =d.toString();:}
+           | PRINTF:d       {: RESULT =d.toString();:}
+           | ELSE:d         {: RESULT =d.toString();:}
+           | IF:d           {: RESULT =d.toString();:}
+           | H:d            {: RESULT =d.toString();:}
+           | STDIO:d        {: RESULT =d.toString();:}
+           | CONIO:d        {: RESULT =d.toString();:}
+           ;
+/*********************Fin de la gramatica ********************/
