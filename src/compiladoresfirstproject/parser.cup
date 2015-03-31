@@ -6,7 +6,6 @@ import java_cup.runtime.*;
 import java_cup.runtime.Symbol;
 import java.util.ArrayList;
 import java.util.*;
-import proyecto1.*;
 
 action code{:
 
