@@ -1,0 +1,38 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0,67,88,0.9);
+}
+
+.Errores{
+    background-color: rgba(190,219,57,0.8);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.Err{
+    display: none;
+    border-radius: 10px;
+    color: black;
+    background-color: rgba(31,138,112,0.8);
+    padding-left: 5px;
+    transition: all 0.5s;
+}
+
+.Err p{
+    padding: 2px;
+    margin: 0px;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+}
+
+
+.Err p:hover{
+    background-color: rgba(253,116,0,0.8);
+}
+
+
+.Errores:hover .Err{
+    display: block;
+}
