@@ -8,57 +8,53 @@ package compiladoresfirstproject;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int mover = 6;
-  public static final int lindos = 28;
-  public static final int MENOR = 9;
-  public static final int haga = 24;
-  public static final int adios = 27;
-  public static final int SUMA = 15;
-  public static final int MENOR_IGUAL = 11;
-  public static final int True = 19;
-  public static final int MULTI = 17;
-  public static final int mientras = 23;
-  public static final int sino = 25;
-  public static final int MAYOR_IGUAL = 12;
-  public static final int False = 20;
-  public static final int izquierda = 2;
-  public static final int ojos = 30;
-  public static final int arriba = 3;
-  public static final int IGUAL_IGUAL = 13;
-  public static final int MAYOR = 10;
+  public static final int newline = 27;
+  public static final int True = 8;
+  public static final int boca = 18;
+  public static final int suma = 28;
+  public static final int resta = 24;
+  public static final int lindos = 17;
+  public static final int decir = 26;
+  public static final int derecha = 22;
+  public static final int entonces = 11;
+  public static final int eqeq = 6;
+  public static final int divi = 32;
+  public static final int si = 10;
+  public static final int closeKey = 37;
+  public static final int mientras = 12;
+  public static final int declarar = 29;
+  public static final int mayoreq = 5;
+  public static final int closeParth = 35;
+  public static final int menor = 2;
   public static final int EOF = 0;
-  public static final int hola = 26;
-  public static final int DIFERENTE = 14;
-  public static final int boca = 29;
-  public static final int entonces = 22;
-  public static final int DIV = 18;
-  public static final int NEWLINE = 8;
+  public static final int arriba = 21;
+  public static final int menoreq = 4;
   public static final int error = 1;
-  public static final int decir = 7;
-  public static final int abajo = 5;
-  public static final int derecha = 4;
-  public static final int si = 21;
-  public static final int RESTA = 16;
+  public static final int mayor = 3;
+  public static final int False = 9;
+  public static final int hola = 15;
+  public static final int opKey = 36;
+  public static final int abajo = 23;
+  public static final int multi = 31;
+  public static final int diferente = 7;
+  public static final int izquierda = 20;
+  public static final int haga = 13;
+  public static final int eq = 30;
+  public static final int opParth = 34;
+  public static final int ojos = 19;
+  public static final int adios = 16;
+  public static final int mover = 25;
+  public static final int num = 33;
+  public static final int sino = 14;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
-  "izquierda",
-  "arriba",
-  "derecha",
-  "abajo",
-  "mover",
-  "decir",
-  "NEWLINE",
-  "MENOR",
-  "MAYOR",
-  "MENOR_IGUAL",
-  "MAYOR_IGUAL",
-  "IGUAL_IGUAL",
-  "DIFERENTE",
-  "SUMA",
-  "RESTA",
-  "MULTI",
-  "DIV",
+  "menor",
+  "mayor",
+  "menoreq",
+  "mayoreq",
+  "eqeq",
+  "diferente",
   "True",
   "False",
   "si",
@@ -70,7 +66,25 @@ public class sym {
   "adios",
   "lindos",
   "boca",
-  "ojos"
+  "ojos",
+  "izquierda",
+  "arriba",
+  "derecha",
+  "abajo",
+  "resta",
+  "mover",
+  "decir",
+  "newline",
+  "suma",
+  "declarar",
+  "eq",
+  "multi",
+  "divi",
+  "num",
+  "opParth",
+  "closeParth",
+  "opKey",
+  "closeKey"
   };
 }
 

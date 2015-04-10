@@ -6,6 +6,7 @@
 package compiladoresfirstproject;
 
 import java.io.File;
+//import java.io.StringReader;
 
 /**
  *
@@ -23,12 +24,13 @@ public class Main {
         //generarParser();
         //---------------------------------------------------
 
-       // new VentanaPrincipal().run();
+        new VentanaPrincipal().run();
+        
     }
 
     // Metodo que genera el analizador lexico, usando jFlex
     private static void generarScanner() {
-        String path = "C:/Users/JAAM/Documents/NetBeansProjects/CompiladoresFirstProject/src/compiladoresfirstproject/scanner.lex";
+        String path = "C:/Users/JAAM/Documents/NetBeansProjects/CompiladoresFirstProject/src/compiladoresfirstproject/scanner.flex";
         File file = new File(path); // path -> donde se encuentra el archivo scanner.lex
         jflex.Main.generate(file);
     }
@@ -39,13 +41,13 @@ public class Main {
         // habilita la opcion de guardar en directorio
         opciones[0] = "-destdir";
         // path donde se va guardar
-        opciones[1] = "C:/Users/Francisco/Documents/NetBeansProjects/CompiladoresFirstProject/src/compiladoresfirstproject/";
+        opciones[1] = "C:/Users/JAAM/Documents/NetBeansProjects/CompiladoresFirstProject/src/compiladoresfirstproject/";
         // habilita la opcion de nombre
         opciones[2] = "-parser";
         // nombre dela clase del parser
-        opciones[3] = "Parser";
+        opciones[3] = "myParser";
         // path donde se encuentra el archivo parser.cup
-        opciones[4] = "C:/Users/Francisco/Documents/NetBeansProjects/CompiladoresFirstProject/src/compiladoresfirstproject/parser.cup";
+        opciones[4] = "C:/Users/JAAM/Documents/NetBeansProjects/CompiladoresFirstProject/src/compiladoresfirstproject/parser.cup";
         try {
             java_cup.Main.main(opciones);
         } catch (Exception ex) {

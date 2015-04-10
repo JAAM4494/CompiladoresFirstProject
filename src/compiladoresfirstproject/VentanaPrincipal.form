@@ -27,7 +27,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btnCargar" max="32767" attributes="0"/>
-                  <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="aLexicoBtn" alignment="0" max="32767" attributes="0"/>
                   <Component id="jButton3" alignment="0" max="32767" attributes="0"/>
                   <Component id="jButton1" max="32767" attributes="0"/>
               </Group>
@@ -60,7 +60,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane2" pref="271" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="aLexicoBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -83,10 +83,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCargarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="aLexicoBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="A. L&#xe9;xico"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aLexicoBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton3">
       <Properties>
@@ -115,7 +118,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea2">
+        <Component class="javax.swing.JTextArea" name="salidaText">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>

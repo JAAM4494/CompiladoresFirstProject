@@ -1,177 +1,139 @@
 package compiladoresfirstproject;
 
-import java.io.*;
-import java.lang.*;
-import java_cup.runtime.*;
 import java_cup.runtime.Symbol;
-import java.util.ArrayList;
+import java_cup.runtime.*;
 import java.util.*;
+import java.io.*;
 
+                /**** ACTION CODE ****/
 
-
-action code{:
-
-
+action code {:
+               
 :}
+
+                /**** PARSER CODE ****/
 
 parser code {:
 
-public void syntax_error(Symbol cur_token){
-System.out.println("va a ingresar el error sintactico "+ cur_token.value);
-interfaz.rotular  ("va a ingresar el error sintactico "+ cur_token.value);
+ public void syntax_error(Symbol cur_token) {
+                System.out.println("Error sintáctico: "+ cur_token.value);
 }
 
-public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
-interfaz.rotular("error YA no se recupera");
+public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
+            System.out.println("Error sintáctico ya no se recupera");
+}
 
-System.out.println("error YA no se recupera");
-:}
+:};
 
+                /**** TERMINALES ****/
 
+terminal   menor,        mayor,     menoreq,   mayoreq,    eqeq,     diferente;
+terminal   True,         False,     si,        entonces,   mientras, haga, sino;
+terminal   hola,         adios,     lindos,    boca,       ojos;
+terminal   izquierda,    arriba,    derecha,   abajo,      resta;
+terminal   mover,        decir,     newline,   suma;
+terminal   declarar,     eq,        multi,     divi;
 
+terminal Integer num;
 
+terminal   opParth,      closeParth;
+terminal   opKey,        closeKey; 
 
+                /**** NO TERMINALES ****/
 
-
-
-
-
-
-
-
-/////////////////////////////////////////////////
-////// SIMBOLOS TERMINALES /////////////
-/////////////////////////////////////////////////
-
-terminal izquierda, arriba, derecha,  abajo;
-terminal mover, decir, NEWLINE;
-terminal MENOR,  MAYOR,  MENOR_IGUAL, MAYOR_IGUAL, IGUAL_IGUAL, DIFERENTE;
-terminal SUMA, RESTA, MULTI, DIV;
-terminal True, False, si, entonces, mientras, haga, sino;
-terminal hola, adios, lindos, boca, ojos;
-
-
-
-/////////////////////////////////////////////////////////////
-/////////////////// SIMBOLOS NO TERMINALES ///////////////////
-/////////////////////////////////////////////////////////////
+non terminal    PROGRAMA;
+non terminal    LISTAVARIABLES,         DECLARACIONVARIABLE;
+non terminal    LISTADECLARACIONES,     DECLARACION;
+non terminal    MOVER,                  VOZ,                 DECLARACIONSELECCION,       PALABRA;
+non terminal    DECLARACIONITERACION,   TIPO;
+non terminal    EXPRESION,              EXPRESIONSUMA,       TERMINO;
+non terminal    OPERADORSUMA,           EXPRESIONMULT,       ID;
+non terminal    EXPRESIONCONDICION,     OPERADORMULT;
+non terminal    OPERADORRELACIONAL;
+non terminal    LISTADECLARACIONESCONDICIONADAS;
 
 
-non terminal Programa, PALABRA;
-non terminal ListaVariables, DeclaracionVariable;
-non terminal ListaDeclaraciones, Declaración, declarar;
-non terminal Mover, Voz, DeclaracionSeleccion;
-non terminal DeclaracionIteracion, TIPO;
-non terminal Expresion, ExpresionSuma, Termino;
-non terminal OperadorSuma, ExpresionMult, ID;
-non terminal OperadorMult, ExpresiónCondición;
-non terminal ListaDeclaracionesCondicionadas; 
-non terminal OperadorRelacional, NUM;
+                /**** PRECEDENCIAS ****/
+
+precedence left sino;
+precedence left suma, resta;
+precedence left divi, multi;
 
 
+                /**** INICIO DE LA GRAMATICA ****/
 
-start with Programa;
+start with PROGRAMA;
 
+PROGRAMA ::= LISTAVARIABLES LISTADECLARACIONES;
 
-/***********inicio de la gramática *******************
-******************************************************/
+LISTAVARIABLES ::= LISTAVARIABLES DECLARACIONVARIABLE
+                 | DECLARACIONVARIABLE:d {:RESULT= d;:};
 
-Programa ::= ListaVariables ListaDeclaraciones;
+DECLARACIONVARIABLE ::= declarar ID:d newline {:RESULT= d;:};
 
-ListaVariables ::= ListaVariables DeclaracionVariable 
-     | DeclaracionVariable 
- 		    ;
+LISTADECLARACIONES ::=  LISTADECLARACIONES DECLARACION 
+                      | DECLARACION:d {:RESULT= d;:};
 
- 
+DECLARACION ::=  MOVER:d {:RESULT= d;:}
+               | VOZ:d {:RESULT= d;:}
+               | DECLARACIONSELECCION:d {:RESULT= d;:}
+               | DECLARACIONITERACION:d {:RESULT= d;:};
 
+MOVER ::=  mover TIPO:d newline {:RESULT= d;:};
 
-DeclaracionVariable ::= declarar ID NEWLINE
-			;
+VOZ ::= decir PALABRA:d {:RESULT= d;:};
 
-ListaDeclaraciones ::=  ListaDeclaraciones Declaración 
-| Declaración 
-;
+PALABRA ::= hola:d {:RESULT= d.toString();:}  
+          | adios:d {:RESULT= d.toString();:}  
+          | lindos:d {:RESULT= d.toString();:}  
+          | ojos:d {:RESULT= d.toString();:}  	
+          | boca:d {:RESULT= d.toString();:};
 
-Declaracion ::=  Mover 
-| Voz
-| DeclaracionSeleccion
-| DeclaracionIteracion
-;
+TIPO ::= izquierda:d {:RESULT= d.toString();:}  
+       | arriba:d {:RESULT= d.toString();:}  
+       | derecha:d {:RESULT= d.toString();:}  
+       | abajo:d {:RESULT= d.toString();:};
 
-Mover ::=  mover TIPO NEWLINE;
+OPERADORSUMA ::= suma:d {:RESULT= d.toString();:}
+               | resta:d {:RESULT= d.toString();:};
 
-Voz ::= decir PALABRA;
+OPERADORMULT ::= multi:d {:RESULT= d.toString();:}
+               | divi:d {:RESULT= d.toString();:};
 
-PALABRA ::= hola
-		| adios
-		| lindos
-		| ojos	
-		| boca
-		;
+EXPRESION ::= ID eq EXPRESIONSUMA  
+            | EXPRESIONSUMA OPERADORRELACIONAL EXPRESIONSUMA
+            | EXPRESIONSUMA:d {:RESULT= d;:};
 
-TIPO ::= izquierda 
-| arriba 
-| derecha
-| abajo
-;
+OPERADORRELACIONAL ::= menor:d {:RESULT= d.toString();:}  
+                    |  mayor:d {:RESULT= d.toString();:}
+                    |  menoreq:d {:RESULT= d.toString();:}
+                    |  mayoreq:d {:RESULT= d.toString();:}
+                    |  eqeq:d {:RESULT= d.toString();:}
+                    |  diferente:d {:RESULT= d.toString();:};
 
-Expresion ::= ID = ExpresionSuma 
-          | ExpresionSuma
-          ;
+EXPRESIONSUMA ::= EXPRESIONSUMA OPERADORSUMA TERMINO
+ 		| EXPRESIONMULT:d {:RESULT= d;:};
 
-Expresion ::= ExpresionSuma OperadorRelacional ExpresionSuma 
-          | ExpresionSuma
-          ;
+EXPRESIONMULT ::= EXPRESIONMULT OPERADORMULT EXPRESIONSUMA
+                | TERMINO:d {:RESULT= d;:};
 
-OperadorRelacional ::= MENOR  
-|  MAYOR 
-|  MENOR_IGUAL
-| MAYOR_IGUAL
-|  IGUAL_IGUAL
-|  DIFERENTE
-;
+TERMINO ::=  opParth EXPRESION:d closeParth {:RESULT= d;:}
+          | ID:d {:RESULT= d;:}
+          | num:d {:RESULT= d;:};
 
+EXPRESIONCONDICION ::= EXPRESION:d {:RESULT= d;:}
+                     | True:d {:RESULT= d;:}
+                     | False:d {:RESULT= d;:};
 
-
-ExpresionSuma ::= ExpresionSuma OperadorSuma Termino 
- 		       | ExpresionMult
-		       ;
-
-ExpresionMult ::= ExpresionMult OperadorMult ExpresionSuma 
-| Termino
-;
-
-OperadorSuma ::=  SUMA
-       | RESTA
-       ;
-
-OperadorMult ::=  MULTI
-    | DIV
-    ;
-
-Termino ::= ( Expresion )
-        | ID 
-        | NUM
-        ;
-
-         
-
-ExpresiónCondición ::= Expresion 
-| True
-| False
-;
-
-ListaDeclaracionesCondicionadas ::= Declaración 
-| { ListaDeclaraciones }
-;
+LISTADECLARACIONESCONDICIONADAS ::= DECLARACION:d {:RESULT= d;:}
+                                  | opKey LISTADECLARACIONES:d closeKey {:RESULT= d;:};
 
 
-DeclaracionSeleccion ::= si (ExpresiónCondición) entonces ListaDeclaracionesCondicionadas
-                                       | si (ExpresiónCondición) entonces ListaDeclaracionesCondicionadas                         sino  ListaDeclaracionesCondicionadas
-                                     ;
+DECLARACIONSELECCION ::= si opParth EXPRESIONCONDICION closeParth entonces LISTADECLARACIONESCONDICIONADAS
+                       | si opParth EXPRESIONCONDICION closeParth entonces LISTADECLARACIONESCONDICIONADAS sino LISTADECLARACIONESCONDICIONADAS;
 
 
-DeclaracionIteracion ::=  mientras ( ExpresiónCondición ) haga ListaDeclaracionesCondicionadas 
- 			| haga ListaDeclaracionesCondicionadas mientras Expresion
-			;
+DECLARACIONITERACION ::=  mientras opParth EXPRESIONCONDICION closeParth haga LISTADECLARACIONESCONDICIONADAS 
+ 			| haga LISTADECLARACIONESCONDICIONADAS mientras EXPRESION;
 
+                                /**** FIN DE LA GRAMATICA ****/
