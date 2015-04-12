@@ -8,6 +8,7 @@ import java.io.*;
 
 action code {:
     Hashtable table = new Hashtable();
+    tablaSimbolos tablaSim=new tablaSimbolos();
 :}
 
                 /**** PARSER CODE ****/
@@ -21,8 +22,8 @@ parser code {:
 public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
             System.out.println("Error sintáctico ya no se recupera");
 }
- public void semantics_error(Symbol cur_token) {
-                System.out.println("Error semantico: La variable  "+ cur_token.value + "  " +" No se encuentra");
+ public void semantics_error(String cur_token) {
+                System.out.println("Error semantico: La variable  "+ cur_token + "  " +" No se encuentra");
 }
 
 :};
@@ -37,7 +38,7 @@ terminal   mover,        decir,     newline,   suma;
 terminal   declarar,     eq,        multi,     divi;
 
 terminal Integer num;
-
+terminal ID;
 terminal   opParth,      closeParth;
 terminal   opKey,        closeKey; 
 
@@ -49,7 +50,7 @@ non terminal    LISTADECLARACIONES,     DECLARACION;
 non terminal    MOVER,                  VOZ,                 DECLARACIONSELECCION,       PALABRA;
 non terminal    DECLARACIONITERACION,   TIPO;
 non terminal    EXPRESION,              EXPRESIONSUMA,       TERMINO;
-non terminal    OPERADORSUMA,           EXPRESIONMULT,       ID;
+non terminal    OPERADORSUMA,           EXPRESIONMULT;
 non terminal    EXPRESIONCONDICION,     OPERADORMULT;
 non terminal    OPERADORRELACIONAL;
 non terminal    LISTADECLARACIONESCONDICIONADAS;
@@ -81,7 +82,7 @@ DECLARACION ::=  MOVER:d {:RESULT= d;:}
                | DECLARACIONSELECCION:d {:RESULT= d;:}
                | DECLARACIONITERACION:d {:RESULT= d;:};
 
-MOVER ::=  mover TIPO:d newline {:RESULT= d;:};
+MOVER ::=  mover TIPO:d {:RESULT= d;:};
 
 VOZ ::= decir PALABRA:d {:RESULT= d;:};
 
@@ -102,7 +103,9 @@ OPERADORSUMA ::= suma:d {:RESULT= d.toString();:}
 OPERADORMULT ::= multi:d {:RESULT= d.toString();:}
                | divi:d {:RESULT= d.toString();:};
 
-EXPRESION ::= ID:id eq EXPRESIONSUMA:expr {:table.put(id, expr);:}  
+EXPRESION ::= ID:id eq EXPRESIONSUMA:expr {:table.put(id, expr);
+                                           tablaSim.writeSymbol(id.toString(),((Integer)expr).intValue());                     
+                                           :}  
             | EXPRESIONSUMA OPERADORRELACIONAL EXPRESIONSUMA
             | EXPRESIONSUMA:d {:RESULT= d;:};
 
@@ -113,19 +116,19 @@ OPERADORRELACIONAL ::= menor:d {:RESULT= d.toString();:}
                     |  eqeq:d {:RESULT= d.toString();:}
                     |  diferente:d {:RESULT= d.toString();:};
 
-EXPRESIONSUMA ::= EXPRESIONSUMA:n OPERADORSUMA:d TERMINO:m {:if(d.toString()=="+"){RESULT= new Integer(n.intValue()+m.intValue());}
-                                                             else{RESULT= new Integer(n.intValue()+m.intValue());}:} 
+EXPRESIONSUMA ::= EXPRESIONSUMA:n OPERADORSUMA:d TERMINO:m {:if("+".equals(d.toString())){RESULT= new Integer(((Integer)n).intValue()+((Integer)m).intValue());}
+                                                             else{RESULT= new Integer(((Integer)n).intValue()+((Integer)m).intValue());}:} 
  		| EXPRESIONMULT:d {:RESULT= d;:};
 
-EXPRESIONMULT ::= EXPRESIONMULT:n OPERADORMULT:d EXPRESIONSUMA:m {:if(d.toString()=="/"){
-                                                                 if(m==0){System.out.println("division entre cero")RESULT= new Integer(0);}
-                                                                 else{RESULT=new Integer(n.intValue()/m.intValue()}}
-                                                                 else{RESULT= new Integer(n.intValue()*m.intValue());}:}
+EXPRESIONMULT ::= EXPRESIONMULT:n OPERADORMULT:d EXPRESIONSUMA:m {:if("/".equals(d.toString())){
+                                                                 if((Integer)m==0){System.out.println("division entre cero");RESULT= new Integer(0);}
+                                                                 else{RESULT=new Integer(((Integer)n).intValue()/((Integer)m).intValue());}}
+                                                                 else{RESULT= new Integer(((Integer)n).intValue()*((Integer)m).intValue());}:}
                 | TERMINO:d {:RESULT= d;:};
 
 TERMINO ::=  opParth EXPRESION:d closeParth {:RESULT= d;:}
           | ID:d {:Integer value = (Integer) table.get(d);
-            if(value==null){parser.semantics_error(d);
+            if(value==null){parser.semantics_error(d.toString());
                             value = new Integer (0);}
             RESULT= value;:}
           | num:d {:RESULT= new Integer(d);:};
