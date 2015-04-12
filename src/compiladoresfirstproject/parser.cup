@@ -37,7 +37,7 @@ terminal   izquierda,    arriba,    derecha,   abajo,      resta;
 terminal   mover,        decir,     newline,   suma;
 terminal   declarar,     eq,        multi,     divi;
 
-terminal Integer num;
+terminal String num;
 terminal ID;
 terminal   opParth,      closeParth;
 terminal   opKey,        closeKey; 
@@ -49,11 +49,13 @@ non terminal    LISTAVARIABLES,         DECLARACIONVARIABLE;
 non terminal    LISTADECLARACIONES,     DECLARACION;
 non terminal    MOVER,                  VOZ,                 DECLARACIONSELECCION,       PALABRA;
 non terminal    DECLARACIONITERACION,   TIPO;
-non terminal    EXPRESION,              EXPRESIONSUMA,       TERMINO;
-non terminal    OPERADORSUMA,           EXPRESIONMULT;
+non terminal    OPERADORSUMA;
 non terminal    EXPRESIONCONDICION,     OPERADORMULT;
 non terminal    OPERADORRELACIONAL;
 non terminal    LISTADECLARACIONESCONDICIONADAS;
+
+non terminal EXPRESIONSUMA, EXPRESIONMULT, TERMINO;
+non terminal EXPRESION;
 
 
                 /**** PRECEDENCIAS ****/

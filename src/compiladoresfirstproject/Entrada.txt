@@ -21,3 +21,8 @@ mientras(true) haga {
 decir hola
 decir lindos
 }
+
+haga {
+decir lindos
+mover derecha
+} mientras 5+6
