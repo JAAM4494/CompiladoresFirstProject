@@ -20,11 +20,12 @@ public class sym {
   public static final int eqeq = 6;
   public static final int divi = 32;
   public static final int si = 10;
-  public static final int closeKey = 37;
+  public static final int closeKey = 38;
   public static final int mientras = 12;
   public static final int declarar = 29;
   public static final int mayoreq = 5;
-  public static final int closeParth = 35;
+  public static final int closeParth = 36;
+  public static final int ID = 34;
   public static final int menor = 2;
   public static final int EOF = 0;
   public static final int arriba = 21;
@@ -33,14 +34,14 @@ public class sym {
   public static final int mayor = 3;
   public static final int False = 9;
   public static final int hola = 15;
-  public static final int opKey = 36;
+  public static final int opKey = 37;
   public static final int abajo = 23;
   public static final int multi = 31;
   public static final int diferente = 7;
   public static final int izquierda = 20;
   public static final int haga = 13;
   public static final int eq = 30;
-  public static final int opParth = 34;
+  public static final int opParth = 35;
   public static final int ojos = 19;
   public static final int adios = 16;
   public static final int mover = 25;
@@ -81,6 +82,7 @@ public class sym {
   "multi",
   "divi",
   "num",
+  "ID",
   "opParth",
   "closeParth",
   "opKey",

@@ -34,32 +34,32 @@ public void echo(int pToken) {
 %}
 
 %eofval{
-{return new Symbol(sym.EOF, null); }
+System.out.println("ENDOF");
+return new Symbol(sym.EOF,null);
 %eofval}
 
 LETRA=[a-zA-Z]
 DIGITO=[0-9]
 ALPHA_NUMERIC={LETRA}|{DIGITO}
 
+ID={LETRA}({ALPHA_NUMERIC})*
+
 NEW_LINE=(\n|\r)
 ESPACIO_EN_BLANCO=([\ |\t|\f])
-LineTerminator = \r|\n|\r\n
-InputCharacter = [^\r\n]
-
-st = [^\\\n\"]+ | [\\][\\] | "\\\"" | "\\\'" |"\\t"| "\\n" | "\\r" |"\\b" |"\n"
  
 FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
 
 %%
-[\n] { yychar=0;}
+[\n] {yychar=0;}
 
-[ \t\r\n\f] { /* ignore white space. */ }
+[ \t\f] {/* ignore white space. */ }
 
 \' { /* ignora apostrofes. */ }
 <YYINITIAL> {ESPACIO_EN_BLANCO}  {/*no hace nada, aumenta una columna,continua lectura*/yychar++; }
-<YYINITIAL> {NEW_LINE}     {yychar=0; yyline=0}
+<YYINITIAL> {NEW_LINE}     {System.out.println("Salto linea");yychar=0; yyline=0;return new Symbol(sym.mover, yyline, yychar, yytext());}
 
 <YYINITIAL>"mover"          {echo(sym.mover); return new Symbol(sym.mover,          yyline, yychar, yytext());}
+<YYINITIAL>"declarar"       {echo(sym.declarar); return new Symbol(sym.declarar,          yyline, yychar, yytext());}
 <YYINITIAL>"lindos"         {echo(sym.lindos); return new Symbol(sym.lindos,         yyline, yychar, yytext());}
 <YYINITIAL>"<"              {echo(sym.menor); return new Symbol(sym.menor,          yyline, yychar, yytext());}
 <YYINITIAL>"haga"           {echo(sym.haga); return new Symbol(sym.haga,           yyline, yychar, yytext());}
@@ -90,7 +90,7 @@ FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
 
 <YYINITIAL>{DIGITO}+ {ESPACIO_EN_BLANCO}* {echo(sym.num); return new Symbol(sym.num, yyline, yychar, yytext()); }
 
-EOF    {System.out.println("Fin de archivo");}
+<YYINITIAL>{ID} {echo(sym.ID); return new Symbol(sym.ID, yyline, yychar, yytext()); }
 
 /*<YYINITIAL>{FRASE}        {echo(); return new Symbol(sym.FRASE,          yyline, yychar, yytext());}*/
 

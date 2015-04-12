@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -161,9 +162,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             myLexer AnalizadorLexico = new myLexer(new FileReader(pathDeArchivo.toString()));
             myParser AnalizadorSintactico = new myParser(AnalizadorLexico);
             //AnalizadorSintactico.parse();
-            for (int i = 0; i < retornoArchivo.length(); i++) {
-                AnalizadorLexico.next_token();
-            }
+            Symbol currToken;
+            do {
+            currToken = AnalizadorLexico.next_token();
+        } while (currToken.sym != sym.EOF);
+
             System.out.println("Fin de escaneo..!!");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);

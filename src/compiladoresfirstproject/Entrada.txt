@@ -1,1 +1,4 @@
-5+6$7+4a
+
+declarar variable
+declarar otra
+declarar variable22

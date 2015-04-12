@@ -8,7 +8,7 @@ import java.io.*;
 
 action code {:
     Hashtable table = new Hashtable();
-    tablaSimbolos tablaSim=new tablaSimbolos();
+   // tablaSimbolos tablaSim=new tablaSimbolos();
 :}
 
                 /**** PARSER CODE ****/
@@ -104,7 +104,7 @@ OPERADORMULT ::= multi:d {:RESULT= d.toString();:}
                | divi:d {:RESULT= d.toString();:};
 
 EXPRESION ::= ID:id eq EXPRESIONSUMA:expr {:table.put(id, expr);
-                                           tablaSim.writeSymbol(id.toString(),((Integer)expr).intValue());                     
+                                           //tablaSim.writeSymbol(id.toString(),((Integer)expr).intValue());                     
                                            :}  
             | EXPRESIONSUMA OPERADORRELACIONAL EXPRESIONSUMA
             | EXPRESIONSUMA:d {:RESULT= d;:};
