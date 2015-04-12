@@ -61,18 +61,18 @@ public class myLexer implements java_cup.runtime.Scanner {
   private static final String ZZ_ACTION_PACKED_0 =
     "\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7"+
     "\1\10\6\2\1\1\1\2\1\1\1\2\1\11\1\2"+
-    "\1\12\1\13\1\1\1\2\1\14\1\15\1\16\2\2"+
-    "\1\1\1\17\1\20\1\21\1\22\1\3\1\2\1\0"+
-    "\4\2\1\0\4\2\1\0\1\2\2\23\1\24\2\2"+
-    "\1\25\1\2\1\26\2\2\1\27\1\2\1\0\5\2"+
+    "\1\12\1\13\1\14\1\2\1\15\1\16\1\17\2\2"+
+    "\1\1\1\20\1\21\1\22\1\23\1\3\1\2\1\0"+
+    "\4\2\1\0\4\2\1\0\1\2\2\24\1\25\2\2"+
+    "\1\26\1\2\1\27\2\2\1\30\1\2\1\0\5\2"+
     "\1\0\2\2\1\0\2\2\1\0\1\2\1\0\7\2"+
-    "\1\0\1\2\2\30\3\2\1\0\1\2\1\0\1\2"+
-    "\1\0\1\2\1\0\2\2\1\0\1\2\2\31\1\32"+
-    "\1\33\1\34\1\0\1\2\1\35\1\36\1\0\4\2"+
-    "\2\37\1\0\1\2\1\0\1\2\2\40\1\41\1\0"+
-    "\1\2\2\42\1\0\4\2\2\43\2\44\1\0\1\2"+
-    "\1\0\2\2\1\45\1\2\1\0\1\2\2\46\2\47"+
-    "\1\50\1\0\1\2\2\51";
+    "\1\0\1\2\2\31\3\2\1\0\1\2\1\0\1\2"+
+    "\1\0\1\2\1\0\2\2\1\0\1\2\2\32\1\33"+
+    "\1\34\1\35\1\0\1\2\1\36\1\37\1\0\4\2"+
+    "\2\40\1\0\1\2\1\0\1\2\2\41\1\42\1\0"+
+    "\1\2\2\43\1\0\4\2\2\44\2\45\1\0\1\2"+
+    "\1\0\2\2\1\46\1\2\1\0\1\2\2\47\2\50"+
+    "\1\51\1\0\1\2\2\52";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[155];
@@ -814,167 +814,171 @@ public void echo(int pToken) {
           case 1: 
             { System.out.println("Caracter desconocido en la fila: " + yyline + ", columna: " + yychar);
             }
-          case 42: break;
+          case 43: break;
           case 2: 
             { echo(sym.ID); return new Symbol(sym.ID, yyline, yychar, yytext());
             }
-          case 43: break;
+          case 44: break;
           case 3: 
             { echo(sym.num); return new Symbol(sym.num, yyline, yychar, yytext());
             }
-          case 44: break;
+          case 45: break;
           case 4: 
             { yychar=0;
             }
-          case 45: break;
+          case 46: break;
           case 5: 
             { System.out.println("Salto linea");yychar=0; yyline=0;
             }
-          case 46: break;
+          case 47: break;
           case 6: 
             { /*no hace nada, aumenta una columna,continua lectura*/yychar++;
             }
-          case 47: break;
+          case 48: break;
           case 7: 
             { /* ignore white space. */
             }
-          case 48: break;
+          case 49: break;
           case 8: 
             { /* ignora apostrofes. */
             }
-          case 49: break;
+          case 50: break;
           case 9: 
             { echo(sym.menor); return new Symbol(sym.menor,          yyline, yychar, yytext());
             }
-          case 50: break;
+          case 51: break;
           case 10: 
             { echo(sym.suma); return new Symbol(sym.suma,           yyline, yychar, yytext());
             }
-          case 51: break;
+          case 52: break;
           case 11: 
             { echo(sym.resta); return new Symbol(sym.resta,          yyline, yychar, yytext());
             }
-          case 52: break;
-          case 12: 
-            { echo(sym.multi); return new Symbol(sym.multi,          yyline, yychar, yytext());
-            }
           case 53: break;
-          case 13: 
-            { echo(sym.divi); return new Symbol(sym.divi,           yyline, yychar, yytext());
+          case 12: 
+            { echo(sym.eq); return new Symbol(sym.eq,          yyline, yychar, yytext());
             }
           case 54: break;
-          case 14: 
-            { echo(sym.mayor); return new Symbol(sym.mayor,          yyline, yychar, yytext());
+          case 13: 
+            { echo(sym.multi); return new Symbol(sym.multi,          yyline, yychar, yytext());
             }
           case 55: break;
-          case 15: 
-            { echo(sym.opParth); return new Symbol(sym.opParth,             yyline, yychar, yytext());
+          case 14: 
+            { echo(sym.divi); return new Symbol(sym.divi,           yyline, yychar, yytext());
             }
           case 56: break;
-          case 16: 
-            { echo(sym.closeParth); return new Symbol(sym.closeParth,             yyline, yychar, yytext());
+          case 15: 
+            { echo(sym.mayor); return new Symbol(sym.mayor,          yyline, yychar, yytext());
             }
           case 57: break;
-          case 17: 
-            { echo(sym.opKey); return new Symbol(sym.opKey,             yyline, yychar, yytext());
+          case 16: 
+            { echo(sym.opParth); return new Symbol(sym.opParth,             yyline, yychar, yytext());
             }
           case 58: break;
-          case 18: 
-            { echo(sym.closeKey); return new Symbol(sym.closeKey,             yyline, yychar, yytext());
+          case 17: 
+            { echo(sym.closeParth); return new Symbol(sym.closeParth,             yyline, yychar, yytext());
             }
           case 59: break;
-          case 19: 
-            { echo(sym.si); return new Symbol(sym.si,             yyline, yychar, yytext());
+          case 18: 
+            { echo(sym.opKey); return new Symbol(sym.opKey,             yyline, yychar, yytext());
             }
           case 60: break;
-          case 20: 
-            { echo(sym.menoreq); return new Symbol(sym.menoreq,        yyline, yychar, yytext());
+          case 19: 
+            { echo(sym.closeKey); return new Symbol(sym.closeKey,             yyline, yychar, yytext());
             }
           case 61: break;
-          case 21: 
-            { echo(sym.eqeq); return new Symbol(sym.eqeq,           yyline, yychar, yytext());
+          case 20: 
+            { echo(sym.si); return new Symbol(sym.si,             yyline, yychar, yytext());
             }
           case 62: break;
-          case 22: 
-            { echo(sym.mayoreq); return new Symbol(sym.mayoreq,        yyline, yychar, yytext());
+          case 21: 
+            { echo(sym.menoreq); return new Symbol(sym.menoreq,        yyline, yychar, yytext());
             }
           case 63: break;
-          case 23: 
-            { echo(sym.diferente); return new Symbol(sym.diferente,      yyline, yychar, yytext());
+          case 22: 
+            { echo(sym.eqeq); return new Symbol(sym.eqeq,           yyline, yychar, yytext());
             }
           case 64: break;
-          case 24: 
-            { echo(sym.ojos); return new Symbol(sym.ojos,           yyline, yychar, yytext());
+          case 23: 
+            { echo(sym.mayoreq); return new Symbol(sym.mayoreq,        yyline, yychar, yytext());
             }
           case 65: break;
-          case 25: 
-            { echo(sym.sino); return new Symbol(sym.sino,           yyline, yychar, yytext());
+          case 24: 
+            { echo(sym.diferente); return new Symbol(sym.diferente,      yyline, yychar, yytext());
             }
           case 66: break;
-          case 26: 
-            { echo(sym.hola); return new Symbol(sym.hola,           yyline, yychar, yytext());
+          case 25: 
+            { echo(sym.ojos); return new Symbol(sym.ojos,           yyline, yychar, yytext());
             }
           case 67: break;
-          case 27: 
-            { echo(sym.haga); return new Symbol(sym.haga,           yyline, yychar, yytext());
+          case 26: 
+            { echo(sym.sino); return new Symbol(sym.sino,           yyline, yychar, yytext());
             }
           case 68: break;
-          case 28: 
-            { echo(sym.True); return new Symbol(sym.True,           yyline, yychar, yytext());
+          case 27: 
+            { echo(sym.hola); return new Symbol(sym.hola,           yyline, yychar, yytext());
             }
           case 69: break;
-          case 29: 
-            { echo(sym.boca); return new Symbol(sym.boca,           yyline, yychar, yytext());
+          case 28: 
+            { echo(sym.haga); return new Symbol(sym.haga,           yyline, yychar, yytext());
             }
           case 70: break;
-          case 30: 
-            { echo(sym.mover); return new Symbol(sym.mover,          yyline, yychar, yytext());
+          case 29: 
+            { echo(sym.True); return new Symbol(sym.True,           yyline, yychar, yytext());
             }
           case 71: break;
-          case 31: 
-            { echo(sym.decir); return new Symbol(sym.decir,          yyline, yychar, yytext());
+          case 30: 
+            { echo(sym.boca); return new Symbol(sym.boca,           yyline, yychar, yytext());
             }
           case 72: break;
-          case 32: 
-            { echo(sym.adios); return new Symbol(sym.adios,          yyline, yychar, yytext());
+          case 31: 
+            { echo(sym.mover); return new Symbol(sym.mover,          yyline, yychar, yytext());
             }
           case 73: break;
-          case 33: 
-            { echo(sym.abajo); return new Symbol(sym.abajo,          yyline, yychar, yytext());
+          case 32: 
+            { echo(sym.decir); return new Symbol(sym.decir,          yyline, yychar, yytext());
             }
           case 74: break;
-          case 34: 
-            { echo(sym.False); return new Symbol(sym.False,          yyline, yychar, yytext());
+          case 33: 
+            { echo(sym.adios); return new Symbol(sym.adios,          yyline, yychar, yytext());
             }
           case 75: break;
-          case 35: 
-            { echo(sym.lindos); return new Symbol(sym.lindos,         yyline, yychar, yytext());
+          case 34: 
+            { echo(sym.abajo); return new Symbol(sym.abajo,          yyline, yychar, yytext());
             }
           case 76: break;
-          case 36: 
-            { echo(sym.arriba); return new Symbol(sym.arriba,         yyline, yychar, yytext());
+          case 35: 
+            { echo(sym.False); return new Symbol(sym.False,          yyline, yychar, yytext());
             }
           case 77: break;
-          case 37: 
-            { echo(sym.derecha); return new Symbol(sym.derecha,        yyline, yychar, yytext());
+          case 36: 
+            { echo(sym.lindos); return new Symbol(sym.lindos,         yyline, yychar, yytext());
             }
           case 78: break;
-          case 38: 
-            { echo(sym.mientras); return new Symbol(sym.mientras,       yyline, yychar, yytext());
+          case 37: 
+            { echo(sym.arriba); return new Symbol(sym.arriba,         yyline, yychar, yytext());
             }
           case 79: break;
-          case 39: 
-            { echo(sym.entonces); return new Symbol(sym.entonces,       yyline, yychar, yytext());
+          case 38: 
+            { echo(sym.derecha); return new Symbol(sym.derecha,        yyline, yychar, yytext());
             }
           case 80: break;
-          case 40: 
-            { echo(sym.declarar); return new Symbol(sym.declarar,          yyline, yychar, yytext());
+          case 39: 
+            { echo(sym.mientras); return new Symbol(sym.mientras,       yyline, yychar, yytext());
             }
           case 81: break;
-          case 41: 
-            { echo(sym.izquierda); return new Symbol(sym.izquierda,      yyline, yychar, yytext());
+          case 40: 
+            { echo(sym.entonces); return new Symbol(sym.entonces,       yyline, yychar, yytext());
             }
           case 82: break;
+          case 41: 
+            { echo(sym.declarar); return new Symbol(sym.declarar,          yyline, yychar, yytext());
+            }
+          case 83: break;
+          case 42: 
+            { echo(sym.izquierda); return new Symbol(sym.izquierda,      yyline, yychar, yytext());
+            }
+          case 84: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

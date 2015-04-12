@@ -65,6 +65,7 @@ FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
 <YYINITIAL>"adios"          {echo(sym.adios); return new Symbol(sym.adios,          yyline, yychar, yytext());}
 <YYINITIAL>"+"              {echo(sym.suma); return new Symbol(sym.suma,           yyline, yychar, yytext());}
 <YYINITIAL>"-"              {echo(sym.resta); return new Symbol(sym.resta,          yyline, yychar, yytext());}
+<YYINITIAL>"="              {echo(sym.eq); return new Symbol(sym.eq,          yyline, yychar, yytext());}
 <YYINITIAL>"<="             {echo(sym.menoreq); return new Symbol(sym.menoreq,        yyline, yychar, yytext());}
 <YYINITIAL>"true"           {echo(sym.True); return new Symbol(sym.True,           yyline, yychar, yytext());}
 <YYINITIAL>"*"              {echo(sym.multi); return new Symbol(sym.multi,          yyline, yychar, yytext());}
