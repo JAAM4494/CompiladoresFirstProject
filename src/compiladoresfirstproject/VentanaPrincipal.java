@@ -161,16 +161,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             //Scanner AnalizadorLexico = new Scanner(new StringReader(retornoArchivo));
             myLexer AnalizadorLexico = new myLexer(new FileReader(pathDeArchivo.toString()));
             myParser AnalizadorSintactico = new myParser(AnalizadorLexico);
-            //AnalizadorSintactico.parse();
+            AnalizadorSintactico.parse();
             Symbol currToken;
-            do {
-            currToken = AnalizadorLexico.next_token();
-        } while (currToken.sym != sym.EOF);
+           // do {
+         //   currToken = AnalizadorLexico.next_token();
+       // } while (currToken.sym != sym.EOF);
 
             System.out.println("Fin de escaneo..!!");
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);

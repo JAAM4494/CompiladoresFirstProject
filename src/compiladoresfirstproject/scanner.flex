@@ -34,8 +34,7 @@ public void echo(int pToken) {
 %}
 
 %eofval{
-System.out.println("ENDOF");
-return new Symbol(sym.EOF,null);
+{return new Symbol(sym.EOF,null);}
 %eofval}
 
 LETRA=[a-zA-Z]
@@ -56,7 +55,7 @@ FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
 
 \' { /* ignora apostrofes. */ }
 <YYINITIAL> {ESPACIO_EN_BLANCO}  {/*no hace nada, aumenta una columna,continua lectura*/yychar++; }
-<YYINITIAL> {NEW_LINE}     {System.out.println("Salto linea");yychar=0; yyline=0;return new Symbol(sym.mover, yyline, yychar, yytext());}
+<YYINITIAL> {NEW_LINE}     {System.out.println("Salto linea");yychar=0; yyline=0;}
 
 <YYINITIAL>"mover"          {echo(sym.mover); return new Symbol(sym.mover,          yyline, yychar, yytext());}
 <YYINITIAL>"declarar"       {echo(sym.declarar); return new Symbol(sym.declarar,          yyline, yychar, yytext());}
@@ -87,6 +86,11 @@ FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
 <YYINITIAL>"abajo"          {echo(sym.abajo); return new Symbol(sym.abajo,          yyline, yychar, yytext());}
 <YYINITIAL>"derecha"        {echo(sym.derecha); return new Symbol(sym.derecha,        yyline, yychar, yytext());}
 <YYINITIAL>"si"             {echo(sym.si); return new Symbol(sym.si,             yyline, yychar, yytext());}
+
+<YYINITIAL>"("             {echo(sym.opParth); return new Symbol(sym.opParth,             yyline, yychar, yytext());}
+<YYINITIAL>")"             {echo(sym.closeParth); return new Symbol(sym.closeParth,             yyline, yychar, yytext());}
+<YYINITIAL>"{"             {echo(sym.opKey); return new Symbol(sym.opKey,             yyline, yychar, yytext());}
+<YYINITIAL>"}"             {echo(sym.closeKey); return new Symbol(sym.closeKey,             yyline, yychar, yytext());}
 
 <YYINITIAL>{DIGITO}+ {ESPACIO_EN_BLANCO}* {echo(sym.num); return new Symbol(sym.num, yyline, yychar, yytext()); }
 

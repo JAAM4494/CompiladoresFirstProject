@@ -1,4 +1,23 @@
-
 declarar variable
 declarar otra
 declarar variable22
+mover izquierda
+decir hola
+
+si(true) entonces {
+mover abajo
+mover derecha
+}
+
+si(true) entonces {
+mover izquierda
+decir adios
+} sino {
+mover derecha
+decir hola
+}
+
+mientras(true) haga {
+decir hola
+decir lindos
+}
