@@ -8,7 +8,7 @@ import java.io.*;
 
 action code {:
     Hashtable table = new Hashtable();
-   // tablaSimbolos tablaSim=new tablaSimbolos();
+    TablaSim tablaSim=new TablaSim();
 :}
 
                 /**** PARSER CODE ****/
@@ -74,7 +74,9 @@ PROGRAMA ::= LISTAVARIABLES LISTADECLARACIONES;
 LISTAVARIABLES ::= LISTAVARIABLES DECLARACIONVARIABLE
                  | DECLARACIONVARIABLE:d {:RESULT= d;:};
 
-DECLARACIONVARIABLE ::= declarar ID:d {:RESULT= d;:};
+DECLARACIONVARIABLE ::= declarar ID:d {:
+                        table.put(d.toString(),0);
+                        RESULT= d;:};
 
 LISTADECLARACIONES ::=  LISTADECLARACIONES DECLARACION 
                       | DECLARACION:d {:RESULT= d;:};
@@ -105,8 +107,14 @@ OPERADORSUMA ::= suma:d {:RESULT= d.toString();:}
 OPERADORMULT ::= multi:d {:RESULT= d.toString();:}
                | divi:d {:RESULT= d.toString();:};
 
-EXPRESION ::= ID:id eq EXPRESIONSUMA:expr {:table.put(id, expr);
-                                           //tablaSim.writeSymbol(id.toString(),((Integer)expr).intValue());                     
+EXPRESION ::= ID:id eq EXPRESIONSUMA:expr {:
+                                            if(table.containsKey(id.toString())){
+                                               table.replace(id.toString(), new Integer(((Integer)expr).intValue()));
+                                               tablaSim.writeSymbol(id.toString(), new Integer(((Integer)expr).intValue()));
+                                            }
+                                           else{
+                                            System.out.println("Variable no declarada");
+                                            }                     
                                            :}  
             | EXPRESIONSUMA OPERADORRELACIONAL EXPRESIONSUMA
             | EXPRESIONSUMA:d {:RESULT= d;:};

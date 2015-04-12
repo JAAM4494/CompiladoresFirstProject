@@ -266,7 +266,7 @@ class CUP$myParser$actions {
 
 
     Hashtable table = new Hashtable();
-   // tablaSimbolos tablaSim=new tablaSimbolos();
+    TablaSim tablaSim=new TablaSim();
 
   private final myParser parser;
 
@@ -340,7 +340,9 @@ class CUP$myParser$actions {
 		int dleft = ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()).left;
 		int dright = ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$myParser$stack.peek()).value;
-		RESULT= d;
+		
+                        table.put(d.toString(),0);
+                        RESULT= d;
               CUP$myParser$result = parser.getSymbolFactory().newSymbol("DECLARACIONVARIABLE",2, ((java_cup.runtime.Symbol)CUP$myParser$stack.elementAt(CUP$myParser$top-1)), ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()), RESULT);
             }
           return CUP$myParser$result;
@@ -604,8 +606,14 @@ class CUP$myParser$actions {
 		int exprleft = ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()).left;
 		int exprright = ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()).right;
 		Object expr = (Object)((java_cup.runtime.Symbol) CUP$myParser$stack.peek()).value;
-		table.put(id, expr);
-                                           //tablaSim.writeSymbol(id.toString(),((Integer)expr).intValue());                     
+		
+                                            if(table.containsKey(id.toString())){
+                                               table.replace(id.toString(), new Integer(((Integer)expr).intValue()));
+                                               tablaSim.writeSymbol(id.toString(), new Integer(((Integer)expr).intValue()));
+                                            }
+                                           else{
+                                            System.out.println("Variable no declarada");
+                                            }                     
                                            
               CUP$myParser$result = parser.getSymbolFactory().newSymbol("EXPRESION",19, ((java_cup.runtime.Symbol)CUP$myParser$stack.elementAt(CUP$myParser$top-2)), ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()), RESULT);
             }

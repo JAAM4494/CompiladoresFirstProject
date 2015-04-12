@@ -11,6 +11,19 @@ body{
     margin: 5px;
 }
 
+table,th{
+    border: 1px solid black;
+}
+
+
+thead{
+    background-color: rgb(81,165,195);
+}
+
+tbody{
+    background-color: rgb(212,59,33);
+}
+
 .Err{
     display: none;
     border-radius: 10px;

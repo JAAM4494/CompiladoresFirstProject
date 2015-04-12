@@ -31,3 +31,8 @@ haga {
 mover abajo
 mover arriba
 } mientras variable = 5+6
+
+haga {
+mover abajo
+mover arriba
+} mientras variable22 = 5-6
