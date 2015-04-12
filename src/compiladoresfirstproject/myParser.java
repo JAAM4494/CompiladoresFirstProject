@@ -718,7 +718,7 @@ class CUP$myParser$actions {
 		int mright = ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()).right;
 		Object m = (Object)((java_cup.runtime.Symbol) CUP$myParser$stack.peek()).value;
 		if("+".equals(d.toString())){RESULT= new Integer(((Integer)n).intValue()+((Integer)m).intValue());}
-                                                             else{RESULT= new Integer(((Integer)n).intValue()+((Integer)m).intValue());}
+                                                             else{RESULT= new Integer(((Integer)n).intValue()- ((Integer)m).intValue());}
               CUP$myParser$result = parser.getSymbolFactory().newSymbol("EXPRESIONSUMA",16, ((java_cup.runtime.Symbol)CUP$myParser$stack.elementAt(CUP$myParser$top-2)), ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()), RESULT);
             }
           return CUP$myParser$result;

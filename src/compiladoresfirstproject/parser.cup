@@ -119,7 +119,7 @@ OPERADORRELACIONAL ::= menor:d {:RESULT= d.toString();:}
                     |  diferente:d {:RESULT= d.toString();:};
 
 EXPRESIONSUMA ::= EXPRESIONSUMA:n OPERADORSUMA:d TERMINO:m {:if("+".equals(d.toString())){RESULT= new Integer(((Integer)n).intValue()+((Integer)m).intValue());}
-                                                             else{RESULT= new Integer(((Integer)n).intValue()+((Integer)m).intValue());}:} 
+                                                             else{RESULT= new Integer(((Integer)n).intValue()- ((Integer)m).intValue());}:} 
  		| EXPRESIONMULT:d {:RESULT= d;:};
 
 EXPRESIONMULT ::= EXPRESIONMULT:n OPERADORMULT:d EXPRESIONSUMA:m {:if("/".equals(d.toString())){

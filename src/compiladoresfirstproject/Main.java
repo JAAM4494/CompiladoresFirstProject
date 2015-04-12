@@ -23,7 +23,7 @@ public class Main {
         
        //generarScanner();
         new VentanaPrincipal().run();
-        //generarParser();
+      //  generarParser();
         
     }
 
