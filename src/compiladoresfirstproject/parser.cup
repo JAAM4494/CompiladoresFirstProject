@@ -17,13 +17,16 @@ parser code {:
 
  public void syntax_error(Symbol cur_token) {
                 System.out.println("Error sintáctico: "+ cur_token.value);
+                VentanaPrincipal.mostrarSalida("Error sintáctico: "+ cur_token.value);
 }
 
 public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
             System.out.println("Error sintáctico ya no se recupera");
+            VentanaPrincipal.mostrarSalida("Error sintáctico ya no se recupera");
 }
  public void semantics_error(String cur_token) {
-                System.out.println("Error semantico: La variable  "+ cur_token + "  " +" No se encuentra");
+                System.out.println("Error semantico: La variable  "+ cur_token + "  " + " No se encuentra");
+                VentanaPrincipal.mostrarSalida("Error semantico: La variable  "+ cur_token + "  " + " No se encuentra");
 }
 
 :};
