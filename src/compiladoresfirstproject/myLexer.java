@@ -3,6 +3,9 @@
 package compiladoresfirstproject;
 
 import java_cup.runtime.*;
+import java.lang.reflect.Field;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -441,8 +444,34 @@ int columna=1;
     int ultimoEstado = 0;
  public void init(){};
 
-public void echo(int pToken) {
-                System.out.println("Token: " + pToken + " Lexema: " + yytext());
+private int[] tokens;
+
+public void echo(int pToken)  {
+      try {
+          String TokenName = returnTokenName(pToken);
+          System.out.println("Token: " + TokenName + " Lexema: " + yytext());
+      } catch (IllegalArgumentException | IllegalAccessException ex) {
+          Logger.getLogger(myLexer.class.getName()).log(Level.SEVERE, null, ex);
+      }
+}
+
+private static String returnTokenName(int pIntToken) throws IllegalArgumentException, IllegalAccessException {
+        String out = null;
+        sym Bridge = null;
+        Field fields[] = sym.class.getDeclaredFields();
+        
+        for (int i = 0; i < fields.length-1; i++) {
+            Field temp0 = fields[i];
+            temp0.setAccessible(true);
+            Object valueObject = temp0.get(Bridge);
+            //System.out.println(value);
+            // System.out.println("Variable Name is : " + fld[i].getName());
+            if(pIntToken == (int)valueObject) {
+                //System.out.println(temp0.getName());
+                out = temp0.getName();
+            }
+        }
+        return out;
 }
 
 
@@ -820,7 +849,7 @@ public void echo(int pToken) {
             }
           case 44: break;
           case 3: 
-            { echo(sym.num); return new Symbol(sym.num, yyline, yychar, yytext());
+            { echo(sym.Num); return new Symbol(sym.Num, yyline, yychar, yytext());
             }
           case 45: break;
           case 4: 
@@ -844,83 +873,83 @@ public void echo(int pToken) {
             }
           case 50: break;
           case 9: 
-            { echo(sym.menor); return new Symbol(sym.menor,          yyline, yychar, yytext());
+            { echo(sym.Menor); return new Symbol(sym.Menor,          yyline, yychar, yytext());
             }
           case 51: break;
           case 10: 
-            { echo(sym.suma); return new Symbol(sym.suma,           yyline, yychar, yytext());
+            { echo(sym.Suma); return new Symbol(sym.Suma,           yyline, yychar, yytext());
             }
           case 52: break;
           case 11: 
-            { echo(sym.resta); return new Symbol(sym.resta,          yyline, yychar, yytext());
+            { echo(sym.Resta); return new Symbol(sym.Resta,          yyline, yychar, yytext());
             }
           case 53: break;
           case 12: 
-            { echo(sym.eq); return new Symbol(sym.eq,          yyline, yychar, yytext());
+            { echo(sym.Eq); return new Symbol(sym.Eq,          yyline, yychar, yytext());
             }
           case 54: break;
           case 13: 
-            { echo(sym.multi); return new Symbol(sym.multi,          yyline, yychar, yytext());
+            { echo(sym.Multi); return new Symbol(sym.Multi,          yyline, yychar, yytext());
             }
           case 55: break;
           case 14: 
-            { echo(sym.divi); return new Symbol(sym.divi,           yyline, yychar, yytext());
+            { echo(sym.Divi); return new Symbol(sym.Divi,           yyline, yychar, yytext());
             }
           case 56: break;
           case 15: 
-            { echo(sym.mayor); return new Symbol(sym.mayor,          yyline, yychar, yytext());
+            { echo(sym.Mayor); return new Symbol(sym.Mayor,          yyline, yychar, yytext());
             }
           case 57: break;
           case 16: 
-            { echo(sym.opParth); return new Symbol(sym.opParth,             yyline, yychar, yytext());
+            { echo(sym.OpParenth); return new Symbol(sym.OpParenth,             yyline, yychar, yytext());
             }
           case 58: break;
           case 17: 
-            { echo(sym.closeParth); return new Symbol(sym.closeParth,             yyline, yychar, yytext());
+            { echo(sym.CloseParenth); return new Symbol(sym.CloseParenth,             yyline, yychar, yytext());
             }
           case 59: break;
           case 18: 
-            { echo(sym.opKey); return new Symbol(sym.opKey,             yyline, yychar, yytext());
+            { echo(sym.OpKey); return new Symbol(sym.OpKey,             yyline, yychar, yytext());
             }
           case 60: break;
           case 19: 
-            { echo(sym.closeKey); return new Symbol(sym.closeKey,             yyline, yychar, yytext());
+            { echo(sym.CloseKey); return new Symbol(sym.CloseKey,             yyline, yychar, yytext());
             }
           case 61: break;
           case 20: 
-            { echo(sym.si); return new Symbol(sym.si,             yyline, yychar, yytext());
+            { echo(sym.Si); return new Symbol(sym.Si,             yyline, yychar, yytext());
             }
           case 62: break;
           case 21: 
-            { echo(sym.menoreq); return new Symbol(sym.menoreq,        yyline, yychar, yytext());
+            { echo(sym.MenorEq); return new Symbol(sym.MenorEq,        yyline, yychar, yytext());
             }
           case 63: break;
           case 22: 
-            { echo(sym.eqeq); return new Symbol(sym.eqeq,           yyline, yychar, yytext());
+            { echo(sym.EqEq); return new Symbol(sym.EqEq,           yyline, yychar, yytext());
             }
           case 64: break;
           case 23: 
-            { echo(sym.mayoreq); return new Symbol(sym.mayoreq,        yyline, yychar, yytext());
+            { echo(sym.MayorEq); return new Symbol(sym.MayorEq,        yyline, yychar, yytext());
             }
           case 65: break;
           case 24: 
-            { echo(sym.diferente); return new Symbol(sym.diferente,      yyline, yychar, yytext());
+            { echo(sym.Diferente); return new Symbol(sym.Diferente,      yyline, yychar, yytext());
             }
           case 66: break;
           case 25: 
-            { echo(sym.ojos); return new Symbol(sym.ojos,           yyline, yychar, yytext());
+            { echo(sym.Ojos); return new Symbol(sym.Ojos,           yyline, yychar, yytext());
             }
           case 67: break;
           case 26: 
-            { echo(sym.sino); return new Symbol(sym.sino,           yyline, yychar, yytext());
+            { echo(sym.Sino); return new Symbol(sym.Sino,           yyline, yychar, yytext());
             }
           case 68: break;
           case 27: 
-            { echo(sym.hola); return new Symbol(sym.hola,           yyline, yychar, yytext());
+            { echo(sym.Hola); return new Symbol(sym.Hola,           yyline, yychar, yytext());
             }
           case 69: break;
           case 28: 
-            { echo(sym.haga); return new Symbol(sym.haga,           yyline, yychar, yytext());
+            { echo(sym.Haga); return new Symbol(sym.Haga,           yyline, yychar, yytext());
             }
           case 70: break;
           case 29: 
@@ -928,23 +957,23 @@ public void echo(int pToken) {
             }
           case 71: break;
           case 30: 
-            { echo(sym.boca); return new Symbol(sym.boca,           yyline, yychar, yytext());
+            { echo(sym.Boca); return new Symbol(sym.Boca,           yyline, yychar, yytext());
             }
           case 72: break;
           case 31: 
-            { echo(sym.mover); return new Symbol(sym.mover,          yyline, yychar, yytext());
+            { echo(sym.Mover); return new Symbol(sym.Mover,          yyline, yychar, yytext());
             }
           case 73: break;
           case 32: 
-            { echo(sym.decir); return new Symbol(sym.decir,          yyline, yychar, yytext());
+            { echo(sym.Decir); return new Symbol(sym.Decir,          yyline, yychar, yytext());
             }
           case 74: break;
           case 33: 
-            { echo(sym.adios); return new Symbol(sym.adios,          yyline, yychar, yytext());
+            { echo(sym.Adios); return new Symbol(sym.Adios,          yyline, yychar, yytext());
             }
           case 75: break;
           case 34: 
-            { echo(sym.abajo); return new Symbol(sym.abajo,          yyline, yychar, yytext());
+            { echo(sym.Abajo); return new Symbol(sym.Abajo,          yyline, yychar, yytext());
             }
           case 76: break;
           case 35: 
@@ -952,31 +981,31 @@ public void echo(int pToken) {
             }
           case 77: break;
           case 36: 
-            { echo(sym.lindos); return new Symbol(sym.lindos,         yyline, yychar, yytext());
+            { echo(sym.Lindos); return new Symbol(sym.Lindos,         yyline, yychar, yytext());
             }
           case 78: break;
           case 37: 
-            { echo(sym.arriba); return new Symbol(sym.arriba,         yyline, yychar, yytext());
+            { echo(sym.Arriba); return new Symbol(sym.Arriba,         yyline, yychar, yytext());
             }
           case 79: break;
           case 38: 
-            { echo(sym.derecha); return new Symbol(sym.derecha,        yyline, yychar, yytext());
+            { echo(sym.Derecha); return new Symbol(sym.Derecha,        yyline, yychar, yytext());
             }
           case 80: break;
           case 39: 
-            { echo(sym.mientras); return new Symbol(sym.mientras,       yyline, yychar, yytext());
+            { echo(sym.Mientras); return new Symbol(sym.Mientras,       yyline, yychar, yytext());
             }
           case 81: break;
           case 40: 
-            { echo(sym.entonces); return new Symbol(sym.entonces,       yyline, yychar, yytext());
+            { echo(sym.Entonces); return new Symbol(sym.Entonces,       yyline, yychar, yytext());
             }
           case 82: break;
           case 41: 
-            { echo(sym.declarar); return new Symbol(sym.declarar,          yyline, yychar, yytext());
+            { echo(sym.Declarar); return new Symbol(sym.Declarar,          yyline, yychar, yytext());
             }
           case 83: break;
           case 42: 
-            { echo(sym.izquierda); return new Symbol(sym.izquierda,      yyline, yychar, yytext());
+            { echo(sym.Izquierda); return new Symbol(sym.Izquierda,      yyline, yychar, yytext());
             }
           case 84: break;
           default:

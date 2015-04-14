@@ -8,85 +8,85 @@ package compiladoresfirstproject;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int newline = 27;
-  public static final int True = 8;
-  public static final int boca = 18;
-  public static final int suma = 28;
-  public static final int resta = 24;
-  public static final int lindos = 17;
-  public static final int decir = 26;
-  public static final int derecha = 22;
-  public static final int entonces = 11;
-  public static final int eqeq = 6;
-  public static final int divi = 32;
-  public static final int si = 10;
-  public static final int closeKey = 38;
-  public static final int mientras = 12;
-  public static final int declarar = 29;
-  public static final int mayoreq = 5;
-  public static final int closeParth = 36;
-  public static final int ID = 34;
-  public static final int menor = 2;
+  public static final int True = 2;
+  public static final int CloseParenth = 34;
+  public static final int Derecha = 22;
+  public static final int Divi = 32;
+  public static final int Diferente = 14;
+  public static final int Izquierda = 20;
+  public static final int Menor = 9;
+  public static final int OpParenth = 33;
+  public static final int Eq = 30;
+  public static final int Mayor = 10;
+  public static final int OpKey = 35;
+  public static final int Hola = 15;
+  public static final int Abajo = 23;
+  public static final int ID = 38;
+  public static final int Multi = 31;
   public static final int EOF = 0;
-  public static final int arriba = 21;
-  public static final int menoreq = 4;
+  public static final int EqEq = 13;
   public static final int error = 1;
-  public static final int mayor = 3;
-  public static final int False = 9;
-  public static final int hola = 15;
-  public static final int opKey = 37;
-  public static final int abajo = 23;
-  public static final int multi = 31;
-  public static final int diferente = 7;
-  public static final int izquierda = 20;
-  public static final int haga = 13;
-  public static final int eq = 30;
-  public static final int opParth = 35;
-  public static final int ojos = 19;
-  public static final int adios = 16;
-  public static final int mover = 25;
-  public static final int num = 33;
-  public static final int sino = 14;
+  public static final int False = 3;
+  public static final int Num = 37;
+  public static final int Lindos = 17;
+  public static final int Adios = 16;
+  public static final int Mover = 25;
+  public static final int Haga = 7;
+  public static final int Entonces = 5;
+  public static final int Ojos = 19;
+  public static final int MayorEq = 12;
+  public static final int Si = 4;
+  public static final int Resta = 24;
+  public static final int NewLine = 27;
+  public static final int Sino = 8;
+  public static final int CloseKey = 36;
+  public static final int Mientras = 6;
+  public static final int MenorEq = 11;
+  public static final int Declarar = 29;
+  public static final int Boca = 18;
+  public static final int Decir = 26;
+  public static final int Suma = 28;
+  public static final int Arriba = 21;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
-  "menor",
-  "mayor",
-  "menoreq",
-  "mayoreq",
-  "eqeq",
-  "diferente",
   "True",
   "False",
-  "si",
-  "entonces",
-  "mientras",
-  "haga",
-  "sino",
-  "hola",
-  "adios",
-  "lindos",
-  "boca",
-  "ojos",
-  "izquierda",
-  "arriba",
-  "derecha",
-  "abajo",
-  "resta",
-  "mover",
-  "decir",
-  "newline",
-  "suma",
-  "declarar",
-  "eq",
-  "multi",
-  "divi",
-  "num",
-  "ID",
-  "opParth",
-  "closeParth",
-  "opKey",
-  "closeKey"
+  "Si",
+  "Entonces",
+  "Mientras",
+  "Haga",
+  "Sino",
+  "Menor",
+  "Mayor",
+  "MenorEq",
+  "MayorEq",
+  "EqEq",
+  "Diferente",
+  "Hola",
+  "Adios",
+  "Lindos",
+  "Boca",
+  "Ojos",
+  "Izquierda",
+  "Arriba",
+  "Derecha",
+  "Abajo",
+  "Resta",
+  "Mover",
+  "Decir",
+  "NewLine",
+  "Suma",
+  "Declarar",
+  "Eq",
+  "Multi",
+  "Divi",
+  "OpParenth",
+  "CloseParenth",
+  "OpKey",
+  "CloseKey",
+  "Num",
+  "ID"
   };
 }
 
