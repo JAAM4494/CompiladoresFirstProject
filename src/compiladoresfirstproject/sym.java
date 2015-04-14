@@ -10,6 +10,7 @@ public class sym {
   /* terminals */
   public static final int True = 2;
   public static final int CloseParenth = 34;
+  public static final int Pura = 18;
   public static final int Derecha = 22;
   public static final int Divi = 32;
   public static final int Diferente = 14;
@@ -21,19 +22,21 @@ public class sym {
   public static final int OpKey = 35;
   public static final int Hola = 15;
   public static final int Abajo = 23;
-  public static final int ID = 38;
+  public static final int ID = 41;
   public static final int Multi = 31;
+  public static final int Vida = 19;
   public static final int EOF = 0;
   public static final int EqEq = 13;
   public static final int error = 1;
   public static final int False = 3;
-  public static final int Num = 37;
+  public static final int Num = 40;
   public static final int Lindos = 17;
   public static final int Adios = 16;
   public static final int Mover = 25;
   public static final int Haga = 7;
   public static final int Entonces = 5;
-  public static final int Ojos = 19;
+  public static final int Cabeza = 39;
+  public static final int Ojos = 38;
   public static final int MayorEq = 12;
   public static final int Si = 4;
   public static final int Resta = 24;
@@ -43,7 +46,7 @@ public class sym {
   public static final int Mientras = 6;
   public static final int MenorEq = 11;
   public static final int Declarar = 29;
-  public static final int Boca = 18;
+  public static final int Boca = 37;
   public static final int Decir = 26;
   public static final int Suma = 28;
   public static final int Arriba = 21;
@@ -66,8 +69,8 @@ public class sym {
   "Hola",
   "Adios",
   "Lindos",
-  "Boca",
-  "Ojos",
+  "Pura",
+  "Vida",
   "Izquierda",
   "Arriba",
   "Derecha",
@@ -85,6 +88,9 @@ public class sym {
   "CloseParenth",
   "OpKey",
   "CloseKey",
+  "Boca",
+  "Ojos",
+  "Cabeza",
   "Num",
   "ID"
   };

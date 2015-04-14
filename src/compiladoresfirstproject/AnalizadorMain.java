@@ -22,6 +22,7 @@ public class AnalizadorMain {
             
             myLexer AnalizadorLexico = new myLexer(new FileReader(pPathEntrada));
             myParser AnalizadorSintactico = new myParser(AnalizadorLexico);
+            VentanaPrincipal.mostrarSalida("***********  RESUMEN ANÁLISIS LÉXICO  ***********");
             AnalizadorSintactico.parse();
             //     Symbol currToken;
             //   do {

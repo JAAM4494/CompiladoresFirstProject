@@ -36,6 +36,7 @@ public void echo(int pToken)  {
       try {
           String TokenName = returnTokenName(pToken);
           System.out.println("Token: " + TokenName + " Lexema: " + yytext());
+          VentanaPrincipal.mostrarSalida("Token: " + TokenName + " Lexema: " + yytext());
       } catch (IllegalArgumentException | IllegalAccessException ex) {
           Logger.getLogger(myLexer.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -104,18 +105,22 @@ FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
 <YYINITIAL>">="             {echo(sym.MayorEq); return new Symbol(sym.MayorEq,        yyline, yychar, yytext());}
 <YYINITIAL>"false"          {echo(sym.False); return new Symbol(sym.False,          yyline, yychar, yytext());}
 <YYINITIAL>"izquierda"      {echo(sym.Izquierda); return new Symbol(sym.Izquierda,      yyline, yychar, yytext());}		
-<YYINITIAL>"ojos"           {echo(sym.Ojos); return new Symbol(sym.Ojos,           yyline, yychar, yytext());}
+<YYINITIAL>"vida"           {echo(sym.Vida); return new Symbol(sym.Vida,           yyline, yychar, yytext());}
 <YYINITIAL>"arriba"         {echo(sym.Arriba); return new Symbol(sym.Arriba,         yyline, yychar, yytext());}
 <YYINITIAL>"=="             {echo(sym.EqEq); return new Symbol(sym.EqEq,           yyline, yychar, yytext());}
 <YYINITIAL>">"              {echo(sym.Mayor); return new Symbol(sym.Mayor,          yyline, yychar, yytext());}
 <YYINITIAL>"hola"           {echo(sym.Hola); return new Symbol(sym.Hola,           yyline, yychar, yytext());}
 <YYINITIAL>"!="             {echo(sym.Diferente); return new Symbol(sym.Diferente,      yyline, yychar, yytext());}
-<YYINITIAL>"boca"           {echo(sym.Boca); return new Symbol(sym.Boca,           yyline, yychar, yytext());}
+<YYINITIAL>"pura"           {echo(sym.Pura); return new Symbol(sym.Pura,           yyline, yychar, yytext());}
 <YYINITIAL>"entonces"       {echo(sym.Entonces); return new Symbol(sym.Entonces,       yyline, yychar, yytext());}
 <YYINITIAL>"decir"          {echo(sym.Decir); return new Symbol(sym.Decir,          yyline, yychar, yytext());}
 <YYINITIAL>"abajo"          {echo(sym.Abajo); return new Symbol(sym.Abajo,          yyline, yychar, yytext());}
 <YYINITIAL>"derecha"        {echo(sym.Derecha); return new Symbol(sym.Derecha,        yyline, yychar, yytext());}
 <YYINITIAL>"si"             {echo(sym.Si); return new Symbol(sym.Si,             yyline, yychar, yytext());}
+
+<YYINITIAL>"ojos"           {echo(sym.Ojos); return new Symbol(sym.Ojos,           yyline, yychar, yytext());}
+<YYINITIAL>"boca"           {echo(sym.Boca); return new Symbol(sym.Boca,           yyline, yychar, yytext());}
+<YYINITIAL>"cabeza"         {echo(sym.Cabeza); return new Symbol(sym.Cabeza,           yyline, yychar, yytext());}
 
 <YYINITIAL>"("             {echo(sym.OpParenth); return new Symbol(sym.OpParenth,             yyline, yychar, yytext());}
 <YYINITIAL>")"             {echo(sym.CloseParenth); return new Symbol(sym.CloseParenth,             yyline, yychar, yytext());}

@@ -32,13 +32,15 @@ public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
 
 terminal   True,         False,     Si,        Entonces,   Mientras,    Haga,       Sino;
 terminal   Menor,        Mayor,     MenorEq,   MayorEq,    EqEq,        Diferente;
-terminal   Hola,         Adios,     Lindos,    Boca,       Ojos;
+terminal   Hola,         Adios,     Lindos,    Pura,       Vida ;
 terminal   Izquierda,    Arriba,    Derecha,   Abajo,      Resta;
 terminal   Mover,        Decir,     NewLine,   Suma;
 terminal   Declarar,     Eq,        Multi,     Divi;
 
-terminal   OpParenth,     CloseParenth;
+terminal   OpParenth,    CloseParenth;
 terminal   OpKey,        CloseKey; 
+
+terminal   Boca,         Ojos,     Cabeza;
 
 terminal   String Num;
 terminal   ID;
@@ -57,6 +59,9 @@ non terminal    LISTADECLARACIONESCONDICIONADAS;
 
 non terminal EXPRESIONSUMA, EXPRESIONMULT, TERMINO;
 non terminal EXPRESION;
+
+non terminal BOCA,          OJOS,              CABEZA;
+non terminal DIRECCIONES,   DIRECCIONBOCA,     DIRECCIONHEAD;
 
                 /**** PRECEDENCIAS ****/
 
@@ -93,13 +98,29 @@ VOZ ::= Decir PALABRA:d {:RESULT= d;:};
 PALABRA ::= Hola:d {:RESULT= d.toString();:}  
           | Adios:d {:RESULT= d.toString();:}  
           | Lindos:d {:RESULT= d.toString();:}  
-          | Ojos:d {:RESULT= d.toString();:}  	
-          | Boca:d {:RESULT= d.toString();:};
+          | Pura:d {:RESULT= d.toString();:}  	
+          | Vida:d {:RESULT= d.toString();:};
 
-TIPO ::= Izquierda:d {:RESULT= d.toString();:}  
+TIPO ::= OJOS:d {:RESULT= d.toString();:} 
+       | CABEZA:d {:RESULT= d.toString();:}
+       | BOCA:d {:RESULT= d.toString();:};
+
+OJOS ::= Ojos DIRECCIONES:d {:RESULT= d.toString();:};
+
+CABEZA ::= Cabeza DIRECCIONHEAD:d {:RESULT= d.toString();:};
+
+BOCA ::= Boca DIRECCIONBOCA:d {:RESULT= d.toString();:};
+
+DIRECCIONES ::= Izquierda:d {:RESULT= d.toString();:}  
        | Arriba:d {:RESULT= d.toString();:}  
        | Derecha:d {:RESULT= d.toString();:}  
        | Abajo:d {:RESULT= d.toString();:};
+
+DIRECCIONHEAD ::= Izquierda:d {:RESULT= d.toString();:} 
+                | Derecha:d {:RESULT= d.toString();:};
+
+DIRECCIONBOCA ::= Arriba:d {:RESULT= d.toString();:}
+                | Abajo:d {:RESULT= d.toString();:};
 
 OPERADORSUMA ::= Suma:d {:RESULT= d.toString();:}
                | Resta:d {:RESULT= d.toString();:};

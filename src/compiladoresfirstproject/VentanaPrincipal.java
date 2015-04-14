@@ -21,11 +21,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     Path pathDeArchivo;
     String retornoArchivo;
+    
+    Boolean bandera;
 
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
+        this.bandera = false;
         initComponents();
         txtCodigo.setEditable(false);
         salidaText.setEditable(false);
@@ -50,6 +53,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         salidaText = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,6 +87,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("appleberry", 0, 18)); // NOI18N
         jLabel2.setText("Salida");
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setText("Limpiar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,9 +105,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(procesarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCargar, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCargar, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(125, 125, 125)
@@ -117,6 +130,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(procesarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE))
@@ -136,18 +151,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         try {
             pathDeArchivo = Paths.get(file.getAbsolutePath());
             retornoArchivo = new String(Files.readAllBytes(pathDeArchivo));
-            this.txtCodigo.setText("");
-            this.txtCodigo.setText(retornoArchivo);
+            txtCodigo.setText("");
+            txtCodigo.setText(retornoArchivo);
+            bandera = true;
             //abrir.setText(retorno);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No conseguimos cargar el Archivo");
+            JOptionPane.showMessageDialog(this, "No Conseguimos Cargar El Archivo");
         }
     }//GEN-LAST:event_btnCargarActionPerformed
 
     private void procesarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesarBtnActionPerformed
-             AnalizadorMain nuevoAnalizador = new AnalizadorMain();
-             nuevoAnalizador.procesarEntrada(pathDeArchivo.toString());
+        
+        if(bandera == true) {
+            AnalizadorMain nuevoAnalizador = new AnalizadorMain();
+            nuevoAnalizador.procesarEntrada(pathDeArchivo.toString());
+            bandera = false;
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe Cargarse Un Archivo");
+        }     
     }//GEN-LAST:event_procesarBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        limpiarTextView();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      */
@@ -157,16 +184,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public void run() {
         new VentanaPrincipal().setVisible(true);
     }
+    
+    public static void mostrarSalida(String pEntrada){
+     //salidaText.setText( salidaText.getText() + pEntrada + "\n");
+     salidaText.append(pEntrada + "\n");
+    }
+    
+    private void limpiarTextView() {
+        salidaText.setText("");
+        txtCodigo.setText("");
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCargar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton procesarBtn;
-    private javax.swing.JTextArea salidaText;
-    private javax.swing.JTextArea txtCodigo;
+    public static javax.swing.JTextArea salidaText;
+    public static javax.swing.JTextArea txtCodigo;
     // End of variables declaration//GEN-END:variables
+  
 }

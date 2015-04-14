@@ -1,19 +1,20 @@
 declarar variable
 declarar otra
-declarar variable22
-mover izquierda
+declarar variable2
+
+mover cabeza izquierda
 decir hola
 
 si(true) entonces {
-mover abajo
-mover derecha
+mover boca abajo
+mover ojos derecha
 }
 
 si(true) entonces {
-mover izquierda
+mover cabeza izquierda
 decir adios
 } sino {
-mover derecha
+mover cabeza derecha
 decir hola
 }
 
@@ -24,15 +25,15 @@ decir lindos
 
 haga {
 decir lindos
-mover derecha
+mover cabeza derecha
 } mientras 5+6
 
 haga {
-mover abajo
-mover arriba
+mover ojos abajo
+mover boca arriba
 } mientras variable = 5+6
 
 haga {
-mover abajo
-mover arriba
-} mientras variable22 = 5-6
+mover boca abajo
+mover boca arriba
+} mientras variable2 = 5-6
