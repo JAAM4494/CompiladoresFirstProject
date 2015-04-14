@@ -4,6 +4,10 @@ import java_cup.runtime.*;
 import java.lang.reflect.Field;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.*;
 
 %%
 %class myLexer
@@ -30,16 +34,44 @@ int columna=1;
     int ultimoEstado = 0;
  public void init(){};
 
-private int[] tokens;
+Vector TokensOut = new Vector();
 
 public void echo(int pToken)  {
       try {
           String TokenName = returnTokenName(pToken);
           System.out.println("Token: " + TokenName + " Lexema: " + yytext());
           VentanaPrincipal.mostrarSalida("Token: " + TokenName + " Lexema: " + yytext());
+          TokensOut.addElement("Token: " + TokenName + " Lexema: " + yytext());
       } catch (IllegalArgumentException | IllegalAccessException ex) {
           Logger.getLogger(myLexer.class.getName()).log(Level.SEVERE, null, ex);
       }
+}
+
+private static void writeOut(Vector pVector) {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+
+        try {
+            fichero = new FileWriter("C:/Users/JAAM/Documents/NetBeansProjects/CompiladoresFirstProject/src/compiladoresfirstproject/OutputAnalisisLexico.txt");
+            pw = new PrintWriter(fichero);
+            pw.println("***********  RESUMEN ANÁLISIS LÉXICO  ***********");
+            
+            for (Object pVector1 : pVector) {
+                pw.println(pVector1);
+                //System.out.println("Linea " + i);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            // asegurarnos que se cierra el fichero.
+            if (null != fichero) {
+                try {
+                    fichero.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
 }
 
 private static String returnTokenName(int pIntToken) throws IllegalArgumentException, IllegalAccessException {
@@ -64,7 +96,7 @@ private static String returnTokenName(int pIntToken) throws IllegalArgumentExcep
 %}
 
 %eofval{
-{return new Symbol(sym.EOF,null);}
+{writeOut(TokensOut);return new Symbol(sym.EOF,null);}
 %eofval}
 
 LETRA=[a-zA-Z]
@@ -133,4 +165,6 @@ FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
 
 /*<YYINITIAL>{FRASE}        {echo(); return new Symbol(sym.FRASE,          yyline, yychar, yytext());}*/
 
-. {System.out.println("Caracter desconocido en la fila: " + yyline + ", columna: " + yychar);}
+. {TokensOut.addElement("Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + "el análisis continúa");
+VentanaPrincipal.mostrarSalida("Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + "el análisis continúa");
+System.out.println("Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + "el análisis continúa");}

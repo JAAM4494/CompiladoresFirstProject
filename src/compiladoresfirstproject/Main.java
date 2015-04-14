@@ -6,8 +6,6 @@
 package compiladoresfirstproject;
 
 import java.io.File;
-import java.lang.reflect.Field;
-//import java.io.StringReader;
 
 /**
  *
@@ -24,10 +22,9 @@ public class Main {
         // Metodos para generar los .java de los analizadores
         // los comentan despues de generarlos (las 2 lineas de abajo)
 
-       // generarScanner();
-        new VentanaPrincipal().run();
+        // generarScanner();
+         new VentanaPrincipal().run();
         // generarParser();
-
     }
 
     // Metodo que genera el analizador lexico, usando jFlex
@@ -58,24 +55,4 @@ public class Main {
             System.out.println(ex);
         }
     }
-
-    private static String returnTokenName(int pIntToken) throws IllegalArgumentException, IllegalAccessException {
-        String out = null;
-        sym Bridge = null;
-        Field fields[] = sym.class.getDeclaredFields();
-
-        for (int i = 0; i < fields.length - 1; i++) {
-            Field temp0 = fields[i];
-            temp0.setAccessible(true);
-            Object valueObject = temp0.get(Bridge);
-            //System.out.println(value);
-            // System.out.println("Variable Name is : " + fld[i].getName());
-            if (pIntToken == (int) valueObject) {
-                //System.out.println(temp0.getName());
-                out = temp0.getName();
-            }
-        }
-        return out;
-    }
-
 }
