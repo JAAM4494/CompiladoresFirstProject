@@ -1,8 +1,8 @@
 ***********  RESUMEN ANÁLISIS LÉXICO  ***********
 Token: Declarar Lexema: declarar
-Token: ID Lexema: variable
+Token: ID Lexema: _variable
 Token: Declarar Lexema: declarar
-Token: ID Lexema: otra
+Token: ID Lexema: _otra
 Token: Declarar Lexema: declarar
 Token: ID Lexema: variable2
 Token: Mover Lexema: mover

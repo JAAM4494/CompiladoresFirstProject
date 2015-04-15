@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java_cup.runtime.Symbol;
 
 /**
  *
@@ -24,9 +25,10 @@ public class AnalizadorMain {
             myParser AnalizadorSintactico = new myParser(AnalizadorLexico);
             VentanaPrincipal.mostrarSalida("***********  RESUMEN ANÁLISIS LÉXICO  ***********");
             AnalizadorSintactico.parse();
-            //     Symbol currToken;
+                 //Symbol currToken;
+       
             //   do {
-                //  currToken = AnalizadorLexico.next_token();
+                 // currToken = AnalizadorLexico.next_token();
                 //} while (currToken.sym != sym.EOF);
 
             System.out.println("Fin de escaneo..!!");

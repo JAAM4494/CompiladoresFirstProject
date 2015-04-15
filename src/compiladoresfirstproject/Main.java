@@ -25,6 +25,8 @@ public class Main {
         // generarScanner();
          new VentanaPrincipal().run();
         // generarParser();
+        
+        
     }
 
     // Metodo que genera el analizador lexico, usando jFlex

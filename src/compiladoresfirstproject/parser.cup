@@ -82,7 +82,7 @@ PROGRAMA ::= LISTAVARIABLES LISTADECLARACIONES;
 LISTAVARIABLES ::= LISTAVARIABLES DECLARACIONVARIABLE
                  | DECLARACIONVARIABLE:d {:RESULT= d;:};
 
-DECLARACIONVARIABLE ::= Declarar ID:d {:
+DECLARACIONVARIABLE ::= Declarar ID:d NewLine {:
                         table.put(d.toString(),0);
                         RESULT= d;:};
 
@@ -94,7 +94,7 @@ DECLARACION ::=  MOVER:d {:RESULT= d;:}
                | DECLARACIONSELECCION:d {:RESULT= d;:}
                | DECLARACIONITERACION:d {:RESULT= d;:};
 
-MOVER ::=  Mover TIPO:d {:RESULT= d;:};
+MOVER ::=  Mover TIPO:d NewLine {:RESULT= d;:};
 
 VOZ ::= Decir PALABRA:d {:RESULT= d;:};
 

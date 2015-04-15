@@ -1,12 +1,12 @@
-declarar variable
-declarar otra
+declarar _variable
+declarar _otra
 declarar variable2
 
 mover cabeza izquierda
 decir hola
 
 si(true) entonces {
-mover boca abajo
+mover boca abajo 
 mover ojos derecha
 }
 

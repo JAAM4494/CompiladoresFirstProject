@@ -20,6 +20,10 @@ import java.util.*;
 int columna=1;
 %}
 
+%{
+boolean banderaNewLine = false;
+%}
+
 %public
 %cup
 %line
@@ -103,9 +107,9 @@ LETRA=[a-zA-Z]
 DIGITO=[0-9]
 ALPHA_NUMERIC={LETRA}|{DIGITO}
 
-ID={LETRA}({ALPHA_NUMERIC})*
+ID=("_"|{LETRA})({ALPHA_NUMERIC})*
 
-NEW_LINE=(\n|\r)
+NEW_LINE=(\n|\r|\r\n)
 ESPACIO_EN_BLANCO=([\ |\t|\f])
  
 FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
@@ -116,54 +120,59 @@ FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
 [ \t\f] {/* ignore white space. */ }
 
 \' { /* ignora apostrofes. */ }
-<YYINITIAL> {ESPACIO_EN_BLANCO}  {/*no hace nada, aumenta una columna,continua lectura*/yychar++; }
-<YYINITIAL> {NEW_LINE}     {System.out.println("Salto linea");yychar=0; yyline=0;}
 
-<YYINITIAL>"mover"          {echo(sym.Mover); return new Symbol(sym.Mover,          yyline, yychar, yytext());}
-<YYINITIAL>"declarar"       {echo(sym.Declarar); return new Symbol(sym.Declarar,          yyline, yychar, yytext());}
-<YYINITIAL>"lindos"         {echo(sym.Lindos); return new Symbol(sym.Lindos,         yyline, yychar, yytext());}
-<YYINITIAL>"<"              {echo(sym.Menor); return new Symbol(sym.Menor,          yyline, yychar, yytext());}
-<YYINITIAL>"haga"           {echo(sym.Haga); return new Symbol(sym.Haga,           yyline, yychar, yytext());}
-<YYINITIAL>"adios"          {echo(sym.Adios); return new Symbol(sym.Adios,          yyline, yychar, yytext());}
-<YYINITIAL>"+"              {echo(sym.Suma); return new Symbol(sym.Suma,           yyline, yychar, yytext());}
-<YYINITIAL>"-"              {echo(sym.Resta); return new Symbol(sym.Resta,          yyline, yychar, yytext());}
-<YYINITIAL>"="              {echo(sym.Eq); return new Symbol(sym.Eq,          yyline, yychar, yytext());}
-<YYINITIAL>"<="             {echo(sym.MenorEq); return new Symbol(sym.MenorEq,        yyline, yychar, yytext());}
-<YYINITIAL>"true"           {echo(sym.True); return new Symbol(sym.True,           yyline, yychar, yytext());}
-<YYINITIAL>"*"              {echo(sym.Multi); return new Symbol(sym.Multi,          yyline, yychar, yytext());}
-<YYINITIAL>"/"              {echo(sym.Divi); return new Symbol(sym.Divi,           yyline, yychar, yytext());}
-<YYINITIAL>"mientras"       {echo(sym.Mientras); return new Symbol(sym.Mientras,       yyline, yychar, yytext());}
-<YYINITIAL>"sino"           {echo(sym.Sino); return new Symbol(sym.Sino,           yyline, yychar, yytext());}
-<YYINITIAL>">="             {echo(sym.MayorEq); return new Symbol(sym.MayorEq,        yyline, yychar, yytext());}
-<YYINITIAL>"false"          {echo(sym.False); return new Symbol(sym.False,          yyline, yychar, yytext());}
-<YYINITIAL>"izquierda"      {echo(sym.Izquierda); return new Symbol(sym.Izquierda,      yyline, yychar, yytext());}		
-<YYINITIAL>"vida"           {echo(sym.Vida); return new Symbol(sym.Vida,           yyline, yychar, yytext());}
-<YYINITIAL>"arriba"         {echo(sym.Arriba); return new Symbol(sym.Arriba,         yyline, yychar, yytext());}
-<YYINITIAL>"=="             {echo(sym.EqEq); return new Symbol(sym.EqEq,           yyline, yychar, yytext());}
-<YYINITIAL>">"              {echo(sym.Mayor); return new Symbol(sym.Mayor,          yyline, yychar, yytext());}
-<YYINITIAL>"hola"           {echo(sym.Hola); return new Symbol(sym.Hola,           yyline, yychar, yytext());}
-<YYINITIAL>"!="             {echo(sym.Diferente); return new Symbol(sym.Diferente,      yyline, yychar, yytext());}
-<YYINITIAL>"pura"           {echo(sym.Pura); return new Symbol(sym.Pura,           yyline, yychar, yytext());}
-<YYINITIAL>"entonces"       {echo(sym.Entonces); return new Symbol(sym.Entonces,       yyline, yychar, yytext());}
-<YYINITIAL>"decir"          {echo(sym.Decir); return new Symbol(sym.Decir,          yyline, yychar, yytext());}
-<YYINITIAL>"abajo"          {echo(sym.Abajo); return new Symbol(sym.Abajo,          yyline, yychar, yytext());}
-<YYINITIAL>"derecha"        {echo(sym.Derecha); return new Symbol(sym.Derecha,        yyline, yychar, yytext());}
-<YYINITIAL>"si"             {echo(sym.Si); return new Symbol(sym.Si,             yyline, yychar, yytext());}
+<YYINITIAL> {ESPACIO_EN_BLANCO}       {/*no hace nada, aumenta una columna,continua lectura*/yychar++; }
+<YYINITIAL> {NEW_LINE}*               {yychar=0; yyline=0;System.out.println("Valor Bandera: " + banderaNewLine); 
+                                      if(banderaNewLine == true) {
+                                           System.out.println("Salto linea");
+                                           banderaNewLine = false;
+                                           return  new Symbol(sym.NewLine,  yyline, yychar, yytext());
+                                      }}
 
-<YYINITIAL>"ojos"           {echo(sym.Ojos); return new Symbol(sym.Ojos,           yyline, yychar, yytext());}
-<YYINITIAL>"boca"           {echo(sym.Boca); return new Symbol(sym.Boca,           yyline, yychar, yytext());}
-<YYINITIAL>"cabeza"         {echo(sym.Cabeza); return new Symbol(sym.Cabeza,           yyline, yychar, yytext());}
+<YYINITIAL>"mover"|"MOVER"                     {echo(sym.Mover); banderaNewLine = true; return new Symbol(sym.Mover,          yyline, yychar, yytext());}
+<YYINITIAL>"declarar"|"DECLARAR"               {echo(sym.Declarar); banderaNewLine = true; return new Symbol(sym.Declarar,          yyline, yychar, yytext());}
+<YYINITIAL>"lindos"|"LINDOS"                   {echo(sym.Lindos); return new Symbol(sym.Lindos,         yyline, yychar, yytext());}
+<YYINITIAL>"<"                                 {echo(sym.Menor); return new Symbol(sym.Menor,          yyline, yychar, yytext());}
+<YYINITIAL>"haga"|"HAGA"                       {echo(sym.Haga); return new Symbol(sym.Haga,           yyline, yychar, yytext());}
+<YYINITIAL>"adios"|"ADIOS"                     {echo(sym.Adios); return new Symbol(sym.Adios,          yyline, yychar, yytext());}
+<YYINITIAL>"+"                                 {echo(sym.Suma); return new Symbol(sym.Suma,           yyline, yychar, yytext());}
+<YYINITIAL>"-"                                 {echo(sym.Resta); return new Symbol(sym.Resta,          yyline, yychar, yytext());}
+<YYINITIAL>"="                                 {echo(sym.Eq); return new Symbol(sym.Eq,          yyline, yychar, yytext());}
+<YYINITIAL>"<="                                {echo(sym.MenorEq); return new Symbol(sym.MenorEq,        yyline, yychar, yytext());}
+<YYINITIAL>"true"|"TRUE"                       {echo(sym.True); return new Symbol(sym.True,           yyline, yychar, yytext());}
+<YYINITIAL>"*"                                 {echo(sym.Multi); return new Symbol(sym.Multi,          yyline, yychar, yytext());}
+<YYINITIAL>"/"                                 {echo(sym.Divi); return new Symbol(sym.Divi,           yyline, yychar, yytext());}
+<YYINITIAL>"mientras"|"MIENTRAS"               {echo(sym.Mientras); return new Symbol(sym.Mientras,       yyline, yychar, yytext());}
+<YYINITIAL>"sino"|"SINO"                       {echo(sym.Sino); return new Symbol(sym.Sino,           yyline, yychar, yytext());}
+<YYINITIAL>">="                                {echo(sym.MayorEq); return new Symbol(sym.MayorEq,        yyline, yychar, yytext());}
+<YYINITIAL>"false"|"FALSE"                     {echo(sym.False); return new Symbol(sym.False,          yyline, yychar, yytext());}		
+<YYINITIAL>"vida"|"VIDA"                       {echo(sym.Vida); return new Symbol(sym.Vida,           yyline, yychar, yytext());}
+<YYINITIAL>"=="                                {echo(sym.EqEq); return new Symbol(sym.EqEq,           yyline, yychar, yytext());}
+<YYINITIAL>">"                                 {echo(sym.Mayor); return new Symbol(sym.Mayor,          yyline, yychar, yytext());}
+<YYINITIAL>"hola"|"HOLA"                       {echo(sym.Hola); return new Symbol(sym.Hola,           yyline, yychar, yytext());}
+<YYINITIAL>"!="                                {echo(sym.Diferente); return new Symbol(sym.Diferente,      yyline, yychar, yytext());}
+<YYINITIAL>"pura"|"PURA"                       {echo(sym.Pura); return new Symbol(sym.Pura,           yyline, yychar, yytext());}
+<YYINITIAL>"entonces"|"ENTONCES"               {echo(sym.Entonces); return new Symbol(sym.Entonces,       yyline, yychar, yytext());}
+<YYINITIAL>"decir"|"DECIR"                     {echo(sym.Decir); return new Symbol(sym.Decir,          yyline, yychar, yytext());}
+<YYINITIAL>"si"|"SI"                           {echo(sym.Si); return new Symbol(sym.Si,             yyline, yychar, yytext());}
 
-<YYINITIAL>"("             {echo(sym.OpParenth); return new Symbol(sym.OpParenth,             yyline, yychar, yytext());}
-<YYINITIAL>")"             {echo(sym.CloseParenth); return new Symbol(sym.CloseParenth,             yyline, yychar, yytext());}
-<YYINITIAL>"{"             {echo(sym.OpKey); return new Symbol(sym.OpKey,             yyline, yychar, yytext());}
-<YYINITIAL>"}"             {echo(sym.CloseKey); return new Symbol(sym.CloseKey,             yyline, yychar, yytext());}
+<YYINITIAL>"ojos"|"OJOS"                       {echo(sym.Ojos); return new Symbol(sym.Ojos,           yyline, yychar, yytext());}
+<YYINITIAL>"boca"|"BOCA"                       {echo(sym.Boca); return new Symbol(sym.Boca,           yyline, yychar, yytext());}
+<YYINITIAL>"cabeza"|"CABEZA"                   {echo(sym.Cabeza); return new Symbol(sym.Cabeza,           yyline, yychar, yytext());}
 
-<YYINITIAL>{DIGITO}+ {ESPACIO_EN_BLANCO}* {echo(sym.Num); return new Symbol(sym.Num, yyline, yychar, yytext()); }
+<YYINITIAL>"("                                 {echo(sym.OpParenth); return new Symbol(sym.OpParenth,             yyline, yychar, yytext());}
+<YYINITIAL>")"                                 {echo(sym.CloseParenth); return new Symbol(sym.CloseParenth,             yyline, yychar, yytext());}
+<YYINITIAL>"{"                                 {echo(sym.OpKey); return new Symbol(sym.OpKey,             yyline, yychar, yytext());}
+<YYINITIAL>"}"                                 {echo(sym.CloseKey); return new Symbol(sym.CloseKey,             yyline, yychar, yytext());}
 
-<YYINITIAL>{ID} {echo(sym.ID); return new Symbol(sym.ID, yyline, yychar, yytext()); }
+<YYINITIAL>"izquierda"|"IZQUIERDA"             {echo(sym.Izquierda); return new Symbol(sym.Izquierda,      yyline, yychar, yytext());}
+<YYINITIAL>"derecha"|"DERECHA"                 {echo(sym.Derecha); return new Symbol(sym.Derecha,        yyline, yychar, yytext());}
+<YYINITIAL>"arriba"|"ARRIBA"                   {echo(sym.Arriba); return new Symbol(sym.Arriba,         yyline, yychar, yytext());}
+<YYINITIAL>"abajo"|"ABAJO"                     {echo(sym.Abajo); return new Symbol(sym.Abajo,          yyline, yychar, yytext());}
 
-/*<YYINITIAL>{FRASE}        {echo(); return new Symbol(sym.FRASE,          yyline, yychar, yytext());}*/
+<YYINITIAL>{DIGITO}+ {ESPACIO_EN_BLANCO}*      {echo(sym.Num); return new Symbol(sym.Num, yyline, yychar, yytext()); }
+
+<YYINITIAL>{ID}                                {echo(sym.ID); return new Symbol(sym.ID, yyline, yychar, yytext()); }
 
 . {TokensOut.addElement("Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + "el análisis continúa");
 VentanaPrincipal.mostrarSalida("Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + "el análisis continúa");
