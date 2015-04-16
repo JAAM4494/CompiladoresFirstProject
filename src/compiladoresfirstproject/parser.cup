@@ -15,15 +15,22 @@ action code {:
 
 parser code {:
 
+ protected int error_sync_size () {
+        System.out.println(":error_sync_size was called.");
+        return 2;}
+
  public void syntax_error(Symbol cur_token) {
                 System.out.println("Error sintáctico: "+ cur_token.value);
+                //System.out.println("En la línea: " + Main.s.getLineNumber());
                 VentanaPrincipal.mostrarSalida("Error sintáctico: "+ cur_token.value);
+                report_error("Syntax Error", null);
 }
 
-public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
-            System.out.println("Error sintáctico ya no se recupera");
-            VentanaPrincipal.mostrarSalida("Error sintáctico ya no se recupera");
-}
+//public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
+//            System.out.println("Error sintáctico ya no se recupera");
+//            VentanaPrincipal.mostrarSalida("Error sintáctico ya no se recupera");
+//}
+
  public void semantics_error(String cur_token) {
                 System.out.println("Error semantico: La variable  "+ cur_token + "  " + " No se encuentra");
                 VentanaPrincipal.mostrarSalida("Error semantico: La variable  "+ cur_token + "  " + " No se encuentra");
@@ -77,17 +84,20 @@ precedence left Divi, Multi;
 
 start with PROGRAMA;
 
-PROGRAMA ::= LISTAVARIABLES LISTADECLARACIONES;
+PROGRAMA ::= LISTAVARIABLES LISTADECLARACIONES
+           | error;
 
 LISTAVARIABLES ::= LISTAVARIABLES DECLARACIONVARIABLE
-                 | DECLARACIONVARIABLE:d {:RESULT= d;:};
+                 | DECLARACIONVARIABLE:d {:RESULT= d;:}
+                 | error;
 
 DECLARACIONVARIABLE ::= Declarar ID:d NewLine {:
                         table.put(d.toString(),0);
                         RESULT= d;:};
 
 LISTADECLARACIONES ::=  LISTADECLARACIONES DECLARACION 
-                      | DECLARACION:d {:RESULT= d;:};
+                      | DECLARACION:d {:RESULT= d;:}
+                      | error;
 
 DECLARACION ::=  MOVER:d {:RESULT= d;:}
                | VOZ:d {:RESULT= d;:}
@@ -102,11 +112,13 @@ PALABRA ::= Hola:d {:RESULT= d.toString();:}
           | Adios:d {:RESULT= d.toString();:}  
           | Lindos:d {:RESULT= d.toString();:}  
           | Pura:d {:RESULT= d.toString();:}  	
-          | Vida:d {:RESULT= d.toString();:};
+          | Vida:d {:RESULT= d.toString();:}
+          | error;
 
 TIPO ::= OJOS:d {:RESULT= d.toString();:} 
        | CABEZA:d {:RESULT= d.toString();:}
-       | BOCA:d {:RESULT= d.toString();:};
+       | BOCA:d {:RESULT= d.toString();:}
+       | error;
 
 OJOS ::= Ojos DIRECCIONES:d {:RESULT= d.toString();:};
 
@@ -117,13 +129,16 @@ BOCA ::= Boca DIRECCIONBOCA:d {:RESULT= d.toString();:};
 DIRECCIONES ::= Izquierda:d {:RESULT= d.toString();:}  
        | Arriba:d {:RESULT= d.toString();:}  
        | Derecha:d {:RESULT= d.toString();:}  
-       | Abajo:d {:RESULT= d.toString();:};
+       | Abajo:d {:RESULT= d.toString();:}
+       | error;
 
 DIRECCIONHEAD ::= Izquierda:d {:RESULT= d.toString();:} 
-                | Derecha:d {:RESULT= d.toString();:};
+                | Derecha:d {:RESULT= d.toString();:}
+                | error;
 
 DIRECCIONBOCA ::= Arriba:d {:RESULT= d.toString();:}
-                | Abajo:d {:RESULT= d.toString();:};
+                | Abajo:d {:RESULT= d.toString();:}
+                | error;
 
 OPERADORSUMA ::= Suma:d {:RESULT= d.toString();:}
                | Resta:d {:RESULT= d.toString();:};
@@ -141,14 +156,16 @@ EXPRESION ::= ID:id Eq EXPRESIONSUMA:expr {:
                                             }                     
                                            :}  
             | EXPRESIONSUMA OPERADORRELACIONAL EXPRESIONSUMA
-            | EXPRESIONSUMA:d {:RESULT= d;:};
+            | EXPRESIONSUMA:d {:RESULT= d;:}
+            | error;
 
 OPERADORRELACIONAL ::= Menor:d {:RESULT= d.toString();:}  
                     |  Mayor:d {:RESULT= d.toString();:}
                     |  MenorEq:d {:RESULT= d.toString();:}
                     |  MayorEq:d {:RESULT= d.toString();:}
                     |  EqEq:d {:RESULT= d.toString();:}
-                    |  Diferente:d {:RESULT= d.toString();:};
+                    |  Diferente:d {:RESULT= d.toString();:}
+                    | error;
 
 EXPRESIONSUMA ::= EXPRESIONSUMA:n OPERADORSUMA:d TERMINO:m {:if("+".equals(d.toString())){RESULT= new Integer(((Integer)n).intValue()+((Integer)m).intValue());}
                                                              else{RESULT= new Integer(((Integer)n).intValue()- ((Integer)m).intValue());}:} 

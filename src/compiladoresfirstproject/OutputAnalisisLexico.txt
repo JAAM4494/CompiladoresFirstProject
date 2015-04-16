@@ -3,6 +3,7 @@ Token: Declarar Lexema: declarar
 Token: ID Lexema: _variable
 Token: Declarar Lexema: declarar
 Token: ID Lexema: _otra
+Token: ID Lexema: algo
 Token: Declarar Lexema: declarar
 Token: ID Lexema: variable2
 Token: Mover Lexema: mover

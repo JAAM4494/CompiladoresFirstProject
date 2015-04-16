@@ -6,6 +6,9 @@
 package compiladoresfirstproject;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  *
@@ -25,8 +28,6 @@ public class Main {
         // generarScanner();
          new VentanaPrincipal().run();
         // generarParser();
-        
-        
     }
 
     // Metodo que genera el analizador lexico, usando jFlex

@@ -1,5 +1,5 @@
 declarar _variable
-declarar _otra
+declarar _otra algo
 declarar variable2
 
 mover cabeza izquierda
