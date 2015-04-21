@@ -18,7 +18,7 @@ public class Intermedio {
     private FileWriter fichero = null;
     private PrintWriter pw = null;
 
-    private String TempString = " ";
+    private String TempString = "";
     private boolean oneLine = false;
 
     public Intermedio() {
@@ -77,6 +77,30 @@ public class Intermedio {
         }
     }
 
+//    public void createInterStack(Vector pVector, String pToken, String pLexema) {
+//
+//        if (pToken.equals("ID")) {
+//            pVector.add(pLexema);
+//        } else {
+//            if (pToken.equals("OpParenth")) {
+//                oneLine = true;
+//            }
+//            if (pToken.equals("CloseParenth")) {
+//                oneLine = false;
+//                TempString = "";
+//            }
+//            if (oneLine) {
+//                if (!pToken.equals("NewLine") & !pToken.equals("CloseParenth") & !pToken.equals("OpParenth")) {
+//                    TempString = TempString + pLexema.toUpperCase();
+//                    pVector.add(TempString);
+//                }
+//            } else {
+//                if (!pToken.equals("NewLine") & !pToken.equals("CloseParenth") & !pToken.equals("OpParenth")) {
+//                    pVector.add(pLexema.toUpperCase());
+//                }
+//            }
+//        }
+//    }
     public void debugInterSack(Vector pVector) {
 
         if (AnalizadorMain.canGenerateCode) {
