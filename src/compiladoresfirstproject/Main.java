@@ -7,8 +7,11 @@ package compiladoresfirstproject;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,12 +25,14 @@ public class Main {
      * @throws java.lang.IllegalAccessException
      */
     public static void main(String[] args) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-        // Metodos para generar los .java de los analizadores
-        // los comentan despues de generarlos (las 2 lineas de abajo)
 
-        // generarScanner();
-         new VentanaPrincipal().run();
-        // generarParser();
+            // Metodos para generar los .java de los analizadores
+            // los comentan despues de generarlos (las 2 lineas de abajo)
+            
+            // generarScanner();
+             new VentanaPrincipal().run();
+            // generarParser();     
+        
     }
 
     // Metodo que genera el analizador lexico, usando jFlex

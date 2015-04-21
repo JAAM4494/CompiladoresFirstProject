@@ -518,7 +518,10 @@ boolean banderaNewLine = false;
     int ultimoEstado = 0;
  public void init(){};
 
+Intermedio generadorIntermedio = new Intermedio();
+
 Vector TokensOut = new Vector();
+Vector TokensIntermedio = new Vector();
 
 public void echo(int pToken)  {
       try {
@@ -526,6 +529,7 @@ public void echo(int pToken)  {
           System.out.println("Token: " + TokenName + " Lexema: " + yytext());
           VentanaPrincipal.mostrarSalida("Token: " + TokenName + " Lexema: " + yytext());
           TokensOut.addElement("Token: " + TokenName + " Lexema: " + yytext());
+          generadorIntermedio.createInterStack(TokensIntermedio, TokenName, yytext());
       } catch (IllegalArgumentException | IllegalAccessException ex) {
           Logger.getLogger(myLexer.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -791,7 +795,10 @@ private static String returnTokenName(int pIntToken) throws IllegalArgumentExcep
   private void zzDoEOF() throws java.io.IOException {
     if (!zzEOFDone) {
       zzEOFDone = true;
-      yyclose();
+    writeOut(TokensOut);
+TokensIntermedio.add("END"); 
+generadorIntermedio.debugInterSack(TokensIntermedio);
+  yyclose();
     }
   }
 
@@ -938,15 +945,15 @@ private static String returnTokenName(int pIntToken) throws IllegalArgumentExcep
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
             zzDoEOF();
-          { {writeOut(TokensOut);return new Symbol(sym.EOF,null);}
+          { {return new Symbol(sym.EOF,null);}
  }
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { yychar=0; yyline=0;System.out.println("Valor Bandera: " + banderaNewLine); 
+            { yychar=0; yyline=0; 
                                       if(banderaNewLine == true) {
-                                           System.out.println("Salto linea");
+                                           //System.out.println("Salto linea");
                                            banderaNewLine = false;
                                            return  new Symbol(sym.NewLine,  yyline, yychar, yytext());
                                       }

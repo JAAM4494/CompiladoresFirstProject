@@ -3,7 +3,6 @@ Token: Declarar Lexema: declarar
 Token: ID Lexema: _variable
 Token: Declarar Lexema: declarar
 Token: ID Lexema: _otra
-Token: ID Lexema: algo
 Token: Declarar Lexema: declarar
 Token: ID Lexema: variable2
 Token: Mover Lexema: mover
@@ -77,7 +76,7 @@ Token: Boca Lexema: boca
 Token: Arriba Lexema: arriba
 Token: CloseKey Lexema: }
 Token: Mientras Lexema: mientras
-Token: ID Lexema: variable
+Token: ID Lexema: _variable
 Token: Eq Lexema: =
 Token: Num Lexema: 5
 Token: Suma Lexema: +

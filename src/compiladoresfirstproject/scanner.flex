@@ -38,7 +38,10 @@ boolean banderaNewLine = false;
     int ultimoEstado = 0;
  public void init(){};
 
+Intermedio generadorIntermedio = new Intermedio();
+
 Vector TokensOut = new Vector();
+Vector TokensIntermedio = new Vector();
 
 public void echo(int pToken)  {
       try {
@@ -46,6 +49,7 @@ public void echo(int pToken)  {
           System.out.println("Token: " + TokenName + " Lexema: " + yytext());
           VentanaPrincipal.mostrarSalida("Token: " + TokenName + " Lexema: " + yytext());
           TokensOut.addElement("Token: " + TokenName + " Lexema: " + yytext());
+          generadorIntermedio.createInterStack(TokensIntermedio, TokenName, yytext());
       } catch (IllegalArgumentException | IllegalAccessException ex) {
           Logger.getLogger(myLexer.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -100,8 +104,14 @@ private static String returnTokenName(int pIntToken) throws IllegalArgumentExcep
 %}
 
 %eofval{
-{writeOut(TokensOut);return new Symbol(sym.EOF,null);}
+{return new Symbol(sym.EOF,null);}
 %eofval}
+
+%eof{
+writeOut(TokensOut);
+TokensIntermedio.add("END"); 
+generadorIntermedio.debugInterSack(TokensIntermedio);
+%eof}
 
 LETRA=[a-zA-Z]
 DIGITO=[0-9]
@@ -122,9 +132,9 @@ FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
 \' { /* ignora apostrofes. */ }
 
 <YYINITIAL> {ESPACIO_EN_BLANCO}       {/*no hace nada, aumenta una columna,continua lectura*/yychar++; }
-<YYINITIAL> {NEW_LINE}*               {yychar=0; yyline=0;System.out.println("Valor Bandera: " + banderaNewLine); 
+<YYINITIAL> {NEW_LINE}*               {yychar=0; yyline=0; 
                                       if(banderaNewLine == true) {
-                                           System.out.println("Salto linea");
+                                           //System.out.println("Salto linea");
                                            banderaNewLine = false;
                                            return  new Symbol(sym.NewLine,  yyline, yychar, yytext());
                                       }}

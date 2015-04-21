@@ -17,14 +17,17 @@ import java_cup.runtime.Symbol;
  */
 public class AnalizadorMain {
     
+    public static boolean canGenerateCode = true;
+    
     public void procesarEntrada(String pPathEntrada) {
         
         try {
             
+            canGenerateCode = true;
             myLexer AnalizadorLexico = new myLexer(new FileReader(pPathEntrada));
             myParser AnalizadorSintactico = new myParser(AnalizadorLexico);
             VentanaPrincipal.mostrarSalida("***********  RESUMEN ANÁLISIS LÉXICO  ***********");
-            AnalizadorSintactico.parse(); 
+            AnalizadorSintactico.parse();
                  //Symbol currToken;
        
             //   do {

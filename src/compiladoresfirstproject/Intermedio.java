@@ -7,24 +7,24 @@ package compiladoresfirstproject;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  *
- * @author StevenJM
+ * @author DANIEL
  */
-public class TablaSim {
-    
+public class Intermedio {
+       
     private FileWriter fichero = null;
     private PrintWriter pw = null;
     
-    public TablaSim(){
+    public Intermedio(){
 
         try
         {
             fichero = new FileWriter("tabla.html");
             pw = new PrintWriter(fichero);
-            initFile(); 
+            pw.print("");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -38,39 +38,16 @@ public class TablaSim {
            }
         }
     }
-
-    private void initFile() {
-        pw.println("<!DOCTYPE html>");
-        pw.println("<html>");
-        pw.println("<head>");
-        pw.println("<title> Tabla Simbolos </title>");
-        pw.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">");
-        pw.println("</head>");
-        pw.println("<body>"); 
-        pw.println("<table style=\"width:100%\">");
-        pw.println("<thead>");
-        pw.println("<tr>");
-        pw.println("<th>Simbolo</th>");
-        pw.println("<th>Valor</th>");
-        pw.println("</tr>");
-        pw.println("</thead>"); 
-        pw.println("<tbody>");  
-        pw.close();
-    }
     
-    public void writeSymbol(String pSim, int pValor){
+    public void writeSymbol(String pSim){
             FileWriter fichero = null;
              PrintWriter pw = null;
             try
         {
-            fichero = new FileWriter("tabla.html",true);
+            fichero = new FileWriter("intermedio.int",true);
             pw = new PrintWriter(fichero);
-            pw.write("<tr>");
-            pw.write("<th>"+pSim+"</th>");
-            pw.write("<th>"+pValor+"</th>"); 
-            pw.write("</tr>");
-            pw.close();
-            //System.out.println("Sim: "+pSim+", Valor: "+pValor);
+            pw.println(pSim);
+            //System.out.println("Sim: "+pSim);
  
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,4 +63,24 @@ public class TablaSim {
     }
     }
     
+    public void createInterStack(Vector pVector, String pToken, String pLexema) {
+        
+        if(pToken.equals("ID")){
+            pVector.add(pLexema);
+        } else {
+            if(!pToken.equals("NewLine") & !pToken.equals("CloseParenth") & !pToken.equals("OpParenth")) {
+                pVector.add(pLexema.toUpperCase());
+            }
+        }
+    }
+    
+    
+    public void debugInterSack(Vector pVector) {
+        
+        if(AnalizadorMain.canGenerateCode){
+            for (Object pVector1 : pVector) {
+                writeSymbol(pVector1.toString());
+            }
+        }
+    }
 }

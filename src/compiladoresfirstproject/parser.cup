@@ -79,122 +79,120 @@ precedence left Sino;
 precedence left Suma, Resta;
 precedence left Divi, Multi;
 
-
                 /**** INICIO DE LA GRAMATICA ****/
 
 start with PROGRAMA;
 
-PROGRAMA ::= LISTAVARIABLES LISTADECLARACIONES
+PROGRAMA ::= LISTAVARIABLES LISTADECLARACIONES {:/* System.out.println("-----: " + cur_token.value); */ :}
            | error;
 
-LISTAVARIABLES ::= LISTAVARIABLES DECLARACIONVARIABLE
-                 | DECLARACIONVARIABLE:d {:RESULT= d;:}
+LISTAVARIABLES ::= LISTAVARIABLES DECLARACIONVARIABLE:d 
+                 | DECLARACIONVARIABLE:d 
                  | error;
 
-DECLARACIONVARIABLE ::= Declarar ID:d NewLine {:
-                        table.put(d.toString(),0);
-                        RESULT= d;:};
+DECLARACIONVARIABLE ::= Declarar ID:id NewLine {:
+                        RESULT= id;
+                        table.put(id.toString(),0);:};
 
-LISTADECLARACIONES ::=  LISTADECLARACIONES DECLARACION 
-                      | DECLARACION:d {:RESULT= d;:}
+LISTADECLARACIONES ::=  LISTADECLARACIONES DECLARACION
+                      | DECLARACION
                       | error;
 
-DECLARACION ::=  MOVER:d {:RESULT= d;:}
-               | VOZ:d {:RESULT= d;:}
-               | DECLARACIONSELECCION:d {:RESULT= d;:}
-               | DECLARACIONITERACION:d {:RESULT= d;:};
+DECLARACION ::=  MOVER:d {: RESULT= d; :}
+               | VOZ:d {: RESULT= d; :}
+               | DECLARACIONSELECCION:d {: RESULT= d; :}
+               | DECLARACIONITERACION:d {: RESULT= d; :};
 
-MOVER ::=  Mover TIPO:d NewLine {:RESULT= d;:};
+MOVER ::=  Mover TIPO:d NewLine {: RESULT= d; :};
 
-VOZ ::= Decir PALABRA:d {:RESULT= d;:};
+VOZ ::= Decir PALABRA:d {: RESULT= d; :};
 
-PALABRA ::= Hola:d {:RESULT= d.toString();:}  
-          | Adios:d {:RESULT= d.toString();:}  
-          | Lindos:d {:RESULT= d.toString();:}  
-          | Pura:d {:RESULT= d.toString();:}  	
-          | Vida:d {:RESULT= d.toString();:}
+PALABRA ::= Hola:d    {: RESULT= d.toString(); :}  
+          | Adios:d   {: RESULT= d.toString(); :}  
+          | Lindos:d  {: RESULT= d.toString(); :}  
+          | Pura:d    {: RESULT= d.toString(); :}  	
+          | Vida:d    {: RESULT= d.toString(); :}
           | error;
 
-TIPO ::= OJOS:d {:RESULT= d.toString();:} 
-       | CABEZA:d {:RESULT= d.toString();:}
-       | BOCA:d {:RESULT= d.toString();:}
+TIPO ::= OJOS:d    {: RESULT= d.toString(); :} 
+       | CABEZA:d  {: RESULT= d.toString(); :}
+       | BOCA:d    {: RESULT= d.toString(); :}
        | error;
 
-OJOS ::= Ojos DIRECCIONES:d {:RESULT= d.toString();:};
+OJOS ::= Ojos DIRECCIONES:d {: RESULT= d.toString(); :};
 
-CABEZA ::= Cabeza DIRECCIONHEAD:d {:RESULT= d.toString();:};
+CABEZA ::= Cabeza DIRECCIONHEAD:d {: RESULT= d.toString(); :};
 
-BOCA ::= Boca DIRECCIONBOCA:d {:RESULT= d.toString();:};
+BOCA ::= Boca DIRECCIONBOCA:d {: RESULT= d.toString(); :};
 
-DIRECCIONES ::= Izquierda:d {:RESULT= d.toString();:}  
-       | Arriba:d {:RESULT= d.toString();:}  
-       | Derecha:d {:RESULT= d.toString();:}  
-       | Abajo:d {:RESULT= d.toString();:}
-       | error;
+DIRECCIONES ::= Izquierda:d {: RESULT= d.toString(); :}  
+              | Arriba:d    {: RESULT= d.toString(); :}  
+              | Derecha:d   {: RESULT= d.toString(); :}  
+              | Abajo:d     {: RESULT= d.toString(); :}
+              | error;
 
-DIRECCIONHEAD ::= Izquierda:d {:RESULT= d.toString();:} 
-                | Derecha:d {:RESULT= d.toString();:}
+DIRECCIONHEAD ::= Izquierda:d {: RESULT= d.toString(); :} 
+                | Derecha:d   {: RESULT= d.toString(); :}
                 | error;
 
-DIRECCIONBOCA ::= Arriba:d {:RESULT= d.toString();:}
-                | Abajo:d {:RESULT= d.toString();:}
+DIRECCIONBOCA ::= Arriba:d {: RESULT= d.toString(); :}
+                | Abajo:d  {: RESULT= d.toString(); :}
                 | error;
 
-OPERADORSUMA ::= Suma:d {:RESULT= d.toString();:}
-               | Resta:d {:RESULT= d.toString();:};
+OPERADORSUMA ::= Suma:d  {: RESULT= d.toString(); :}
+               | Resta:d {: RESULT= d.toString(); :};
 
-OPERADORMULT ::= Multi:d {:RESULT= d.toString();:}
-               | Divi:d {:RESULT= d.toString();:};
+OPERADORMULT ::= Multi:d  {: RESULT= d.toString(); :}
+               | Divi:d   {: RESULT= d.toString(); :};
 
-EXPRESION ::= ID:id Eq EXPRESIONSUMA:expr {:
-                                            if(table.containsKey(id.toString())){
+EXPRESION ::= ID:id Eq EXPRESIONSUMA:expr {: if(table.containsKey(id.toString())){
                                                table.replace(id.toString(), new Integer(((Integer)expr).intValue()));
                                                tablaSim.writeSymbol(id.toString(), new Integer(((Integer)expr).intValue()));
-                                            }
+                                               }
                                            else{
                                             System.out.println("Variable no declarada");
-                                            }                     
-                                           :}  
+                                            } :}  
             | EXPRESIONSUMA OPERADORRELACIONAL EXPRESIONSUMA
-            | EXPRESIONSUMA:d {:RESULT= d;:}
+            | EXPRESIONSUMA:d {: RESULT= d; :}
             | error;
 
-OPERADORRELACIONAL ::= Menor:d {:RESULT= d.toString();:}  
-                    |  Mayor:d {:RESULT= d.toString();:}
-                    |  MenorEq:d {:RESULT= d.toString();:}
-                    |  MayorEq:d {:RESULT= d.toString();:}
-                    |  EqEq:d {:RESULT= d.toString();:}
-                    |  Diferente:d {:RESULT= d.toString();:}
-                    | error;
+OPERADORRELACIONAL ::= Menor:d {: RESULT= d.toString(); :}  
+                    |  Mayor:d {: RESULT= d.toString(); :}
+                    |  MenorEq:d {: RESULT= d.toString(); :}
+                    |  MayorEq:d {: RESULT= d.toString(); :}
+                    |  EqEq:d {: RESULT= d.toString(); :}
+                    |  Diferente:d {: RESULT= d.toString(); :}
+                    |  error;
 
-EXPRESIONSUMA ::= EXPRESIONSUMA:n OPERADORSUMA:d TERMINO:m {:if("+".equals(d.toString())){RESULT= new Integer(((Integer)n).intValue()+((Integer)m).intValue());}
-                                                             else{RESULT= new Integer(((Integer)n).intValue()- ((Integer)m).intValue());}:} 
- 		| EXPRESIONMULT:d {:RESULT= d;:};
+EXPRESIONSUMA ::= EXPRESIONSUMA:n OPERADORSUMA:d TERMINO:m {: if("+".equals(d.toString())){RESULT= new Integer(((Integer)n).intValue()+((Integer)m).intValue());}
+                                                              else{RESULT= new Integer(((Integer)n).intValue()- ((Integer)m).intValue());} :} 
+ 		| EXPRESIONMULT:d {: RESULT= d; :};
 
 EXPRESIONMULT ::= EXPRESIONMULT:n OPERADORMULT:d EXPRESIONSUMA:m {:if("/".equals(d.toString())){
                                                                  if((Integer)m==0){System.out.println("division entre cero");RESULT= new Integer(0);}
                                                                  else{RESULT=new Integer(((Integer)n).intValue()/((Integer)m).intValue());}}
                                                                  else{RESULT= new Integer(((Integer)n).intValue()*((Integer)m).intValue());}:}
-                | TERMINO:d {:RESULT= d;:};
+                | TERMINO:d {: RESULT= d; :};
 
-TERMINO ::=  OpParenth EXPRESION:d CloseParenth {:RESULT= d;:}
-          | ID:d {:Integer value = (Integer) table.get(d);
+TERMINO ::=  OpParenth:OP EXPRESION:d CloseParenth:CP {: RESULT= d; :}
+          | ID:d {: Integer value = (Integer) table.get(d);
             if(value==null){parser.semantics_error(d.toString());
                             value = new Integer (0);}
             RESULT= value;:}
-          | Num:d {:RESULT= new Integer(d);:};
+          | Num:d {: RESULT= new Integer(d); :};
 
-EXPRESIONCONDICION ::= EXPRESION:d {:RESULT= d;:}
-                     | True:d {:RESULT= d;:}
-                     | False:d {:RESULT= d;:};
+EXPRESIONCONDICION ::= EXPRESION:d {: RESULT= d; :}
+                     | True:cond   {: RESULT= cond; :}
+                     | False:cond2 {: RESULT= cond2; :};
 
-LISTADECLARACIONESCONDICIONADAS ::= DECLARACION:d {:RESULT= d;:}
-                                  | OpKey LISTADECLARACIONES:d CloseKey {:RESULT= d;:};
+LISTADECLARACIONESCONDICIONADAS ::= DECLARACION:d {: RESULT= d; :}
+                                  | OpKey:a LISTADECLARACIONES:list CloseKey:b {: RESULT= list; :};
 
-DECLARACIONSELECCION ::= Si OpParenth EXPRESIONCONDICION CloseParenth Entonces LISTADECLARACIONESCONDICIONADAS
-                       | Si OpParenth EXPRESIONCONDICION CloseParenth Entonces LISTADECLARACIONESCONDICIONADAS Sino LISTADECLARACIONESCONDICIONADAS;
+DECLARACIONSELECCION ::= Si:cond OpParenth:LP EXPRESIONCONDICION:expr CloseParenth:RP Entonces:then LISTADECLARACIONESCONDICIONADAS:list 
+                      {: RESULT= list; :}
+                    | Si:cond OpParenth:LP EXPRESIONCONDICION CloseParenth:RP Entonces:then LISTADECLARACIONESCONDICIONADAS:list Sino:cond2 LISTADECLARACIONESCONDICIONADAS:list2;
 
-DECLARACIONITERACION ::=  Mientras OpParenth EXPRESIONCONDICION CloseParenth Haga LISTADECLARACIONESCONDICIONADAS 
- 			| Haga LISTADECLARACIONESCONDICIONADAS Mientras EXPRESION;
+DECLARACIONITERACION ::=  Mientras:cond OpParenth:OP EXPRESIONCONDICION:expr CloseParenth:CP Haga:cond2 LISTADECLARACIONESCONDICIONADAS:list 
+ 			| Haga:cond LISTADECLARACIONESCONDICIONADAS:list Mientras:cond2 EXPRESION:expr;
 
                                 /**** FIN DE LA GRAMATICA ****/

@@ -1,5 +1,5 @@
 declarar _variable
-declarar _otra algo
+declarar _otra
 declarar variable2
 
 mover cabeza izquierda
@@ -31,7 +31,7 @@ mover cabeza derecha
 haga {
 mover ojos abajo
 mover boca arriba
-} mientras variable = 5+6
+} mientras _variable = 5+6
 
 haga {
 mover boca abajo
