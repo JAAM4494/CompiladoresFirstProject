@@ -65,17 +65,30 @@ public class Intermedio {
             }
         }
     }
-
-    public void createInterStack(Vector pVector, String pToken, String pLexema) {
+    
+        public void createInterStack(Vector pVector, String pToken, String pLexema) {
 
         if (pToken.equals("ID")) {
             pVector.add(pLexema);
         } else {
-            if (!pToken.equals("NewLine") & !pToken.equals("CloseParenth") & !pToken.equals("OpParenth")) {
+            if (!pToken.equals("NewLine")) {
                 pVector.add(pLexema.toUpperCase());
             }
         }
     }
+    
+    
+
+//    public void createInterStack(Vector pVector, String pToken, String pLexema) {
+//
+//        if (pToken.equals("ID")) {
+//            pVector.add(pLexema);
+//        } else {
+//            if (!pToken.equals("NewLine") & !pToken.equals("CloseParenth") & !pToken.equals("OpParenth")) {
+//                pVector.add(pLexema.toUpperCase());
+//            }
+//        }
+//    }
     
     
     // METODO PERMITE PONER LA EXPRSION EN UNA SOLA LINEA

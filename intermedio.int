@@ -10,7 +10,9 @@ IZQUIERDA
 DECIR
 HOLA
 SI
+(
 TRUE
+)
 ENTONCES
 {
 MOVER
@@ -21,7 +23,9 @@ OJOS
 DERECHA
 }
 SI
+(
 TRUE
+)
 ENTONCES
 {
 MOVER
@@ -39,7 +43,9 @@ DECIR
 HOLA
 }
 MIENTRAS
+(
 TRUE
+)
 HAGA
 {
 DECIR
@@ -90,11 +96,13 @@ variable2
 -
 6
 SI
+(
 _otra
 =
 3
 +
 8
+)
 ENTONCES
 {
 MOVER
