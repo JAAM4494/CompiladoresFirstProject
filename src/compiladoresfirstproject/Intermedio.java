@@ -76,31 +76,38 @@ public class Intermedio {
             }
         }
     }
-
+    
+    
+    // METODO PERMITE PONER LA EXPRSION EN UNA SOLA LINEA
+    
 //    public void createInterStack(Vector pVector, String pToken, String pLexema) {
 //
-//        if (pToken.equals("ID")) {
-//            pVector.add(pLexema);
-//        } else {
-//            if (pToken.equals("OpParenth")) {
-//                oneLine = true;
-//            }
-//            if (pToken.equals("CloseParenth")) {
-//                oneLine = false;
-//                TempString = "";
-//            }
-//            if (oneLine) {
-//                if (!pToken.equals("NewLine") & !pToken.equals("CloseParenth") & !pToken.equals("OpParenth")) {
+//        if (pToken.equals("OpParenth")) {
+//            oneLine = true;
+//        }
+//        if (pToken.equals("CloseParenth")) {
+//            oneLine = false;
+//            pVector.add(TempString);
+//            TempString = "";
+//        }
+//        if (oneLine) {
+//            if (!pToken.equals("NewLine") & !pToken.equals("CloseParenth") & !pToken.equals("OpParenth")) {
+//                if (pToken.equals("ID")) {
+//                    TempString = TempString + pLexema;
+//                } else {
 //                    TempString = TempString + pLexema.toUpperCase();
-//                    pVector.add(TempString);
 //                }
-//            } else {
-//                if (!pToken.equals("NewLine") & !pToken.equals("CloseParenth") & !pToken.equals("OpParenth")) {
-//                    pVector.add(pLexema.toUpperCase());
-//                }
+//            }
+//        } else {
+//            if (!pToken.equals("NewLine") & !pToken.equals("CloseParenth") & !pToken.equals("OpParenth") & !pToken.equals("ID")) {
+//                pVector.add(pLexema.toUpperCase());
+//            }
+//            if (pToken.equals("ID")) {
+//                pVector.add(pLexema);
 //            }
 //        }
 //    }
+
     public void debugInterSack(Vector pVector) {
 
         if (AnalizadorMain.canGenerateCode) {
