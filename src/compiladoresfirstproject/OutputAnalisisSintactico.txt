@@ -1,0 +1,36 @@
+***********  RESUMEN ANÁLISIS SINTÁCTICO  ***********
+ declarar _variable
+ declarar _otra
+ declarar variable2
+ mover cabeza izquierda
+ decir hola
+ si ( true ) entonces {
+ mover boca abajo
+ mover ojos derecha
+ }
+ si ( true ) entonces {
+ mover cabeza izquierda
+ decir adios
+ } sino {
+ mover cabeza derecha
+ decir hola
+ }
+ mientras ( true ) haga {
+ decir hola
+ decir lindos
+ }
+ haga {
+ decir lindos
+ mover cabeza derecha
+ } mientras 5 + 6
+ haga {
+ mover ojos abajo
+ mover boca arriba
+ } mientras _variable = 5 + 6
+ si ( _otra = 3 + 8 ) entonces {
+ mover ojos derecha }
+ haga {
+ mover boca abajo
+ mover boca arriba
+ } mientras variable2 = 5 - 6
+ decir hola

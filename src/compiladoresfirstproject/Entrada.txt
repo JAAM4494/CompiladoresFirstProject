@@ -33,12 +33,12 @@ mover ojos abajo
 mover boca arriba
 } mientras _variable = 5+6
 
+si(_otra = 3+8) entonces
+mover ojos derecha
+
 haga {
 mover boca abajo
 mover boca arriba
 } mientras variable2 = 5-6
 
-si(_otra = 3+8) entonces { 
-mover ojos derecha
 decir hola
-}

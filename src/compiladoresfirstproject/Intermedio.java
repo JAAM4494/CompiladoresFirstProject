@@ -76,9 +76,9 @@ public class Intermedio {
             }
         }
     }
-    
-    
+        
 
+    
 //    public void createInterStack(Vector pVector, String pToken, String pLexema) {
 //
 //        if (pToken.equals("ID")) {

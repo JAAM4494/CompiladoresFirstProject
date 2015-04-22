@@ -39,6 +39,7 @@ boolean banderaNewLine = false;
  public void init(){};
 
 Intermedio generadorIntermedio = new Intermedio();
+SintaxOut salidaSintactico = new SintaxOut();
 
 Vector TokensOut = new Vector();
 Vector TokensIntermedio = new Vector();
@@ -46,10 +47,19 @@ Vector TokensIntermedio = new Vector();
 public void echo(int pToken)  {
       try {
           String TokenName = returnTokenName(pToken);
-          System.out.println("Token: " + TokenName + " Lexema: " + yytext());
-          VentanaPrincipal.mostrarSalida("Token: " + TokenName + " Lexema: " + yytext());
-          TokensOut.addElement("Token: " + TokenName + " Lexema: " + yytext());
-          generadorIntermedio.createInterStack(TokensIntermedio, TokenName, yytext());
+
+          if(!TokenName.equals("NewLine")) {
+            VentanaPrincipal.mostrarSalida("Token: " + TokenName + " Lexema: " + yytext());
+            TokensOut.addElement("Token: " + TokenName + " Lexema: " + yytext());
+            System.out.println("Token: " + TokenName + " Lexema: " + yytext());
+          }
+          if(TokenName.equals("NewLine")) {
+                salidaSintactico.writeSintaxStack(TokenName, "NewLine");
+                generadorIntermedio.createInterStack(TokensIntermedio, TokenName, "NewLine");
+          } else {
+                salidaSintactico.writeSintaxStack(TokenName, yytext());
+                generadorIntermedio.createInterStack(TokensIntermedio, TokenName, yytext());
+          }
       } catch (IllegalArgumentException | IllegalAccessException ex) {
           Logger.getLogger(myLexer.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -109,6 +119,8 @@ private static String returnTokenName(int pIntToken) throws IllegalArgumentExcep
 
 %eof{
 writeOut(TokensOut);
+salidaSintactico.writeSintaxStack("NewLine", yytext());
+salidaSintactico.writeSintaxOut();
 TokensIntermedio.add("END"); 
 generadorIntermedio.debugInterSack(TokensIntermedio);
 %eof}
@@ -132,7 +144,7 @@ FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
 \' { /* ignora apostrofes. */ }
 
 <YYINITIAL> {ESPACIO_EN_BLANCO}       {/*no hace nada, aumenta una columna,continua lectura*/yychar++; }
-<YYINITIAL> {NEW_LINE}*               {yychar=0; yyline=0; 
+<YYINITIAL> {NEW_LINE}*               {yychar=0; yyline=0; echo(sym.NewLine);
                                       if(banderaNewLine == true) {
                                            //System.out.println("Salto linea");
                                            banderaNewLine = false;
