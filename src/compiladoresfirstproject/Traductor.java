@@ -7,8 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * 
- * @author aaroneg,vladimir,steven
  *
  */
 public class Traductor{ 
