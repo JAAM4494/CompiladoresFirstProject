@@ -2,6 +2,10 @@ declarar _variable
 declarar _otra
 declarar variable2
 
+Asignar _variable = 23
+Asignar _otra = 12
+Asignar _variable2 = 8
+
 mover cabeza izquierda
 decir hola
 
@@ -26,12 +30,12 @@ decir lindos
 haga {
 decir lindos
 mover cabeza derecha
-} mientras 5+6
+} mientras (5+6)
 
 haga {
 mover ojos abajo
 mover boca arriba
-} mientras _variable = 5+6
+} mientras (_variable = 5+6)
 
 si(_otra = 3+8) entonces
 mover ojos derecha
@@ -39,6 +43,6 @@ mover ojos derecha
 haga {
 mover boca abajo
 mover boca arriba
-} mientras variable2 = 5-6
+} mientras (variable2 = 5-6)
 
 decir hola

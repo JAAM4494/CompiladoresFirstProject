@@ -19,7 +19,7 @@ public class Errores {
 
         try
         {
-            fichero = new FileWriter("index.html");
+            fichero = new FileWriter("src/outputs/index.html");
             pw = new PrintWriter(fichero);
             initFile();
             pw.println("<div class=\"Errores\">"+pTipoAnalisis);

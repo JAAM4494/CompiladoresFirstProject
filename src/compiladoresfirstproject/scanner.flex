@@ -70,7 +70,7 @@ private static void writeOut(Vector pVector) {
         PrintWriter pw = null;
 
         try {
-            fichero = new FileWriter("C:/Users/JAAM/Documents/NetBeansProjects/CompiladoresFirstProject/src/compiladoresfirstproject/OutputAnalisisLexico.txt");
+            fichero = new FileWriter("src/outputs/OutputAnalisisLexico.txt");
             pw = new PrintWriter(fichero);
             pw.println("***********  RESUMEN ANÁLISIS LÉXICO  ***********");
             
@@ -151,6 +151,7 @@ FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
                                            return  new Symbol(sym.NewLine,  yyline, yychar, yytext());
                                       }}
 
+<YYINITIAL>"asignar"|"ASIGNAR"                 {echo(sym.Asignar); return new Symbol(sym.Asignar, yyline, yychar, yytext());}
 <YYINITIAL>"mover"|"MOVER"                     {echo(sym.Mover); banderaNewLine = true; return new Symbol(sym.Mover,          yyline, yychar, yytext());}
 <YYINITIAL>"declarar"|"DECLARAR"               {echo(sym.Declarar); banderaNewLine = true; return new Symbol(sym.Declarar,          yyline, yychar, yytext());}
 <YYINITIAL>"lindos"|"LINDOS"                   {echo(sym.Lindos); return new Symbol(sym.Lindos,         yyline, yychar, yytext());}

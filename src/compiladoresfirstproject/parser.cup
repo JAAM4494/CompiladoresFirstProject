@@ -45,7 +45,7 @@ terminal   Menor,        Mayor,     MenorEq,   MayorEq,    EqEq,        Diferent
 terminal   Hola,         Adios,     Lindos,    Pura,       Vida ;
 terminal   Izquierda,    Arriba,    Derecha,   Abajo,      Resta;
 terminal   Mover,        Decir,     NewLine,   Suma;
-terminal   Declarar,     Eq,        Multi,     Divi;
+terminal   Declarar,     Eq,        Multi,     Divi,        Asignar;
 
 terminal   OpParenth,    CloseParenth;
 terminal   OpKey,        CloseKey; 
@@ -73,6 +73,8 @@ non terminal EXPRESION;
 non terminal BOCA,          OJOS,              CABEZA;
 non terminal DIRECCIONES,   DIRECCIONBOCA,     DIRECCIONHEAD;
 
+non terminal ASIGNACIONES,  ASIGNAR;
+
                 /**** PRECEDENCIAS ****/
 
 precedence left Sino;
@@ -83,8 +85,12 @@ precedence left Divi, Multi;
 
 start with PROGRAMA;
 
-PROGRAMA ::= LISTAVARIABLES LISTADECLARACIONES {:/* System.out.println("-----: " + cur_token.value); */ :}
+PROGRAMA ::= LISTAVARIABLES ASIGNACIONES LISTADECLARACIONES {:/* System.out.println("-----: " + cur_token.value); */ :}
            | error;
+
+ASIGNACIONES ::= ASIGNACIONES ASIGNAR | ASIGNAR;
+
+ASIGNAR ::= Asignar ID Eq Num;
 
 LISTAVARIABLES ::= LISTAVARIABLES DECLARACIONVARIABLE:d 
                  | DECLARACIONVARIABLE:d 
@@ -193,6 +199,6 @@ DECLARACIONSELECCION ::= Si:cond OpParenth:LP EXPRESIONCONDICION:expr CloseParen
                     | Si:cond OpParenth:LP EXPRESIONCONDICION CloseParenth:RP Entonces:then LISTADECLARACIONESCONDICIONADAS:list Sino:cond2 LISTADECLARACIONESCONDICIONADAS:list2;
 
 DECLARACIONITERACION ::=  Mientras:cond OpParenth:OP EXPRESIONCONDICION:expr CloseParenth:CP Haga:cond2 LISTADECLARACIONESCONDICIONADAS:list 
- 			| Haga:cond LISTADECLARACIONESCONDICIONADAS:list Mientras:cond2 EXPRESION:expr;
+ 			| Haga:cond LISTADECLARACIONESCONDICIONADAS:list Mientras:cond2 OpParenth EXPRESION:expr CloseParenth;
 
                                 /**** FIN DE LA GRAMATICA ****/

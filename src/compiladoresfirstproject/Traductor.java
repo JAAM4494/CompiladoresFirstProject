@@ -78,10 +78,6 @@ public class Traductor{
         pw.println("Servo boca; //12");
         pw.println("Servo ojoIzqY; //4");  
     }
-    
-    public static void main(String[] args) {
-        Traductor a= new Traductor();
-    }
 
     private void setupArduino() {
         pw.println("void setup(){");

@@ -44,7 +44,7 @@ public class SintaxOut {
         Boolean writeExtra = false;
 
         try {
-            fichero = new FileWriter("C:/Users/JAAM/Documents/NetBeansProjects/CompiladoresFirstProject/src/compiladoresfirstproject/OutputAnalisisSintactico.txt");
+            fichero = new FileWriter("src/outputs/OutputAnalisisSintactico.txt");
             pw = new PrintWriter(fichero);
             pw.println("***********  RESUMEN ANÁLISIS SINTÁCTICO  ***********");
 

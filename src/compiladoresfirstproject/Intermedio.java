@@ -24,7 +24,7 @@ public class Intermedio {
     public Intermedio() {
 
         try {
-            fichero = new FileWriter("tabla.html");
+            fichero = new FileWriter("src/outputs/tabla.html");
             pw = new PrintWriter(fichero);
             pw.print("");
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class Intermedio {
         FileWriter fichero = null;
         PrintWriter pw = null;
         try {
-            fichero = new FileWriter("intermedio.int", true);
+            fichero = new FileWriter("src/outputs/OutputAnálisisSemántico.txt", true);
             pw = new PrintWriter(fichero);
             pw.println(pSim);
             //System.out.println("Sim: "+pSim);
