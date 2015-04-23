@@ -96,6 +96,9 @@ public class Intermedio {
         if (AnalizadorMain.canGenerateCode) {
             FileWriter fichero = null;
             PrintWriter pw = null;
+
+            Boolean putCloseKey = false;
+
             try {
                 fichero = new FileWriter("src/outputs/OutputAnálisisSemántico.txt");
                 pw = new PrintWriter(fichero);
@@ -104,25 +107,39 @@ public class Intermedio {
                     if (pVector.get(i).toString().equals("sino") | pVector.get(i).toString().equals("haga")
                             | pVector.get(i).toString().equals("entonces") | pVector.get(i).toString().equals("SINO")
                             | pVector.get(i).toString().equals("HAGA") | pVector.get(i).toString().equals("ENTONCES")) {
-                        
+
                         int tmp = i;
                         if (pVector.get(tmp + 1).equals("{")) {
                             pw.println(pVector.get(i).toString());
                         } else {
-                           pw.println(pVector.get(i).toString());
-                           pw.println("{");
+                            pw.println(pVector.get(i).toString());
+                            pw.println("{");
+                            putCloseKey = true;
                         }
-                        
+
                     } else {
-                        pw.println(pVector.get(i).toString());
+                        if (pVector.get(i).toString().equals("izquierda") | pVector.get(i).toString().equals("IZQUIERDA")
+                                | pVector.get(i).toString().equals("derecha") | pVector.get(i).toString().equals("DERECHA")
+                                | pVector.get(i).toString().equals("arriba") | pVector.get(i).toString().equals("ARRIBA")
+                                | pVector.get(i).toString().equals("abajo") | pVector.get(i).toString().equals("ABAJO")
+                                | pVector.get(i).toString().equals("hola") | pVector.get(i).toString().equals("HOLA")
+                                | pVector.get(i).toString().equals("lindos") | pVector.get(i).toString().equals("LINDOS")
+                                | pVector.get(i).toString().equals("adios") | pVector.get(i).toString().equals("ADIOS")
+                                | pVector.get(i).toString().equals("pura") | pVector.get(i).toString().equals("PURA")
+                                | pVector.get(i).toString().equals("vida") | pVector.get(i).toString().equals("VIDA")) {
+                            if (putCloseKey) {
+                                pw.println(pVector.get(i).toString());
+                                pw.println("}");
+                                putCloseKey = false;
+                            } else {
+                                pw.println(pVector.get(i).toString());
+                            }
+                        } else {
+                            pw.println(pVector.get(i).toString());
+                        }
                     }
                 }
-                
-                
-                
-                
-                
-                
+
             } catch (Exception e) {
             } finally {
                 try {
