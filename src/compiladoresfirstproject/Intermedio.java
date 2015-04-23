@@ -99,15 +99,34 @@ public class Intermedio {
             try {
                 fichero = new FileWriter("src/outputs/OutputAnálisisSemántico.txt");
                 pw = new PrintWriter(fichero);
-            //System.out.println("Sim: "+pSim);
-                for (Object pVector1 : pVector) {
-                    pw.println(pVector1.toString());
-                }
 
+                for (int i = 0; i < pVector.size(); i++) {
+                    if (pVector.get(i).toString().equals("sino") | pVector.get(i).toString().equals("haga")
+                            | pVector.get(i).toString().equals("entonces") | pVector.get(i).toString().equals("SINO")
+                            | pVector.get(i).toString().equals("HAGA") | pVector.get(i).toString().equals("ENTONCES")) {
+                        
+                        int tmp = i;
+                        if (pVector.get(tmp + 1).equals("{")) {
+                            pw.println(pVector.get(i).toString());
+                        } else {
+                           pw.println(pVector.get(i).toString());
+                           pw.println("{");
+                        }
+                        
+                    } else {
+                        pw.println(pVector.get(i).toString());
+                    }
+                }
+                
+                
+                
+                
+                
+                
             } catch (Exception e) {
             } finally {
                 try {
-                // Nuevamente aprovechamos el finally para 
+                    // Nuevamente aprovechamos el finally para 
                     // asegurarnos que se cierra el fichero.
                     if (null != fichero) {
                         fichero.close();

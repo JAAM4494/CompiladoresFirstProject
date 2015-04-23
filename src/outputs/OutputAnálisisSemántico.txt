@@ -105,6 +105,7 @@ _otra
 8
 )
 ENTONCES
+{
 MOVER
 OJOS
 DERECHA
