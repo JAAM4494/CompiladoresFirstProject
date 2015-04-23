@@ -63,7 +63,7 @@ public class TablaSim {
              PrintWriter pw = null;
             try
         {
-            fichero = new FileWriter("tabla.html",true);
+            fichero = new FileWriter("src/outputs/tabla.html",true);
             pw = new PrintWriter(fichero);
             pw.write("<tr>");
             pw.write("<th>"+pSim+"</th>");
