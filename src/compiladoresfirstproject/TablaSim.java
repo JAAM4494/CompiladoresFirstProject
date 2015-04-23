@@ -22,7 +22,7 @@ public class TablaSim {
 
         try
         {
-            fichero = new FileWriter("tabla.html");
+            fichero = new FileWriter("src/outputs/tabla.html");
             pw = new PrintWriter(fichero);
             initFile(); 
         } catch (Exception e) {
