@@ -96,7 +96,12 @@ start with PROGRAMA;
 PROGRAMA ::= LISTAVARIABLES ASIGNACIONES LISTADECLARACIONES {: reportadorErr.reportarErrores(arraySyntax,arraySemantic); :}
            | error;
 
-ASIGNACIONES ::= ASIGNACIONES ASIGNAR | ASIGNAR;
+ASIGNACIONES ::= ASIGNACIONES ASIGNAR | ASIGNAR 
+                | error Mover
+                | error Decir
+                | error Si
+                | error Haga
+                | error Mientras;
 
 ASIGNAR ::= Asignar ID:id Eq Num:n {: RESULT=id;
                             if(table.containsKey(id.toString())){
@@ -110,7 +115,7 @@ ASIGNAR ::= Asignar ID:id Eq Num:n {: RESULT=id;
 
 LISTAVARIABLES ::= LISTAVARIABLES DECLARACIONVARIABLE:d 
                  | DECLARACIONVARIABLE:d 
-                 | error;
+                 | error Asignar;
 
 DECLARACIONVARIABLE ::= Declarar ID:id NewLine {:
                         RESULT= id;
@@ -118,7 +123,11 @@ DECLARACIONVARIABLE ::= Declarar ID:id NewLine {:
 
 LISTADECLARACIONES ::=  LISTADECLARACIONES DECLARACION
                       | DECLARACION
-                      | error;
+                      | error Mover
+                      | error Decir
+                      | error Si
+                      | error Haga
+                      | error Mientras;
 
 DECLARACION ::=  MOVER:d {: RESULT= d; :}
                | VOZ:d {: RESULT= d; :}
