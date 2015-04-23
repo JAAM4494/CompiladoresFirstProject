@@ -102,6 +102,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/generar.png"))); // NOI18N
         jButton2.setText("Generar Código");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
