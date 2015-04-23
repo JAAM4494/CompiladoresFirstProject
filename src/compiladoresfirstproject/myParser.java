@@ -282,6 +282,7 @@ ArrayList<String> arraySemantic;
                 //System.out.println("En la línea: " + Main.s.getLineNumber());
                 VentanaPrincipal.mostrarSalida("Error sintáctico: "+ cur_token.value);
                 arraySyntax.add("Error sintáctico en el token " + cur_token.value);
+                AnalizadorMain.canGenerateCode = false;
                 report_error("Syntax Error", null);
 }
 
@@ -294,6 +295,7 @@ ArrayList<String> arraySemantic;
                 System.out.println("Error semantico: La variable  "+ cur_token + "  " + " No se encuentra");
                 VentanaPrincipal.mostrarSalida("Error semantico: La variable  "+ cur_token + "  " + " No se encuentra");
                 arraySemantic.add("Error semantico: La variable: " + cur_token + " no se encuentra");
+                AnalizadorMain.canGenerateCode = false;
 }
 
 

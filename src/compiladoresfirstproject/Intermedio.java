@@ -134,6 +134,8 @@ public class Intermedio {
                 } catch (Exception e2) {
                 }
             }
+        } else {
+            // Reportar que hay errores y no se puede generar el intermedio
         }
     }
 }

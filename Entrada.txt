@@ -1,4 +1,4 @@
-declarar _variable
+declarar $_variable
 declarar _otra
 declarar variable2
 

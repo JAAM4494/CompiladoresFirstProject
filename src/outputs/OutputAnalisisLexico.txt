@@ -1,5 +1,6 @@
 ***********  RESUMEN ANÁLISIS LÉXICO  ***********
 Token: Declarar Lexema: declarar
+Caracter desconocido en la fila: 0, columna: 9el análisis continúa
 Token: ID Lexema: _variable
 Token: Declarar Lexema: declarar
 Token: ID Lexema: _otra
