@@ -376,7 +376,13 @@ class CUP$myParser$actions {
           case 5: // ASIGNAR ::= Asignar ID Eq Num 
             {
               Object RESULT =null;
-
+		int idleft = ((java_cup.runtime.Symbol)CUP$myParser$stack.elementAt(CUP$myParser$top-2)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$myParser$stack.elementAt(CUP$myParser$top-2)).right;
+		Object id = (Object)((java_cup.runtime.Symbol) CUP$myParser$stack.elementAt(CUP$myParser$top-2)).value;
+		int nleft = ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()).right;
+		String n = (String)((java_cup.runtime.Symbol) CUP$myParser$stack.peek()).value;
+		 System.out.println(id + " = " + n); 
               CUP$myParser$result = parser.getSymbolFactory().newSymbol("ASIGNAR",27, ((java_cup.runtime.Symbol)CUP$myParser$stack.elementAt(CUP$myParser$top-3)), ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()), RESULT);
             }
           return CUP$myParser$result;

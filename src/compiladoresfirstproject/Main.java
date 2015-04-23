@@ -16,8 +16,8 @@ public class Main {
     public static void main(String[] args) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
             
             // generarScanner();
-             new VentanaPrincipal().run();
-            // generarParser();     
+            // new VentanaPrincipal().run();
+             generarParser();     
         
     }
 
