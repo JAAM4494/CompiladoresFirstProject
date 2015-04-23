@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author JAAM
  */
-public class SintaxOut {
+public class SyntaxOut {
 
     String finalOut = "";
     Vector<colectObject> datosSalida = new Vector();

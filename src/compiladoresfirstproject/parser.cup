@@ -9,11 +9,15 @@ import java.io.*;
 action code {:
     Hashtable table = new Hashtable();
     TablaSim tablaSim=new TablaSim();
+    Errores reportadorErr = new Errores();
 :}
 
                 /**** PARSER CODE ****/
 
 parser code {:
+
+ArrayList<String> arraySyntax;
+ArrayList<String> arraySemantic;
 
  protected int error_sync_size () {
         System.out.println(":error_sync_size was called.");
@@ -23,6 +27,7 @@ parser code {:
                 System.out.println("Error sintáctico: "+ cur_token.value);
                 //System.out.println("En la línea: " + Main.s.getLineNumber());
                 VentanaPrincipal.mostrarSalida("Error sintáctico: "+ cur_token.value);
+                arraySyntax.add("Error sintáctico en el token " + cur_token.value);
                 report_error("Syntax Error", null);
 }
 
@@ -34,6 +39,7 @@ parser code {:
  public void semantics_error(String cur_token) {
                 System.out.println("Error semantico: La variable  "+ cur_token + "  " + " No se encuentra");
                 VentanaPrincipal.mostrarSalida("Error semantico: La variable  "+ cur_token + "  " + " No se encuentra");
+                arraySemantic.add("Error semantico: La variable: " + cur_token + " no se encuentra");
 }
 
 :};
@@ -85,7 +91,7 @@ precedence left Divi, Multi;
 
 start with PROGRAMA;
 
-PROGRAMA ::= LISTAVARIABLES ASIGNACIONES LISTADECLARACIONES {:/* System.out.println("-----: " + cur_token.value); */ :}
+PROGRAMA ::= LISTAVARIABLES ASIGNACIONES LISTADECLARACIONES {: reportadorErr.reportarErrores(arraySyntax,arraySemantic); :}
            | error;
 
 ASIGNACIONES ::= ASIGNACIONES ASIGNAR | ASIGNAR;

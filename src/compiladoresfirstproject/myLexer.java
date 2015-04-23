@@ -535,7 +535,7 @@ boolean banderaNewLine = false;
  public void init(){};
 
 Intermedio generadorIntermedio = new Intermedio();
-SintaxOut salidaSintactico = new SintaxOut();
+SyntaxOut salidaSintactico = new SyntaxOut();
 
 Vector TokensOut = new Vector();
 Vector TokensIntermedio = new Vector();

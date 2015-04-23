@@ -270,6 +270,9 @@ public class myParser extends java_cup.runtime.lr_parser {
 
 
 
+ArrayList<String> arraySyntax;
+ArrayList<String> arraySemantic;
+
  protected int error_sync_size () {
         System.out.println(":error_sync_size was called.");
         return 2;}
@@ -278,6 +281,7 @@ public class myParser extends java_cup.runtime.lr_parser {
                 System.out.println("Error sintáctico: "+ cur_token.value);
                 //System.out.println("En la línea: " + Main.s.getLineNumber());
                 VentanaPrincipal.mostrarSalida("Error sintáctico: "+ cur_token.value);
+                arraySyntax.add("Error sintáctico en el token " + cur_token.value);
                 report_error("Syntax Error", null);
 }
 
@@ -289,6 +293,7 @@ public class myParser extends java_cup.runtime.lr_parser {
  public void semantics_error(String cur_token) {
                 System.out.println("Error semantico: La variable  "+ cur_token + "  " + " No se encuentra");
                 VentanaPrincipal.mostrarSalida("Error semantico: La variable  "+ cur_token + "  " + " No se encuentra");
+                arraySemantic.add("Error semantico: La variable: " + cur_token + " no se encuentra");
 }
 
 
@@ -300,6 +305,7 @@ class CUP$myParser$actions {
 
     Hashtable table = new Hashtable();
     TablaSim tablaSim=new TablaSim();
+    Errores reportadorErr = new Errores();
 
   private final myParser parser;
 
@@ -340,7 +346,7 @@ class CUP$myParser$actions {
           case 1: // PROGRAMA ::= LISTAVARIABLES ASIGNACIONES LISTADECLARACIONES 
             {
               Object RESULT =null;
-		/* System.out.println("-----: " + cur_token.value); */ 
+		 reportadorErr.reportarErrores(arraySyntax,arraySemantic); 
               CUP$myParser$result = parser.getSymbolFactory().newSymbol("PROGRAMA",0, ((java_cup.runtime.Symbol)CUP$myParser$stack.elementAt(CUP$myParser$top-2)), ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()), RESULT);
             }
           return CUP$myParser$result;
