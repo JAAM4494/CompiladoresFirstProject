@@ -13,7 +13,7 @@ _otra
 =
 12
 ASIGNAR
-_variable2
+variable2
 =
 8
 MOVER

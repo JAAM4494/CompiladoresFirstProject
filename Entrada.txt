@@ -4,7 +4,7 @@ declarar variable2
 
 Asignar _variable = 23
 Asignar _otra = 12
-Asignar _variable2 = 8
+Asignar variable2 = 8
 
 mover cabeza izquierda
 decir hola

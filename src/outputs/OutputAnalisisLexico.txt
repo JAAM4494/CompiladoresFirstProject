@@ -15,7 +15,7 @@ Token: ID Lexema: _otra
 Token: Eq Lexema: =
 Token: Num Lexema: 12
 Token: Asignar Lexema: Asignar
-Token: ID Lexema: _variable2
+Token: ID Lexema: variable2
 Token: Eq Lexema: =
 Token: Num Lexema: 8
 Token: Mover Lexema: mover
