@@ -42,31 +42,7 @@ public class Intermedio {
         }
     }
 
-    public void writeSymbol(String pSim) {
-        FileWriter fichero = null;
-        PrintWriter pw = null;
-        try {
-            fichero = new FileWriter("src/outputs/OutputAnálisisSemántico.txt", true);
-            pw = new PrintWriter(fichero);
-            pw.println(pSim);
-            //System.out.println("Sim: "+pSim);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                // Nuevamente aprovechamos el finally para 
-                // asegurarnos que se cierra el fichero.
-                if (null != fichero) {
-                    fichero.close();
-                }
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
-    }
-    
-        public void createInterStack(Vector pVector, String pToken, String pLexema) {
+    public void createInterStack(Vector pVector, String pToken, String pLexema) {
 
         if (pToken.equals("ID")) {
             pVector.add(pLexema);
@@ -76,9 +52,7 @@ public class Intermedio {
             }
         }
     }
-        
 
-    
 //    public void createInterStack(Vector pVector, String pToken, String pLexema) {
 //
 //        if (pToken.equals("ID")) {
@@ -89,10 +63,7 @@ public class Intermedio {
 //            }
 //        }
 //    }
-    
-    
     // METODO PERMITE PONER LA EXPRSION EN UNA SOLA LINEA
-    
 //    public void createInterStack(Vector pVector, String pToken, String pLexema) {
 //
 //        if (pToken.equals("OpParenth")) {
@@ -120,12 +91,29 @@ public class Intermedio {
 //            }
 //        }
 //    }
-
     public void debugInterSack(Vector pVector) {
 
         if (AnalizadorMain.canGenerateCode) {
-            for (Object pVector1 : pVector) {
-                writeSymbol(pVector1.toString());
+            FileWriter fichero = null;
+            PrintWriter pw = null;
+            try {
+                fichero = new FileWriter("src/outputs/OutputAnálisisSemántico.txt");
+                pw = new PrintWriter(fichero);
+            //System.out.println("Sim: "+pSim);
+                for (Object pVector1 : pVector) {
+                    pw.println(pVector1.toString());
+                }
+
+            } catch (Exception e) {
+            } finally {
+                try {
+                // Nuevamente aprovechamos el finally para 
+                    // asegurarnos que se cierra el fichero.
+                    if (null != fichero) {
+                        fichero.close();
+                    }
+                } catch (Exception e2) {
+                }
             }
         }
     }

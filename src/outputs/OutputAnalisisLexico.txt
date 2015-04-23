@@ -12,11 +12,11 @@ Token: Num Lexema: 23
 Token: Asignar Lexema: Asignar
 Token: ID Lexema: _otra
 Token: Eq Lexema: =
-Token: Num Lexema: 23
+Token: Num Lexema: 12
 Token: Asignar Lexema: Asignar
 Token: ID Lexema: _variable2
 Token: Eq Lexema: =
-Token: Num Lexema: 23
+Token: Num Lexema: 8
 Token: Mover Lexema: mover
 Token: Cabeza Lexema: cabeza
 Token: Izquierda Lexema: izquierda
