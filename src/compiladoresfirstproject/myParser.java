@@ -270,8 +270,8 @@ public class myParser extends java_cup.runtime.lr_parser {
 
 
 
-ArrayList<String> arraySyntax;
-ArrayList<String> arraySemantic;
+ArrayList<String> arraySyntax = new ArrayList<String>();
+ArrayList<String> arraySemantic = new ArrayList<String>();
 
  protected int error_sync_size () {
         System.out.println(":error_sync_size was called.");

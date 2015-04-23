@@ -34,6 +34,7 @@ public class Errores {
             fichero = new FileWriter("src/outputs/errores.html");
             pw = new PrintWriter(fichero);
             initFile();
+            System.out.println("Tamaño: " + pErrSintactico.size());
             if(pErrSintactico.isEmpty()){
                 pw.println("<div class=\"Errores\">Sintactico");
                 pw.println("<div class=\"Err\">");
