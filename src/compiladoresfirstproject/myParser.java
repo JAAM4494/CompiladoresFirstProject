@@ -280,8 +280,8 @@ ArrayList<String> arraySemantic = new ArrayList<String>();
  public void syntax_error(Symbol cur_token) {
                 System.out.println("Error sintáctico: "+ cur_token.value);
                 //System.out.println("En la línea: " + Main.s.getLineNumber());
-                VentanaPrincipal.mostrarSalida("Error sintáctico: "+ cur_token.value);
-                arraySyntax.add("Error sintáctico en el token " + cur_token.value);
+                VentanaPrincipal.mostrarSalida("Error sintáctico en el token: "+ cur_token.value);
+                arraySyntax.add("Error sintáctico en el token: " + cur_token.value);
                 AnalizadorMain.canGenerateCode = false;
                 report_error("Syntax Error", null);
 }
@@ -291,10 +291,10 @@ ArrayList<String> arraySemantic = new ArrayList<String>();
 //            VentanaPrincipal.mostrarSalida("Error sintáctico ya no se recupera");
 //}
 
- public void semantics_error(String cur_token) {
-                System.out.println("Error semantico: La variable  "+ cur_token + "  " + " No se encuentra");
-                VentanaPrincipal.mostrarSalida("Error semantico: La variable  "+ cur_token + "  " + " No se encuentra");
-                arraySemantic.add("Error semantico: La variable: " + cur_token + " no se encuentra");
+ public void semanticError(String pCurToken,String pMsg) {
+                System.out.println("Error semantico sobre el token: " + pCurToken + " " + pMsg);
+                VentanaPrincipal.mostrarSalida("Error semantico sobre el token: " + pCurToken + " " + pMsg);
+                arraySemantic.add("Error semantico sobre el token: " + pCurToken + " " + pMsg);
                 AnalizadorMain.canGenerateCode = false;
 }
 
@@ -397,6 +397,7 @@ class CUP$myParser$actions {
                             }
                             else{
                                 System.out.println("VARIABLE NO DEFINIDA");
+                                parser.semanticError(id.toString(),"variable sin definir");
                             }
               CUP$myParser$result = parser.getSymbolFactory().newSymbol("ASIGNAR",27, ((java_cup.runtime.Symbol)CUP$myParser$stack.elementAt(CUP$myParser$top-3)), ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()), RESULT);
             }
@@ -881,6 +882,7 @@ class CUP$myParser$actions {
 		Object expr = (Object)((java_cup.runtime.Symbol) CUP$myParser$stack.peek()).value;
 		 if(!table.containsKey(id.toString())){
                                                     System.out.println("Variable no declarada");
+                                                    parser.semanticError(id.toString(),"variable sin declarar");
                                                } 
               CUP$myParser$result = parser.getSymbolFactory().newSymbol("EXPRESION",19, ((java_cup.runtime.Symbol)CUP$myParser$stack.elementAt(CUP$myParser$top-2)), ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()), RESULT);
             }
@@ -1042,7 +1044,8 @@ class CUP$myParser$actions {
 		int mright = ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()).right;
 		Object m = (Object)((java_cup.runtime.Symbol) CUP$myParser$stack.peek()).value;
 		if("/".equals(d.toString())){
-                                                                 if((Integer)m==0){System.out.println("division entre cero");RESULT= new Integer(0);}
+                                                                 if((Integer)m==0){System.out.println("division entre cero");
+                                                                    parser.semanticError(m.toString(),"division entre cero"); RESULT= new Integer(0);}
                                                                  else{RESULT=new Integer(((Integer)n).intValue()/((Integer)m).intValue());}}
                                                                  else{RESULT= new Integer(((Integer)n).intValue()*((Integer)m).intValue());}
               CUP$myParser$result = parser.getSymbolFactory().newSymbol("EXPRESIONMULT",17, ((java_cup.runtime.Symbol)CUP$myParser$stack.elementAt(CUP$myParser$top-2)), ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()), RESULT);
@@ -1087,7 +1090,7 @@ class CUP$myParser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$myParser$stack.peek()).value;
 		 Integer value = (Integer) table.get(d);
-            if(value==null){parser.semantics_error(d.toString());
+            if(value==null){ parser.semanticError(d.toString(),"Null_Exception");
                             value = new Integer (0);}
             RESULT= value;
               CUP$myParser$result = parser.getSymbolFactory().newSymbol("TERMINO",18, ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()), RESULT);
