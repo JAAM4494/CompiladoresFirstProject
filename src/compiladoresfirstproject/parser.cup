@@ -90,7 +90,14 @@ PROGRAMA ::= LISTAVARIABLES ASIGNACIONES LISTADECLARACIONES {:/* System.out.prin
 
 ASIGNACIONES ::= ASIGNACIONES ASIGNAR | ASIGNAR;
 
-ASIGNAR ::= Asignar ID:id Eq Num:n {: System.out.println(id + " = " + n); :};
+ASIGNAR ::= Asignar ID:id Eq Num:n {: RESULT=id;
+                            if(table.containsKey(id.toString())){
+                                table.replace(id.toString(),new Integer(n));
+                                tablaSim.writeSymbol(id.toString(), new Integer(n));
+                            }
+                            else{
+                                System.out.println("VARIABLE NO DEFINIDA");
+                            }:};
 
 LISTAVARIABLES ::= LISTAVARIABLES DECLARACIONVARIABLE:d 
                  | DECLARACIONVARIABLE:d 
@@ -151,13 +158,9 @@ OPERADORSUMA ::= Suma:d  {: RESULT= d.toString(); :}
 OPERADORMULT ::= Multi:d  {: RESULT= d.toString(); :}
                | Divi:d   {: RESULT= d.toString(); :};
 
-EXPRESION ::= ID:id Eq EXPRESIONSUMA:expr {: if(table.containsKey(id.toString())){
-                                               table.replace(id.toString(), new Integer(((Integer)expr).intValue()));
-                                               tablaSim.writeSymbol(id.toString(), new Integer(((Integer)expr).intValue()));
-                                               }
-                                           else{
-                                            System.out.println("Variable no declarada");
-                                            } :}  
+EXPRESION ::= ID:id Eq EXPRESIONSUMA:expr {: if(!table.containsKey(id.toString())){
+                                                    System.out.println("Variable no declarada");
+                                               } :}  
             | EXPRESIONSUMA OPERADORRELACIONAL EXPRESIONSUMA
             | EXPRESIONSUMA:d {: RESULT= d; :}
             | error;

@@ -382,7 +382,14 @@ class CUP$myParser$actions {
 		int nleft = ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()).right;
 		String n = (String)((java_cup.runtime.Symbol) CUP$myParser$stack.peek()).value;
-		 System.out.println(id + " = " + n); 
+		 RESULT=id;
+                            if(table.containsKey(id.toString())){
+                                table.replace(id.toString(),new Integer(n));
+                                tablaSim.writeSymbol(id.toString(), new Integer(n));
+                            }
+                            else{
+                                System.out.println("VARIABLE NO DEFINIDA");
+                            }
               CUP$myParser$result = parser.getSymbolFactory().newSymbol("ASIGNAR",27, ((java_cup.runtime.Symbol)CUP$myParser$stack.elementAt(CUP$myParser$top-3)), ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()), RESULT);
             }
           return CUP$myParser$result;
@@ -864,13 +871,9 @@ class CUP$myParser$actions {
 		int exprleft = ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()).left;
 		int exprright = ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()).right;
 		Object expr = (Object)((java_cup.runtime.Symbol) CUP$myParser$stack.peek()).value;
-		 if(table.containsKey(id.toString())){
-                                               table.replace(id.toString(), new Integer(((Integer)expr).intValue()));
-                                               tablaSim.writeSymbol(id.toString(), new Integer(((Integer)expr).intValue()));
-                                               }
-                                           else{
-                                            System.out.println("Variable no declarada");
-                                            } 
+		 if(!table.containsKey(id.toString())){
+                                                    System.out.println("Variable no declarada");
+                                               } 
               CUP$myParser$result = parser.getSymbolFactory().newSymbol("EXPRESION",19, ((java_cup.runtime.Symbol)CUP$myParser$stack.elementAt(CUP$myParser$top-2)), ((java_cup.runtime.Symbol)CUP$myParser$stack.peek()), RESULT);
             }
           return CUP$myParser$result;

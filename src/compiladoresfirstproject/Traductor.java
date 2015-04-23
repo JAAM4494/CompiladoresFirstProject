@@ -17,7 +17,7 @@ public class Traductor{
     public Traductor() { 
         try
         {
-            fichero = new FileWriter("robot.ino");
+            fichero = new FileWriter("src/outputs/robot/robot.ino");
             pw = new PrintWriter(fichero);
             initFile(); 
             setupArduino();
