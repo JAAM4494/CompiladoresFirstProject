@@ -2,37 +2,8 @@
  declarar _variable
  declarar _otra
  declarar variable2
- Asignar _variable = 23
- Asignar _otra = 12
- si ( true ) {
- decir hola
- decir lindos
+ Asignar _otra = 6
+ Asignar variable2 = 20
+ si ( _otra > 18989 ) entonces {
+ mover ojos inclinado
  }
- mover cabeza izquierda derecha
- decir hola
- si true entonces {
- mover cabeza izquierda
- decir adios
- } sino {
- mover cabeza derecha
- decir hola
- }
- mientras true ) haga {
- decir hola
- decir lindos
- }
- haga {
- decir lindos
- mover cabeza derecha
- } mientras ( 5 + 6 )
- haga {
- mover ojos abajo
- mover boca arriba
- } mientras ( miVariable = 5 + 6 )
- si ( _otra = 3 + 8 ) entonces {
- mover ojos derecha }
- haga {
- mover boca abajo
- mover boca arriba
- } mientras ( variable2 = 5 / 0 )
- decir hola

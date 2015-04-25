@@ -192,7 +192,7 @@ FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
 <YYINITIAL>"arriba"|"ARRIBA"                   {echo(sym.Arriba); return new Symbol(sym.Arriba,         yyline, yychar, yytext());}
 <YYINITIAL>"abajo"|"ABAJO"                     {echo(sym.Abajo); return new Symbol(sym.Abajo,          yyline, yychar, yytext());}
 
-<YYINITIAL>{DIGITO}+ {ESPACIO_EN_BLANCO}*      {echo(sym.Num); return new Symbol(sym.Num, yyline, yychar, yytext()); }
+<YYINITIAL>{DIGITO}+                           {echo(sym.Num); return new Symbol(sym.Num, yyline, yychar, yytext()); }
 
 <YYINITIAL>{ID}                                {echo(sym.ID); return new Symbol(sym.ID, yyline, yychar, yytext()); }
 
