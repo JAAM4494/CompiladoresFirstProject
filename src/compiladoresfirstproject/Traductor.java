@@ -33,7 +33,7 @@ public class Traductor{
         }
         
         try {
-            sc = new Scanner(new File("intermedio.int"));
+            sc = new Scanner(new File("src/outputs/OutputAnalisisSemantico.txt"));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Traductor.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -82,16 +82,17 @@ public class Traductor{
     private void setupArduino() {
         pw.println("void setup(){");
         pw.println("Serial.begin(9600);");
-        pw.println("ojoDerX.attach(8);");
+        pw.println("ojoDerX.attach(7);");
         pw.println("ojoDerX.write(90);");
-        pw.println("ojoDerY.attach(11);");
+        pw.println("ojoDerY.attach(2);");
         pw.println("ojoDerY.write(60);");
-        pw.println("ojoIzqX.attach(9);");
+        pw.println("ojoIzqX.attach(3);");
         pw.println("ojoIzqX.write(90);"); 
-        pw.println("ojoIzqY.attach(4);");
+        pw.println("ojoIzqY.attach(6);");
         pw.println("ojoIzqY.write(90);");
-        pw.println("boca.write(110);");
-        pw.println("cabeza.attach(10);");
+        pw.println("boca.attach(5);");
+        pw.println("boca.write(105);");
+        pw.println("cabeza.attach(4);");
         pw.println("cabeza.write(90);}");
         pw.println("void loop(){");
         
@@ -408,7 +409,7 @@ public class Traductor{
             fichero = new FileWriter("robot.ino",true);
             pw = new PrintWriter(fichero);
             if(dir.equals("ARRIBA")){
-                pw.println("boca.write(110);");   
+                pw.println("boca.write(105);");   
                 pw.println("delay(20);");
             }
             if(dir.equals("ABAJO")){

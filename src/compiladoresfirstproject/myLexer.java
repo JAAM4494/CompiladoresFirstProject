@@ -41,24 +41,21 @@ public class myLexer implements java_cup.runtime.Scanner {
   /** 
    * Translates characters to character classes
    */
-  private static final char [] ZZ_CMAP = {
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  7,  4, 45,  7,  5,  0,  0, 
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-     7, 35,  0,  0,  0,  0,  0,  8, 40, 41, 31, 26,  0, 27,  0, 32, 
-     2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  0,  0, 24, 28, 33,  0, 
-     0,  9, 38, 22, 21, 20, 34, 14, 25, 13, 37,  1, 23, 17, 15, 18, 
-    36, 44, 16, 11, 29, 30, 19,  1,  1,  1, 39,  0,  0,  0,  0,  3, 
-     0,  9, 38, 22, 21, 20, 34, 14, 25, 13, 37,  1, 23, 17, 15, 18, 
-    36, 44, 16, 11, 29, 30, 19,  1,  1,  1, 39, 42,  6, 43,  0,  0, 
-     0,  0,  0,  0,  0, 45,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-  };
+  private static final String ZZ_CMAP_PACKED = 
+    "\11\0\1\7\1\4\1\55\1\7\1\5\22\0\1\7\1\43\5\0"+
+    "\1\10\1\50\1\51\1\37\1\32\1\0\1\33\1\0\1\40\12\2"+
+    "\2\0\1\30\1\34\1\41\2\0\1\11\1\46\1\26\1\25\1\24"+
+    "\1\42\1\16\1\31\1\15\1\45\1\1\1\27\1\21\1\17\1\22"+
+    "\1\44\1\54\1\20\1\13\1\35\1\36\1\23\3\1\1\47\4\0"+
+    "\1\3\1\0\1\11\1\46\1\26\1\25\1\24\1\42\1\16\1\31"+
+    "\1\15\1\45\1\1\1\27\1\21\1\17\1\22\1\44\1\54\1\20"+
+    "\1\13\1\35\1\36\1\23\3\1\1\47\1\52\1\6\1\53\7\0"+
+    "\1\55\252\0\2\14\115\0\1\12\u1ea8\0\1\55\1\55\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
+
+  /** 
+   * Translates characters to character classes
+   */
+  private static final char [] ZZ_CMAP = zzUnpackCMap(ZZ_CMAP_PACKED);
 
   /** 
    * Translates DFA states to action switch labels.
@@ -619,6 +616,24 @@ private static String returnTokenName(int pIntToken) throws IllegalArgumentExcep
   }
 
 
+  /** 
+   * Unpacks the compressed character translation table.
+   *
+   * @param packed   the packed character translation table
+   * @return         the unpacked character translation table
+   */
+  private static char [] zzUnpackCMap(String packed) {
+    char [] map = new char[0x110000];
+    int i = 0;  /* index in packed string  */
+    int j = 0;  /* index in unpacked array */
+    while (i < 210) {
+      int  count = packed.charAt(i++);
+      char value = packed.charAt(i++);
+      do map[j++] = value; while (--count > 0);
+    }
+    return map;
+  }
+
 
   /**
    * Refills the input buffer.
@@ -988,9 +1003,9 @@ generadorIntermedio.debugInterSack(TokensIntermedio);
             }
           case 47: break;
           case 2: 
-            { TokensOut.addElement("Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + "el análisis continúa");
-VentanaPrincipal.mostrarSalida("Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + "el análisis continúa");
-System.out.println("Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + "el análisis continúa");
+            { TokensOut.addElement("#Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + ", el analisis continua");
+VentanaPrincipal.mostrarSalida("#Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + ", el analisis continua");
+System.out.println("#Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + ", el analisis continua");
             }
           case 48: break;
           case 3: 

@@ -23,11 +23,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     String retornoArchivo;
     
     Boolean bandera;
+    
+    AnalizadorMain nuevoAnalizador;
 
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
+        this.nuevoAnalizador = new AnalizadorMain();
         this.bandera = false;
         initComponents();
         txtCodigo.setEditable(false);
@@ -54,7 +57,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        generarBnt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,9 +104,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/generar.png"))); // NOI18N
-        jButton2.setText("Generar Código");
+        generarBnt.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        generarBnt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/generar.png"))); // NOI18N
+        generarBnt.setText("Generar Código");
+        generarBnt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generarBntActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,7 +125,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(procesarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCargar, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(generarBnt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -143,7 +151,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(procesarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(generarBnt, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -173,11 +181,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No Conseguimos Cargar El Archivo");
         }
     }//GEN-LAST:event_btnCargarActionPerformed
-
+     
+     public void rotularError() {
+         JOptionPane.showMessageDialog(this, "Errores detectados, revisar módulo de errores");
+     }
+    
     private void procesarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesarBtnActionPerformed
         
         if(bandera == true) {
-            AnalizadorMain nuevoAnalizador = new AnalizadorMain();
             nuevoAnalizador.procesarEntrada(pathDeArchivo.toString());
             bandera = false;
         } else {
@@ -190,6 +201,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         limpiarTextView();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void generarBntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarBntActionPerformed
+        // TODO add your handling code here:
+        nuevoAnalizador.GenerarCodigo();
+    }//GEN-LAST:event_generarBntActionPerformed
+
+    
     /**
      */
     //</editor-fold>
@@ -208,12 +225,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         salidaText.setText("");
         txtCodigo.setText("");
     }
+    
+   
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCargar;
+    private javax.swing.JButton generarBnt;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -83,7 +83,7 @@ public class Intermedio {
             Boolean putCloseKey = false;
 
             try {
-                fichero = new FileWriter("src/outputs/OutputAnálisisSemántico.txt");
+                fichero = new FileWriter("src/outputs/OutputAnalisisSemantico.txt");
                 pw = new PrintWriter(fichero);
 
                 for (int i = 0; i < pVector.size(); i++) {
@@ -136,6 +136,7 @@ public class Intermedio {
             }
         } else {
             // Reportar que hay errores y no se puede generar el intermedio
+            AnalizadorMain.canGenerateCode = false;
         }
     }
 }

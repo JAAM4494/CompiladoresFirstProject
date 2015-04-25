@@ -28,7 +28,6 @@ boolean banderaNewLine = false;
 %cup
 %line
 %full
-%unicode
 %ignorecase
 %char
 
@@ -39,7 +38,7 @@ boolean banderaNewLine = false;
  public void init(){};
 
 Intermedio generadorIntermedio = new Intermedio();
-SintaxOut salidaSintactico = new SintaxOut();
+SyntaxOut salidaSintactico = new SyntaxOut();
 
 Vector TokensOut = new Vector();
 Vector TokensIntermedio = new Vector();
@@ -197,6 +196,6 @@ FRASE=("_"|{ALPHA_NUMERIC})("_"|{ALPHA_NUMERIC})*
 
 <YYINITIAL>{ID}                                {echo(sym.ID); return new Symbol(sym.ID, yyline, yychar, yytext()); }
 
-. {TokensOut.addElement("Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + "el análisis continúa");
-VentanaPrincipal.mostrarSalida("Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + "el análisis continúa");
-System.out.println("Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + "el análisis continúa");}
+. {TokensOut.addElement("#Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + ", el analisis continua");
+VentanaPrincipal.mostrarSalida("#Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + ", el analisis continua");
+System.out.println("#Caracter desconocido en la fila: " + yyline + ", columna: " + yychar + ", el analisis continua");}

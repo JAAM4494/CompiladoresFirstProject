@@ -4,21 +4,20 @@
  declarar variable2
  Asignar _variable = 23
  Asignar _otra = 12
- Asignar variable2 = 8
- mover cabeza izquierda
+ si ( true ) {
  decir hola
- si ( true ) entonces {
- mover boca abajo
- mover ojos derecha
+ decir lindos
  }
- si ( true ) entonces {
+ mover cabeza izquierda derecha
+ decir hola
+ si true entonces {
  mover cabeza izquierda
  decir adios
  } sino {
  mover cabeza derecha
  decir hola
  }
- mientras ( true ) haga {
+ mientras true ) haga {
  decir hola
  decir lindos
  }
@@ -29,11 +28,11 @@
  haga {
  mover ojos abajo
  mover boca arriba
- } mientras ( _variable = 5 + 6 )
+ } mientras ( miVariable = 5 + 6 )
  si ( _otra = 3 + 8 ) entonces {
  mover ojos derecha }
  haga {
  mover boca abajo
  mover boca arriba
- } mientras ( variable2 = 5 - 6 )
+ } mientras ( variable2 = 5 / 0 )
  decir hola

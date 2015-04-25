@@ -16,31 +16,39 @@ import java_cup.runtime.Symbol;
  * @author JAAM
  */
 public class AnalizadorMain {
-    
+
     public static boolean canGenerateCode = true;
-    
+
     public void procesarEntrada(String pPathEntrada) {
-        
+
         try {
-            
+
             canGenerateCode = true;
             myLexer AnalizadorLexico = new myLexer(new FileReader(pPathEntrada));
             myParser AnalizadorSintactico = new myParser(AnalizadorLexico);
-            VentanaPrincipal.mostrarSalida("***********  RESUMEN ANÁLISIS LÉXICO  ***********");
+            VentanaPrincipal.mostrarSalida("***********  RESUMEN PROCESAMIENTO ***********");
             AnalizadorSintactico.parse();
-                 //Symbol currToken;
-       
-            //   do {
-                 // currToken = AnalizadorLexico.next_token();
-                //} while (currToken.sym != sym.EOF);
 
+                 //Symbol currToken;
+            //   do {
+            // currToken = AnalizadorLexico.next_token();
+            //} while (currToken.sym != sym.EOF);
             System.out.println("Fin de escaneo..!!");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
+    public void GenerarCodigo() {
+        if (canGenerateCode == true) {
+            Traductor newTrans = new Traductor();
+        } else {
+            //reportar revisar modulo errores
+            Main.mainWindow.rotularError();
+        }
+    }
+
 }

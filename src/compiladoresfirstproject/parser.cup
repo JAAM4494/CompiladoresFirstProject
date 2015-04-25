@@ -19,27 +19,26 @@ parser code {:
 ArrayList<String> arraySyntax = new ArrayList<String>();
 ArrayList<String> arraySemantic = new ArrayList<String>();
 
- protected int error_sync_size () {
-        System.out.println(":error_sync_size was called.");
-        return 2;}
+// protected int error_sync_size () {
+//        System.out.println(":error_sync_size was called.");
+//        return 4;}
 
  public void syntax_error(Symbol cur_token) {
-                System.out.println("Error sintáctico: "+ cur_token.value);
-                //System.out.println("En la línea: " + Main.s.getLineNumber());
-                VentanaPrincipal.mostrarSalida("Error sintáctico en el token: "+ cur_token.value);
-                arraySyntax.add("Error sintáctico en el token: " + cur_token.value);
+                System.out.println("#Error sintactico con el token: " + cur_token.value);
+                VentanaPrincipal.mostrarSalida("#Error sintactico con el token: " + cur_token.value);
+                arraySyntax.add("Error sintactico con el token: " + cur_token.value);
                 AnalizadorMain.canGenerateCode = false;
                 report_error("Syntax Error", null);
 }
 
-//public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
-//            System.out.println("Error sintáctico ya no se recupera");
-//            VentanaPrincipal.mostrarSalida("Error sintáctico ya no se recupera");
-//}
+public void unrecovered_syntax_error(Symbol cur_token) {
+            System.out.println("#Error sintactico ya no se recupera");
+            VentanaPrincipal.mostrarSalida("#Error sintactico ya no se recupera");
+}
 
  public void semanticError(String pCurToken,String pMsg) {
-                System.out.println("Error semantico sobre el token: " + pCurToken + " " + pMsg);
-                VentanaPrincipal.mostrarSalida("Error semantico sobre el token: " + pCurToken + " " + pMsg);
+                System.out.println("#Error semantico sobre el token: " + pCurToken + " " + pMsg);
+                VentanaPrincipal.mostrarSalida("#Error semantico sobre el token: " + pCurToken + " " + pMsg);
                 arraySemantic.add("Error semantico sobre el token: " + pCurToken + " " + pMsg);
                 AnalizadorMain.canGenerateCode = false;
 }
@@ -94,14 +93,10 @@ precedence left Divi, Multi;
 start with PROGRAMA;
 
 PROGRAMA ::= LISTAVARIABLES ASIGNACIONES LISTADECLARACIONES {: reportadorErr.reportarErrores(arraySyntax,arraySemantic); :}
-           | error;
+           ;
 
 ASIGNACIONES ::= ASIGNACIONES ASIGNAR | ASIGNAR 
-                | error Mover
-                | error Decir
-                | error Si
-                | error Haga
-                | error Mientras;
+                | error;
 
 ASIGNAR ::= Asignar ID:id Eq Num:n {: RESULT=id;
                             if(table.containsKey(id.toString())){
@@ -109,30 +104,29 @@ ASIGNAR ::= Asignar ID:id Eq Num:n {: RESULT=id;
                                 tablaSim.writeSymbol(id.toString(), new Integer(n));
                             }
                             else{
-                                System.out.println("VARIABLE NO DEFINIDA");
-                                parser.semanticError(id.toString(),"variable sin definir");
-                            }:};
+                                System.out.println("VARIABLE NO DECLARADA");
+                                parser.semanticError(id.toString(),"variable sin declarar");
+                            }:}
+                            ;
 
 LISTAVARIABLES ::= LISTAVARIABLES DECLARACIONVARIABLE:d 
                  | DECLARACIONVARIABLE:d 
-                 | error Asignar;
+                 | error;
 
 DECLARACIONVARIABLE ::= Declarar ID:id NewLine {:
                         RESULT= id;
-                        table.put(id.toString(),0);:};
+                        table.put(id.toString(),-1);:}
+                        ;
 
 LISTADECLARACIONES ::=  LISTADECLARACIONES DECLARACION
                       | DECLARACION
-                      | error Mover
-                      | error Decir
-                      | error Si
-                      | error Haga
-                      | error Mientras;
+                      | error;
 
 DECLARACION ::=  MOVER:d {: RESULT= d; :}
                | VOZ:d {: RESULT= d; :}
                | DECLARACIONSELECCION:d {: RESULT= d; :}
-               | DECLARACIONITERACION:d {: RESULT= d; :};
+               | DECLARACIONITERACION:d {: RESULT= d; :}
+               ;
 
 MOVER ::=  Mover TIPO:d NewLine {: RESULT= d; :};
 
@@ -143,12 +137,12 @@ PALABRA ::= Hola:d    {: RESULT= d.toString(); :}
           | Lindos:d  {: RESULT= d.toString(); :}  
           | Pura:d    {: RESULT= d.toString(); :}  	
           | Vida:d    {: RESULT= d.toString(); :}
-          | error;
+          ;
 
 TIPO ::= OJOS:d    {: RESULT= d.toString(); :} 
        | CABEZA:d  {: RESULT= d.toString(); :}
        | BOCA:d    {: RESULT= d.toString(); :}
-       | error;
+       ;
 
 OJOS ::= Ojos DIRECCIONES:d {: RESULT= d.toString(); :};
 
@@ -160,15 +154,15 @@ DIRECCIONES ::= Izquierda:d {: RESULT= d.toString(); :}
               | Arriba:d    {: RESULT= d.toString(); :}  
               | Derecha:d   {: RESULT= d.toString(); :}  
               | Abajo:d     {: RESULT= d.toString(); :}
-              | error;
+              ;
 
 DIRECCIONHEAD ::= Izquierda:d {: RESULT= d.toString(); :} 
                 | Derecha:d   {: RESULT= d.toString(); :}
-                | error;
+                ;
 
 DIRECCIONBOCA ::= Arriba:d {: RESULT= d.toString(); :}
                 | Abajo:d  {: RESULT= d.toString(); :}
-                | error;
+                ;
 
 OPERADORSUMA ::= Suma:d  {: RESULT= d.toString(); :}
                | Resta:d {: RESULT= d.toString(); :};
@@ -179,10 +173,17 @@ OPERADORMULT ::= Multi:d  {: RESULT= d.toString(); :}
 EXPRESION ::= ID:id Eq EXPRESIONSUMA:expr {: if(!table.containsKey(id.toString())){
                                                     System.out.println("Variable no declarada");
                                                     parser.semanticError(id.toString(),"variable sin declarar");
-                                               } :}  
+                                               } else {
+                                                    if((Integer)table.get(id.toString())==-1){
+                                                    System.out.println("Null_Exception");
+                                                    parser.semanticError(id.toString(),"Null_Exception");
+                                                }
+                                                }
+                                               
+ :}  
             | EXPRESIONSUMA OPERADORRELACIONAL EXPRESIONSUMA
             | EXPRESIONSUMA:d {: RESULT= d; :}
-            | error;
+            ;
 
 OPERADORRELACIONAL ::= Menor:d {: RESULT= d.toString(); :}  
                     |  Mayor:d {: RESULT= d.toString(); :}
@@ -190,7 +191,7 @@ OPERADORRELACIONAL ::= Menor:d {: RESULT= d.toString(); :}
                     |  MayorEq:d {: RESULT= d.toString(); :}
                     |  EqEq:d {: RESULT= d.toString(); :}
                     |  Diferente:d {: RESULT= d.toString(); :}
-                    |  error;
+                    ;
 
 EXPRESIONSUMA ::= EXPRESIONSUMA:n OPERADORSUMA:d TERMINO:m {: if("+".equals(d.toString())){RESULT= new Integer(((Integer)n).intValue()+((Integer)m).intValue());}
                                                               else{RESULT= new Integer(((Integer)n).intValue()- ((Integer)m).intValue());} :} 

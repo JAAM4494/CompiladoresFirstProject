@@ -8,6 +8,8 @@ import java.util.*;
  * @author JAAM 
  */
 public class Main {
+    
+    public static VentanaPrincipal mainWindow;
 
     /*
      * @param args the command line arguments
@@ -16,9 +18,10 @@ public class Main {
      */
     public static void main(String[] args) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
             
-            // generarScanner();
-             new VentanaPrincipal().run();
-            // generarParser();    
+          //   generarScanner();
+       mainWindow = new VentanaPrincipal();
+        mainWindow.run();
+       // generarParser();    
         
     }
 
