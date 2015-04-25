@@ -1,14 +1,13 @@
 package compiladoresfirstproject;
 
 import java.io.File;
-import java.util.*;
 
 /**
  *
- * @author JAAM 
+ * @author JAAM
  */
 public class Main {
-    
+
     public static VentanaPrincipal mainWindow;
 
     /*
@@ -17,12 +16,12 @@ public class Main {
      * @throws java.lang.IllegalAccessException
      */
     public static void main(String[] args) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-            
-          //   generarScanner();
-       mainWindow = new VentanaPrincipal();
+
+        // generarScanner();
+        mainWindow = new VentanaPrincipal();
         mainWindow.run();
        // generarParser();    
-        
+
     }
 
     // Metodo que genera el analizador lexico, usando jFlex

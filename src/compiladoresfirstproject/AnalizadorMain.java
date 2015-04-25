@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java_cup.runtime.Symbol;
 
 /**
  *
@@ -19,17 +18,16 @@ public class AnalizadorMain {
 
     public static boolean canGenerateCode = true;
 
+    // Metodo principal del compilador, se encarga del procesamiento de la entrada
     public void procesarEntrada(String pPathEntrada) {
 
         try {
-
             canGenerateCode = true;
             myLexer AnalizadorLexico = new myLexer(new FileReader(pPathEntrada));
             myParser AnalizadorSintactico = new myParser(AnalizadorLexico);
             VentanaPrincipal.mostrarSalida("***********  RESUMEN PROCESAMIENTO ***********");
             AnalizadorSintactico.parse();
-
-                 //Symbol currToken;
+            //Symbol currToken;
             //   do {
             // currToken = AnalizadorLexico.next_token();
             //} while (currToken.sym != sym.EOF);
@@ -39,9 +37,9 @@ public class AnalizadorMain {
         } catch (Exception ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
+    // Metodo encargado de generar el código final .ino
     public void GenerarCodigo() {
         if (canGenerateCode == true) {
             Traductor newTrans = new Traductor();
@@ -50,5 +48,4 @@ public class AnalizadorMain {
             Main.mainWindow.rotularError();
         }
     }
-
 }

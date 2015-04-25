@@ -27,6 +27,7 @@ public class SyntaxOut {
         String Lexema = "";
     }
 
+    // Metodo encargado de escribir la lista de la salida del analisis sintactico
     public void writeSintaxStack(String pToken, String pLexema) {
 
         colectObject temp1 = new colectObject();
@@ -36,6 +37,7 @@ public class SyntaxOut {
         datosSalida.add(temp1);
     }
 
+    // Metodo encargado de escribir la salida del analisis sintactico
     public void writeSintaxOut() {
         FileWriter fichero = null;
         PrintWriter pw = null;
@@ -51,23 +53,23 @@ public class SyntaxOut {
             for (int i = 0; i < datosSalida.size(); i++) {
                 if (datosSalida.get(i).Token.equals("Entonces") | datosSalida.get(i).Token.equals("Haga")
                         | datosSalida.get(i).Token.equals("Sino")) {
-                    
+
                     int tmp = i;
-                    if(datosSalida.get(tmp + 1).Token.equals("OpKey")) {
-                        finalOut = finalOut + " " + datosSalida.get(i).Lexema ;
+                    if (datosSalida.get(tmp + 1).Token.equals("OpKey")) {
+                        finalOut = finalOut + " " + datosSalida.get(i).Lexema;
                     } else {
                         finalOut = finalOut + " " + datosSalida.get(i).Lexema + " {";
                         writeExtra = true;
                     }
-                    
+
                 } else {
-                    if( (datosSalida.get(i).Token.equals("Mover") || datosSalida.get(i).Token.equals("Decir")) 
+                    if ((datosSalida.get(i).Token.equals("Mover") || datosSalida.get(i).Token.equals("Decir"))
                             && writeExtra) {
-                            putCloseKey = true;
-                            writeExtra = false;
-                        }
+                        putCloseKey = true;
+                        writeExtra = false;
+                    }
                     if ((datosSalida.get(i)).Token.equals("NewLine")) {
-                        
+
                         if (putCloseKey) {
                             finalOut = finalOut + " }";
                             putCloseKey = false;
@@ -93,5 +95,4 @@ public class SyntaxOut {
             }
         }
     }
-
 }

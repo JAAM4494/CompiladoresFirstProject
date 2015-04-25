@@ -104,7 +104,7 @@ public class Traductor{
         PrintWriter pw = null;
             try
         {
-            fichero = new FileWriter("robot.ino",true);
+            fichero = new FileWriter("src/outputs/robot/robot.ino",true);
             pw = new PrintWriter(fichero);
             pw.println("int "+var+";");
             pw.close();
@@ -127,7 +127,7 @@ public class Traductor{
         PrintWriter pw = null;
             try
         {
-            fichero = new FileWriter("robot.ino",true);
+            fichero = new FileWriter("src/outputs/robot/robot.ino",true);
             pw = new PrintWriter(fichero);
             
                 pw.print("if"+con);
@@ -157,7 +157,7 @@ public class Traductor{
                     break;                
            }
             }
-            fichero = new FileWriter("robot.ino",true);
+            fichero = new FileWriter("src/outputs/robot/robot.ino",true);
             PrintWriter pw1 = new PrintWriter(fichero);
             pw1.println("}");
             pw1.close();           
@@ -188,7 +188,7 @@ public class Traductor{
         PrintWriter pw = null;
             try
         {
-            fichero = new FileWriter("robot.ino",true);
+            fichero = new FileWriter("src/outputs/robot/robot.ino",true);
             pw = new PrintWriter(fichero);
             pw.println("do");
             String line=sc.nextLine();
@@ -210,7 +210,7 @@ public class Traductor{
                 }
            
             }
-            fichero = new FileWriter("robot.ino",true);
+            fichero = new FileWriter("src/outputs/robot/robot.ino",true);
             PrintWriter pw1 = new PrintWriter(fichero);
             pw1.println("}");           
             line=sc.nextLine();
@@ -248,7 +248,7 @@ public class Traductor{
         PrintWriter pw = null;
             try
         {
-            fichero = new FileWriter("robot.ino",true);
+            fichero = new FileWriter("src/outputs/robot/robot.ino",true);
             pw = new PrintWriter(fichero);
             pw.print("while"+con);
                 while(!")".equals(con)){
@@ -279,7 +279,7 @@ public class Traductor{
                         }
                   }
            }
-            fichero = new FileWriter("robot.ino",true);
+            fichero = new FileWriter("src/outputs/robot/robot.ino",true);
             PrintWriter pw1 = new PrintWriter(fichero);
             pw1.println("}");
             pw1.close();           
@@ -303,7 +303,7 @@ public class Traductor{
         PrintWriter pw = null;
             try
         {
-            fichero = new FileWriter("robot.ino",true);
+            fichero = new FileWriter("src/outputs/robot/robot.ino",true);
             pw = new PrintWriter(fichero);
             char msg=palabra.charAt(0);
             
@@ -328,7 +328,7 @@ public class Traductor{
         PrintWriter pw = null;
             try
         {
-            fichero = new FileWriter("robot.ino",true);
+            fichero = new FileWriter("src/outputs/robot/robot.ino",true);
             pw = new PrintWriter(fichero);
             if(dir.equals("IZQUIERDA")){
                 pw.println("ojoIzqX.write(175);");
@@ -377,7 +377,7 @@ public class Traductor{
         PrintWriter pw = null;
             try
         {
-            fichero = new FileWriter("robot.ino",true);
+            fichero = new FileWriter("src/outputs/robot/robot.ino",true);
             pw = new PrintWriter(fichero);
             if(dir.equals("IZQUIERDA")){
                 pw.println("cabeza.write(130);");   
@@ -406,7 +406,7 @@ public class Traductor{
         PrintWriter pw = null;
             try
         {
-            fichero = new FileWriter("robot.ino",true);
+            fichero = new FileWriter("src/outputs/robot/robot.ino",true);
             pw = new PrintWriter(fichero);
             if(dir.equals("ARRIBA")){
                 pw.println("boca.write(105);");   
@@ -434,7 +434,7 @@ public class Traductor{
         PrintWriter pw = null;
             try
         {
-            fichero = new FileWriter("robot.ino",true);
+            fichero = new FileWriter("src/outputs/robot/robot.ino",true);
             pw = new PrintWriter(fichero);
             pw.println("}");
             pw.close();
@@ -456,7 +456,7 @@ public class Traductor{
         PrintWriter pw = null;
             try
         {
-            fichero = new FileWriter("robot.ino",true);
+            fichero = new FileWriter("src/outputs/robot/robot.ino",true);
             pw = new PrintWriter(fichero);
             
             pw.println("else{");
@@ -476,7 +476,7 @@ public class Traductor{
                     break;                
            }
             }
-            fichero = new FileWriter("robot.ino",true);
+            fichero = new FileWriter("src/outputs/robot/robot.ino",true);
             PrintWriter pw1 = new PrintWriter(fichero);
             pw1.println("}");
             pw1.close();           

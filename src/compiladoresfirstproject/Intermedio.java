@@ -25,6 +25,7 @@ public class Intermedio {
 
     }
 
+    // Metodo encargado de crear la lista de caracteres del intermedio
     public void createInterStack(Vector pVector, String pToken, String pLexema) {
 
         if (pToken.equals("ID")) {
@@ -74,6 +75,7 @@ public class Intermedio {
 //            }
 //        }
 //    }
+    // Metodo encargado de crear la salida del analisis semantico..
     public void debugInterSack(Vector pVector) {
 
         if (AnalizadorMain.canGenerateCode) {

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package compiladoresfirstproject;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -12,10 +13,12 @@ import java.util.ArrayList;
  * @author StevenJM
  */
 public class Errores {
+
     private FileWriter fichero = null;
     private PrintWriter pw = null;
-    
-    public Errores(){    }
+
+    public Errores() {
+    }
 
     private void initFile() {
         pw.println("<!DOCTYPE html>");
@@ -24,64 +27,66 @@ public class Errores {
         pw.println("<title> Errores </title>");
         pw.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">");
         pw.println("</head>");
-        pw.println("<body>");   
+        pw.println("<body>");
     }
-    
-    public void reportarErrores(ArrayList<String> pErrSintactico, ArrayList<String> pErrSemantico){
-        
-        try
-        {
+
+    // Metodo que recibe 2 arreglos uno con los errores sintacticos y el otro con los errores semanticos
+    // luego escribe el html del modulo de errores
+    public void reportarErrores(ArrayList<String> pErrSintactico, ArrayList<String> pErrSemantico) {
+
+        try {
             fichero = new FileWriter("src/outputs/errores.html");
             pw = new PrintWriter(fichero);
             initFile();
             System.out.println("Tamaño: " + pErrSintactico.size());
-            if(pErrSintactico.isEmpty()){
+            if (pErrSintactico.isEmpty()) {
                 pw.println("<div class=\"Errores\">Sintactico");
                 pw.println("<div class=\"Err\">");
                 pw.println("<p>NO HUBO ERRORES</p>");
                 pw.println("</div>");
                 pw.println("</div>");
-            }
-            else{
+            } else {
                 pw.println("<div class=\"Errores\">Sintactico");
                 pw.println("<div class=\"Err\">");
-                for (int i = 0; i < pErrSintactico.size(); i++)
-                    pw.println("<p>"+pErrSintactico.get(i)+"</p>");
+                for (int i = 0; i < pErrSintactico.size(); i++) {
+                    pw.println("<p>" + pErrSintactico.get(i) + "</p>");
+                }
                 pw.println("</div>");
                 pw.println("</div>");
             }
-            if(pErrSemantico.isEmpty()){
+            if (pErrSemantico.isEmpty()) {
                 pw.println("<div class=\"Errores\">Semantico");
                 pw.println("<div class=\"Err\">");
                 pw.println("<p>NO HUBO ERRORES</p>");
                 pw.println("</div>");
                 pw.println("</div>");
-            }
-            else{
+            } else {
                 pw.println("<div class=\"Errores\">Semantico");
                 pw.println("<div class=\"Err\">");
-                for (int i = 0; i < pErrSemantico.size(); i++)
-                    pw.println("<p>"+pErrSemantico.get(i)+"</p>");
+                for (int i = 0; i < pErrSemantico.size(); i++) {
+                    pw.println("<p>" + pErrSemantico.get(i) + "</p>");
+                }
                 pw.println("</div>");
                 pw.println("</div>");
             }
             endFile();
- 
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-           try {
-           if (null != fichero)
-              fichero.close();
-           } catch (Exception e2) {
-              e2.printStackTrace();
-           }
+            try {
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
         }
     }
 
+    // Metodo encargado de cerrar el archivo html
     private void endFile() {
         pw.println("</body>");
         pw.println("</html>");
-    }   
+    }
 }
-
