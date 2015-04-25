@@ -5,24 +5,6 @@ Token: ID Lexema: _variable
 Token: Declarar Lexema: declarar
 Token: ID Lexema: _otra
 Token: Declarar Lexema: declarar
-Token: ID Lexema: variable2
-Token: Asignar Lexema: Asignar
-Token: ID Lexema: _otra
-Token: Eq Lexema: =
-Token: Num Lexema: 6
-Token: Asignar Lexema: Asignar
-Token: ID Lexema: variable2
-Token: Eq Lexema: =
-Token: Num Lexema: 20
-Token: Si Lexema: si
-Token: OpParenth Lexema: (
-Token: ID Lexema: _otra
-Token: Mayor Lexema: >
-Token: Num Lexema: 18989
-Token: CloseParenth Lexema: )
-Token: Entonces Lexema: entonces
-Token: OpKey Lexema: {
-Token: Mover Lexema: mover
-Token: Ojos Lexema: ojos
-Token: ID Lexema: inclinado
-Token: CloseKey Lexema: }
+Token: ID Lexema: vari
+#Caracter desconocido en la fila: 1, columna: 15, el analisis continua
+Token: ID Lexema: able2

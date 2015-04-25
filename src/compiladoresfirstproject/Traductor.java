@@ -513,7 +513,7 @@ public class Traductor {
         PrintWriter pw = null;
             try
         {
-            fichero = new FileWriter("src/outputs/robot.ino",true);
+            fichero = new FileWriter("src/outputs/robot/robot.ino",true);
             pw = new PrintWriter(fichero);
             pw.println(var+op+val+";");
             pw.close();

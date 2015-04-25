@@ -1,9 +1,4 @@
 ***********  RESUMEN ANÁLISIS SINTÁCTICO  ***********
  declarar _variable
  declarar _otra
- declarar variable2
- Asignar _otra = 6
- Asignar variable2 = 20
- si ( _otra > 18989 ) entonces {
- mover ojos inclinado
- }
+ declarar vari able2
