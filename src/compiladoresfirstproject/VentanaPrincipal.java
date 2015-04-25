@@ -203,7 +203,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void generarBntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarBntActionPerformed
         // TODO add your handling code here:
-        nuevoAnalizador.GenerarCodigo();
+        if(AnalizadorMain.canGenerateCode) {
+                nuevoAnalizador.GenerarCodigo();
+        } else {
+            JOptionPane.showMessageDialog(this, "Generate Error");
+        }
+        
     }//GEN-LAST:event_generarBntActionPerformed
 
     
