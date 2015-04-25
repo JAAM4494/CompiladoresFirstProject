@@ -66,6 +66,9 @@ public class Traductor {
                 case "DECIR":
                     decir();
                     break;
+                case "ASIGNAR":
+                    asignarVariable();
+                    break;
             }
         }
     }
@@ -501,4 +504,29 @@ public class Traductor {
 
         }
     }
+    
+    private void asignarVariable(){
+        String var=sc.nextLine();
+        String op=sc.nextLine();
+        String val=sc.nextLine();
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+            try
+        {
+            fichero = new FileWriter("robot.ino",true);
+            pw = new PrintWriter(fichero);
+            pw.println(var+op+val+";");
+            pw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           try {
+           if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+    }
+    }
+    
 }
