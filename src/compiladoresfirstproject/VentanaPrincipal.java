@@ -23,6 +23,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     String retornoArchivo;
     
     Boolean bandera;
+    Boolean bandera2;
     
     AnalizadorMain nuevoAnalizador;
 
@@ -32,6 +33,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         this.nuevoAnalizador = new AnalizadorMain();
         this.bandera = false;
+        this.bandera2 = false;
         initComponents();
         txtCodigo.setEditable(false);
         salidaText.setEditable(false);
@@ -191,6 +193,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if(bandera == true) {
             nuevoAnalizador.procesarEntrada(pathDeArchivo.toString());
             bandera = false;
+            bandera2 = true;
         } else {
             JOptionPane.showMessageDialog(this, "Debe Cargarse Un Archivo");
         }     
@@ -203,8 +206,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void generarBntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarBntActionPerformed
         // TODO add your handling code here:
-        if(AnalizadorMain.canGenerateCode) {
+        if(bandera2 == true) {
                 nuevoAnalizador.GenerarCodigo();
+                bandera2 = false;
         } else {
             JOptionPane.showMessageDialog(this, "Generate Error");
         }
